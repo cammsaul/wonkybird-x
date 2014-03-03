@@ -30,5 +30,7 @@ bool MainScene::init() {
 	hudLayer_ = unique_ptr<HUDLayer>{ new HUDLayer() };
 	addChild(hudLayer_.get());
 	
+//	this->scheduleUpdate();
+	
 	return true;
 }

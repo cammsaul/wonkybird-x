@@ -9,11 +9,9 @@
 #ifndef WONKYBIRD_GAMEPLAYLAYER_H
 #define WONKYBIRD_GAMEPLAYLAYER_H
 
-#include <cocos2d.h>
-using namespace cocos2d;
-using namespace std;
+#include "Box2DLayer.h"
 
-class GameplayLayer : public CCLayer {
+class GameplayLayer : public Box2DLayer {
 public:
 	GameplayLayer();
 private:

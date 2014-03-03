@@ -9,9 +9,6 @@
 #ifndef WONKYBIRD_MAINSCENE_H
 #define WONKYBIRD_MAINSCENE_H
 
-#include <memory>
-#include <cocos2d.h>
-
 #include "StaticBackgroundLayer.h"
 #include "ScrollingBackgroundLayer.h"
 #include "GameplayLayer.h"
@@ -19,9 +16,11 @@
 
 class MainScene : public cocos2d::CCScene {
 public:
-	virtual bool init() override;
-
 	MainScene();
+	
+	virtual bool init() override;
+	
+//	virtual void update(float dt) override;
 private:
 	std::unique_ptr<StaticBackgroundLayer> staticBackgroundLayer_;
 	std::unique_ptr<ScrollingBackgroundLayer> scrollingBackgroundLayer_;

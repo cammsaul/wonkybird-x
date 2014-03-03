@@ -8,5 +8,6 @@
 
 #include "GameplayLayer.h"
 
-GameplayLayer::GameplayLayer()
+GameplayLayer::GameplayLayer():
+	Box2DLayer("Textures")
 {}
