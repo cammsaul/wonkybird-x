@@ -18,11 +18,17 @@ MainScene::MainScene():
 bool MainScene::init() {
 	if (!CCScene::init()) { return false; }
 	
-	staticBackgroundLayer_ = std::unique_ptr<StaticBackgroundLayer> { new StaticBackgroundLayer{} };
+	staticBackgroundLayer_ = unique_ptr<StaticBackgroundLayer> { new StaticBackgroundLayer() };
 	addChild(staticBackgroundLayer_.get());
 	
-	scrollingBackgroundLayer_ = std::unique_ptr<ScrollingBackgroundLayer> { new ScrollingBackgroundLayer{} };
+	scrollingBackgroundLayer_ = unique_ptr<ScrollingBackgroundLayer> { new ScrollingBackgroundLayer() };
 	addChild(scrollingBackgroundLayer_.get());
+	
+	gameplayLayer_ = unique_ptr<GameplayLayer> { new GameplayLayer() };
+	addChild(gameplayLayer_.get());
+	
+	hudLayer_ = unique_ptr<HUDLayer>{ new HUDLayer() };
+	addChild(hudLayer_.get());
 	
 	return true;
 }

@@ -176,6 +176,8 @@
 		326DF4EF18C51AA0004E1F4B /* MainScene.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 326DF4EB18C51AA0004E1F4B /* MainScene.cpp */; };
 		326DF4F018C51AA0004E1F4B /* StaticBackgroundLayer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 326DF4ED18C51AA0004E1F4B /* StaticBackgroundLayer.cpp */; };
 		326DF4F918C51E2E004E1F4B /* ScrollingBackgroundLayer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 326DF4F718C51E2E004E1F4B /* ScrollingBackgroundLayer.cpp */; };
+		326DF4FC18C51EAB004E1F4B /* GameplayLayer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 326DF4FA18C51EAB004E1F4B /* GameplayLayer.cpp */; };
+		326DF4FF18C51EB6004E1F4B /* HUDLayer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 326DF4FD18C51EB6004E1F4B /* HUDLayer.cpp */; };
 		375BD4C31868411B0024609E /* ObjectFactory.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 375BD4BB1868411B0024609E /* ObjectFactory.cpp */; };
 		375BD4C41868411B0024609E /* TriggerBase.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 375BD4BD1868411B0024609E /* TriggerBase.cpp */; };
 		375BD4C51868411B0024609E /* TriggerMng.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 375BD4BF1868411B0024609E /* TriggerMng.cpp */; };
@@ -605,6 +607,10 @@
 		326DF4EE18C51AA0004E1F4B /* StaticBackgroundLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StaticBackgroundLayer.h; sourceTree = "<group>"; };
 		326DF4F718C51E2E004E1F4B /* ScrollingBackgroundLayer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ScrollingBackgroundLayer.cpp; sourceTree = "<group>"; };
 		326DF4F818C51E2E004E1F4B /* ScrollingBackgroundLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ScrollingBackgroundLayer.h; sourceTree = "<group>"; };
+		326DF4FA18C51EAB004E1F4B /* GameplayLayer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = GameplayLayer.cpp; sourceTree = "<group>"; };
+		326DF4FB18C51EAB004E1F4B /* GameplayLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GameplayLayer.h; sourceTree = "<group>"; };
+		326DF4FD18C51EB6004E1F4B /* HUDLayer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = HUDLayer.cpp; sourceTree = "<group>"; };
+		326DF4FE18C51EB6004E1F4B /* HUDLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HUDLayer.h; sourceTree = "<group>"; };
 		373B911F18788FB000198F86 /* CCComBase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CCComBase.h; sourceTree = "<group>"; };
 		375BD4BB1868411B0024609E /* ObjectFactory.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ObjectFactory.cpp; sourceTree = "<group>"; };
 		375BD4BC1868411B0024609E /* ObjectFactory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ObjectFactory.h; sourceTree = "<group>"; };
@@ -1440,6 +1446,10 @@
 				326DF4ED18C51AA0004E1F4B /* StaticBackgroundLayer.cpp */,
 				326DF4F818C51E2E004E1F4B /* ScrollingBackgroundLayer.h */,
 				326DF4F718C51E2E004E1F4B /* ScrollingBackgroundLayer.cpp */,
+				326DF4FB18C51EAB004E1F4B /* GameplayLayer.h */,
+				326DF4FA18C51EAB004E1F4B /* GameplayLayer.cpp */,
+				326DF4FE18C51EB6004E1F4B /* HUDLayer.h */,
+				326DF4FD18C51EB6004E1F4B /* HUDLayer.cpp */,
 			);
 			name = Scene;
 			path = ../Classes/Scene;
@@ -1959,6 +1969,7 @@
 				15A3DA3B1682F826002FB0C5 /* CCLabelBMFontLoader.cpp in Sources */,
 				15A3DA3C1682F826002FB0C5 /* CCLabelTTFLoader.cpp in Sources */,
 				15A3DA3D1682F826002FB0C5 /* CCLayerColorLoader.cpp in Sources */,
+				326DF4FF18C51EB6004E1F4B /* HUDLayer.cpp in Sources */,
 				15A3DA3E1682F826002FB0C5 /* CCLayerGradientLoader.cpp in Sources */,
 				15A3DA3F1682F826002FB0C5 /* CCLayerLoader.cpp in Sources */,
 				15A3DA401682F826002FB0C5 /* CCMenuItemImageLoader.cpp in Sources */,
@@ -2069,6 +2080,7 @@
 				375BD50E1868454E0024609E /* CCActionEaseEx.cpp in Sources */,
 				379BB9C117F03F3700829B88 /* UICheckBox.cpp in Sources */,
 				379BB9C217F03F3700829B88 /* UIImageView.cpp in Sources */,
+				326DF4FC18C51EAB004E1F4B /* GameplayLayer.cpp in Sources */,
 				379BB9C317F03F3700829B88 /* UILabel.cpp in Sources */,
 				379BB9C417F03F3700829B88 /* UILabelAtlas.cpp in Sources */,
 				379BB9C517F03F3700829B88 /* UILabelBMFont.cpp in Sources */,

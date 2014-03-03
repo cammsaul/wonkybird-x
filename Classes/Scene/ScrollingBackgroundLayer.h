@@ -6,8 +6,8 @@
 //
 //
 
-#ifndef WONKYBIRD_ScrollingBackgroundLayer_H
-#define WONKYBIRDScrollingBackgroundLayerH
+#ifndef WONKYBIRD_SCROLLINGBACKGROUNDLAYER_H
+#define WONKYBIRD_SCROLLINGBACKGROUNDLAYER_H
 
 #include <cocos2d.h>
 using namespace cocos2d;

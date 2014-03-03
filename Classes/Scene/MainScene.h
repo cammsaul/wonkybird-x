@@ -14,6 +14,8 @@
 
 #include "StaticBackgroundLayer.h"
 #include "ScrollingBackgroundLayer.h"
+#include "GameplayLayer.h"
+#include "HUDLayer.h"
 
 class MainScene : public cocos2d::CCScene {
 public:
@@ -23,6 +25,8 @@ public:
 private:
 	std::unique_ptr<StaticBackgroundLayer> staticBackgroundLayer_;
 	std::unique_ptr<ScrollingBackgroundLayer> scrollingBackgroundLayer_;
+	std::unique_ptr<GameplayLayer> gameplayLayer_;
+	std::unique_ptr<HUDLayer> hudLayer_;
 };
 
 #endif
