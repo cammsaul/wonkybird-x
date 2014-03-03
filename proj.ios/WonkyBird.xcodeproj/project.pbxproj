@@ -208,6 +208,11 @@
 		326DF54818C521B2004E1F4B /* Pipe.ai in Resources */ = {isa = PBXBuildFile; fileRef = 326DF52818C521B2004E1F4B /* Pipe.ai */; };
 		326DF54918C521B2004E1F4B /* Pipe.png in Resources */ = {isa = PBXBuildFile; fileRef = 326DF52918C521B2004E1F4B /* Pipe.png */; };
 		326DF54A18C521B2004E1F4B /* Pipe.tmx in Resources */ = {isa = PBXBuildFile; fileRef = 326DF52A18C521B2004E1F4B /* Pipe.tmx */; };
+		326DF54E18C52604004E1F4B /* GameSprite.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 326DF54C18C52604004E1F4B /* GameSprite.cpp */; };
+		326DF55118C52629004E1F4B /* Bird.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 326DF54F18C52629004E1F4B /* Bird.cpp */; };
+		326DF55418C52647004E1F4B /* Toucan.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 326DF55218C52647004E1F4B /* Toucan.cpp */; };
+		326DF55718C52667004E1F4B /* Pigeon.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 326DF55518C52667004E1F4B /* Pigeon.cpp */; };
+		326DF55D18C5271E004E1F4B /* GameManager.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 326DF55B18C5271E004E1F4B /* GameManager.cpp */; };
 		375BD4C31868411B0024609E /* ObjectFactory.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 375BD4BB1868411B0024609E /* ObjectFactory.cpp */; };
 		375BD4C41868411B0024609E /* TriggerBase.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 375BD4BD1868411B0024609E /* TriggerBase.cpp */; };
 		375BD4C51868411B0024609E /* TriggerMng.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 375BD4BF1868411B0024609E /* TriggerMng.cpp */; };
@@ -665,6 +670,16 @@
 		326DF52818C521B2004E1F4B /* Pipe.ai */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Pipe.ai; sourceTree = "<group>"; };
 		326DF52918C521B2004E1F4B /* Pipe.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Pipe.png; sourceTree = "<group>"; };
 		326DF52A18C521B2004E1F4B /* Pipe.tmx */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = Pipe.tmx; sourceTree = "<group>"; };
+		326DF54C18C52604004E1F4B /* GameSprite.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = GameSprite.cpp; sourceTree = "<group>"; };
+		326DF54D18C52604004E1F4B /* GameSprite.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GameSprite.h; sourceTree = "<group>"; };
+		326DF54F18C52629004E1F4B /* Bird.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Bird.cpp; sourceTree = "<group>"; };
+		326DF55018C52629004E1F4B /* Bird.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Bird.h; sourceTree = "<group>"; };
+		326DF55218C52647004E1F4B /* Toucan.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Toucan.cpp; sourceTree = "<group>"; };
+		326DF55318C52647004E1F4B /* Toucan.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Toucan.h; sourceTree = "<group>"; };
+		326DF55518C52667004E1F4B /* Pigeon.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Pigeon.cpp; sourceTree = "<group>"; };
+		326DF55618C52667004E1F4B /* Pigeon.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Pigeon.h; sourceTree = "<group>"; };
+		326DF55B18C5271E004E1F4B /* GameManager.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = GameManager.cpp; sourceTree = "<group>"; };
+		326DF55C18C5271E004E1F4B /* GameManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GameManager.h; sourceTree = "<group>"; };
 		373B911F18788FB000198F86 /* CCComBase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CCComBase.h; sourceTree = "<group>"; };
 		375BD4BB1868411B0024609E /* ObjectFactory.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ObjectFactory.cpp; sourceTree = "<group>"; };
 		375BD4BC1868411B0024609E /* ObjectFactory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ObjectFactory.h; sourceTree = "<group>"; };
@@ -1319,6 +1334,7 @@
 			children = (
 				326DF50018C51FC3004E1F4B /* Abstract */,
 				326DF4E518C516F1004E1F4B /* Singletons */,
+				326DF54B18C525E2004E1F4B /* GameObjects */,
 				326DF4EA18C51AA0004E1F4B /* Scene */,
 				1AFAF8B616D35DE700DB1158 /* HelloWorldScene.h */,
 				1AFAF8B516D35DE700DB1158 /* HelloWorldScene.cpp */,
@@ -1477,9 +1493,11 @@
 		326DF4E518C516F1004E1F4B /* Singletons */ = {
 			isa = PBXGroup;
 			children = (
+				326DF4E618C51708004E1F4B /* Constants.h */,
 				326DF4E818C51A98004E1F4B /* AppDelegate.h */,
 				326DF4E718C51A98004E1F4B /* AppDelegate.cpp */,
-				326DF4E618C51708004E1F4B /* Constants.h */,
+				326DF55C18C5271E004E1F4B /* GameManager.h */,
+				326DF55B18C5271E004E1F4B /* GameManager.cpp */,
 			);
 			name = Singletons;
 			path = ../Classes/Singletons;
@@ -1508,6 +1526,8 @@
 			children = (
 				326DF50218C51FDA004E1F4B /* GameLayer.h */,
 				326DF50118C51FDA004E1F4B /* GameLayer.cpp */,
+				326DF54D18C52604004E1F4B /* GameSprite.h */,
+				326DF54C18C52604004E1F4B /* GameSprite.cpp */,
 			);
 			name = Abstract;
 			path = ../Classes/Abstract;
@@ -1592,6 +1612,20 @@
 				326DF52A18C521B2004E1F4B /* Pipe.tmx */,
 			);
 			path = TileMaps;
+			sourceTree = "<group>";
+		};
+		326DF54B18C525E2004E1F4B /* GameObjects */ = {
+			isa = PBXGroup;
+			children = (
+				326DF55018C52629004E1F4B /* Bird.h */,
+				326DF54F18C52629004E1F4B /* Bird.cpp */,
+				326DF55318C52647004E1F4B /* Toucan.h */,
+				326DF55218C52647004E1F4B /* Toucan.cpp */,
+				326DF55618C52667004E1F4B /* Pigeon.h */,
+				326DF55518C52667004E1F4B /* Pigeon.cpp */,
+			);
+			name = GameObjects;
+			path = ../Classes/GameObjects;
 			sourceTree = "<group>";
 		};
 		375BD4BA1868411B0024609E /* Trigger */ = {
@@ -2060,13 +2094,17 @@
 				15A3D9131682F7D5002FB0C5 /* b2Fixture.cpp in Sources */,
 				15A3D9141682F7D5002FB0C5 /* b2Island.cpp in Sources */,
 				15A3D9151682F7D5002FB0C5 /* b2World.cpp in Sources */,
+				326DF55118C52629004E1F4B /* Bird.cpp in Sources */,
 				15A3D9161682F7D5002FB0C5 /* b2WorldCallbacks.cpp in Sources */,
 				15A3D9171682F7D5002FB0C5 /* b2ChainAndCircleContact.cpp in Sources */,
 				15A3D9181682F7D5002FB0C5 /* b2ChainAndPolygonContact.cpp in Sources */,
 				375BD5111868454E0024609E /* CCActionManager.cpp in Sources */,
+				326DF55418C52647004E1F4B /* Toucan.cpp in Sources */,
 				15A3D9191682F7D5002FB0C5 /* b2CircleContact.cpp in Sources */,
 				15A3D91A1682F7D5002FB0C5 /* b2Contact.cpp in Sources */,
+				326DF54E18C52604004E1F4B /* GameSprite.cpp in Sources */,
 				15A3D91B1682F7D5002FB0C5 /* b2ContactSolver.cpp in Sources */,
+				326DF55D18C5271E004E1F4B /* GameManager.cpp in Sources */,
 				15A3D91C1682F7D5002FB0C5 /* b2EdgeAndCircleContact.cpp in Sources */,
 				15A3D91D1682F7D5002FB0C5 /* b2EdgeAndPolygonContact.cpp in Sources */,
 				15A3D91E1682F7D5002FB0C5 /* b2PolygonAndCircleContact.cpp in Sources */,
@@ -2123,6 +2161,7 @@
 				15A3DA371682F826002FB0C5 /* CCBValue.cpp in Sources */,
 				15A3DA381682F826002FB0C5 /* CCControlButtonLoader.cpp in Sources */,
 				15A3DA391682F826002FB0C5 /* CCControlLoader.cpp in Sources */,
+				326DF55718C52667004E1F4B /* Pigeon.cpp in Sources */,
 				15A3DA3A1682F826002FB0C5 /* CCData.cpp in Sources */,
 				15A3DA3B1682F826002FB0C5 /* CCLabelBMFontLoader.cpp in Sources */,
 				15A3DA3C1682F826002FB0C5 /* CCLabelTTFLoader.cpp in Sources */,
