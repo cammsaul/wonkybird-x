@@ -7,6 +7,15 @@
 //
 
 #include "HUDLayer.h"
+#include "Constants.h"
 
-HUDLayer::HUDLayer()
-{}
+HUDLayer::HUDLayer():
+GameLayer("HUD"),
+sprites_()
+{
+	sprites_["Title.png"] = unique_ptr<CCSprite>(new CCSprite());
+	auto titleLabel = sprites_["Title.png"].get();
+	titleLabel->initWithSpriteFrameName("Title.png");
+	titleLabel->setPosition({ScreenHalfWidth(), ScreenHeight() * 0.75f});
+	addChild(titleLabel);
+}

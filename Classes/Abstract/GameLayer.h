@@ -19,7 +19,6 @@ class GameLayer : public CCLayer {
 public:
 	GameLayer(const string& textureAtlasName);
 private:
-	CCTextureAtlas textureAtlas_;
 	CCSpriteBatchNode spriteBatchNode_;
 };
 

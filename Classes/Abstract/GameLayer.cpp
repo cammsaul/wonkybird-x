@@ -9,11 +9,12 @@
 #include "GameLayer.h"
 
 GameLayer::GameLayer(const string& textureAtlasName):
-textureAtlas_ {},
 spriteBatchNode_ {}
 {
-	textureAtlas_.initWithFile((textureAtlasName + "@2x.png").c_str(), 20); // capacity = 20 (?)
-	spriteBatchNode_.setTextureAtlas(&textureAtlas_);
+	auto plistFilename = (textureAtlasName + "@2x.plist");
+	auto textureFilename = (textureAtlasName + "@2x.png");
+	spriteBatchNode_.initWithFile(textureFilename.c_str(), 20);
+	CCSpriteFrameCache::sharedSpriteFrameCache()->addSpriteFramesWithFile(plistFilename.c_str(), textureFilename.c_str());
 	
 	addChild(&spriteBatchNode_);
 }
