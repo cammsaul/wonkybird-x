@@ -213,6 +213,7 @@
 		326DF55418C52647004E1F4B /* Toucan.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 326DF55218C52647004E1F4B /* Toucan.cpp */; };
 		326DF55718C52667004E1F4B /* Pigeon.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 326DF55518C52667004E1F4B /* Pigeon.cpp */; };
 		326DF55D18C5271E004E1F4B /* GameManager.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 326DF55B18C5271E004E1F4B /* GameManager.cpp */; };
+		326DF56018C5276B004E1F4B /* Box2DLayer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 326DF55E18C5276B004E1F4B /* Box2DLayer.cpp */; };
 		375BD4C31868411B0024609E /* ObjectFactory.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 375BD4BB1868411B0024609E /* ObjectFactory.cpp */; };
 		375BD4C41868411B0024609E /* TriggerBase.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 375BD4BD1868411B0024609E /* TriggerBase.cpp */; };
 		375BD4C51868411B0024609E /* TriggerMng.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 375BD4BF1868411B0024609E /* TriggerMng.cpp */; };
@@ -680,6 +681,8 @@
 		326DF55618C52667004E1F4B /* Pigeon.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Pigeon.h; sourceTree = "<group>"; };
 		326DF55B18C5271E004E1F4B /* GameManager.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = GameManager.cpp; sourceTree = "<group>"; };
 		326DF55C18C5271E004E1F4B /* GameManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GameManager.h; sourceTree = "<group>"; };
+		326DF55E18C5276B004E1F4B /* Box2DLayer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Box2DLayer.cpp; sourceTree = "<group>"; };
+		326DF55F18C5276B004E1F4B /* Box2DLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Box2DLayer.h; sourceTree = "<group>"; };
 		373B911F18788FB000198F86 /* CCComBase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CCComBase.h; sourceTree = "<group>"; };
 		375BD4BB1868411B0024609E /* ObjectFactory.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ObjectFactory.cpp; sourceTree = "<group>"; };
 		375BD4BC1868411B0024609E /* ObjectFactory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ObjectFactory.h; sourceTree = "<group>"; };
@@ -1528,6 +1531,8 @@
 				326DF50118C51FDA004E1F4B /* GameLayer.cpp */,
 				326DF54D18C52604004E1F4B /* GameSprite.h */,
 				326DF54C18C52604004E1F4B /* GameSprite.cpp */,
+				326DF55F18C5276B004E1F4B /* Box2DLayer.h */,
+				326DF55E18C5276B004E1F4B /* Box2DLayer.cpp */,
 			);
 			name = Abstract;
 			path = ../Classes/Abstract;
@@ -2097,6 +2102,7 @@
 				326DF55118C52629004E1F4B /* Bird.cpp in Sources */,
 				15A3D9161682F7D5002FB0C5 /* b2WorldCallbacks.cpp in Sources */,
 				15A3D9171682F7D5002FB0C5 /* b2ChainAndCircleContact.cpp in Sources */,
+				326DF56018C5276B004E1F4B /* Box2DLayer.cpp in Sources */,
 				15A3D9181682F7D5002FB0C5 /* b2ChainAndPolygonContact.cpp in Sources */,
 				375BD5111868454E0024609E /* CCActionManager.cpp in Sources */,
 				326DF55418C52647004E1F4B /* Toucan.cpp in Sources */,
