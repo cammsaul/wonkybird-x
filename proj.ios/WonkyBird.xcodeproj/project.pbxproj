@@ -175,6 +175,7 @@
 		326DF4E918C51A98004E1F4B /* AppDelegate.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 326DF4E718C51A98004E1F4B /* AppDelegate.cpp */; };
 		326DF4EF18C51AA0004E1F4B /* MainScene.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 326DF4EB18C51AA0004E1F4B /* MainScene.cpp */; };
 		326DF4F018C51AA0004E1F4B /* StaticBackgroundLayer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 326DF4ED18C51AA0004E1F4B /* StaticBackgroundLayer.cpp */; };
+		326DF4F918C51E2E004E1F4B /* ScrollingBackgroundLayer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 326DF4F718C51E2E004E1F4B /* ScrollingBackgroundLayer.cpp */; };
 		375BD4C31868411B0024609E /* ObjectFactory.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 375BD4BB1868411B0024609E /* ObjectFactory.cpp */; };
 		375BD4C41868411B0024609E /* TriggerBase.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 375BD4BD1868411B0024609E /* TriggerBase.cpp */; };
 		375BD4C51868411B0024609E /* TriggerMng.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 375BD4BF1868411B0024609E /* TriggerMng.cpp */; };
@@ -602,6 +603,8 @@
 		326DF4EC18C51AA0004E1F4B /* MainScene.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MainScene.h; sourceTree = "<group>"; };
 		326DF4ED18C51AA0004E1F4B /* StaticBackgroundLayer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = StaticBackgroundLayer.cpp; sourceTree = "<group>"; };
 		326DF4EE18C51AA0004E1F4B /* StaticBackgroundLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StaticBackgroundLayer.h; sourceTree = "<group>"; };
+		326DF4F718C51E2E004E1F4B /* ScrollingBackgroundLayer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ScrollingBackgroundLayer.cpp; sourceTree = "<group>"; };
+		326DF4F818C51E2E004E1F4B /* ScrollingBackgroundLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ScrollingBackgroundLayer.h; sourceTree = "<group>"; };
 		373B911F18788FB000198F86 /* CCComBase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CCComBase.h; sourceTree = "<group>"; };
 		375BD4BB1868411B0024609E /* ObjectFactory.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ObjectFactory.cpp; sourceTree = "<group>"; };
 		375BD4BC1868411B0024609E /* ObjectFactory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ObjectFactory.h; sourceTree = "<group>"; };
@@ -1420,8 +1423,8 @@
 		326DF4E518C516F1004E1F4B /* Singletons */ = {
 			isa = PBXGroup;
 			children = (
-				326DF4E718C51A98004E1F4B /* AppDelegate.cpp */,
 				326DF4E818C51A98004E1F4B /* AppDelegate.h */,
+				326DF4E718C51A98004E1F4B /* AppDelegate.cpp */,
 				326DF4E618C51708004E1F4B /* Constants.h */,
 			);
 			name = Singletons;
@@ -1431,10 +1434,12 @@
 		326DF4EA18C51AA0004E1F4B /* Scene */ = {
 			isa = PBXGroup;
 			children = (
-				326DF4EB18C51AA0004E1F4B /* MainScene.cpp */,
 				326DF4EC18C51AA0004E1F4B /* MainScene.h */,
-				326DF4ED18C51AA0004E1F4B /* StaticBackgroundLayer.cpp */,
+				326DF4EB18C51AA0004E1F4B /* MainScene.cpp */,
 				326DF4EE18C51AA0004E1F4B /* StaticBackgroundLayer.h */,
+				326DF4ED18C51AA0004E1F4B /* StaticBackgroundLayer.cpp */,
+				326DF4F818C51E2E004E1F4B /* ScrollingBackgroundLayer.h */,
+				326DF4F718C51E2E004E1F4B /* ScrollingBackgroundLayer.cpp */,
 			);
 			name = Scene;
 			path = ../Classes/Scene;
@@ -2020,6 +2025,7 @@
 				1A8F3B7E175E05DA00049216 /* SkeletonJson.cpp in Sources */,
 				1A8F3B7F175E05DA00049216 /* Skin.cpp in Sources */,
 				1A8F3B80175E05DA00049216 /* Slot.cpp in Sources */,
+				326DF4F918C51E2E004E1F4B /* ScrollingBackgroundLayer.cpp in Sources */,
 				1A8F3B81175E05DA00049216 /* SlotData.cpp in Sources */,
 				1A8F3B82175E05DA00049216 /* spine-cocos2dx.cpp in Sources */,
 				1AB87035175E0A84005D39BF /* WebSocket.cpp in Sources */,
