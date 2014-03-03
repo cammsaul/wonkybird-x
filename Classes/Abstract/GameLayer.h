@@ -9,17 +9,11 @@
 #ifndef WONKYBIRD_GAMELAYER_H
 #define WONKYBIRD_GAMELAYER_H
 
-#include <memory>
-#include <cocos2d.h>
-
-using namespace cocos2d;
-using namespace std;
-
-class GameLayer : public CCLayer {
+class GameLayer : public cocos2d::CCLayer {
 public:
-	GameLayer(const string& textureAtlasName);
+	GameLayer(const std::string& textureAtlasName);
 private:
-	CCSpriteBatchNode spriteBatchNode_;
+	cocos2d::CCSpriteBatchNode spriteBatchNode_;
 };
 
 #endif

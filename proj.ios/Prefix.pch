@@ -2,7 +2,25 @@
 // Prefix header for all source files of the 'iphone' target in the 'iphone' project
 //
 
+#ifndef PREFIX_PCH
+#define PREFIX_PCH
+
 #ifdef __OBJC__
     #import <Foundation/Foundation.h>
     #import <UIKit/UIKit.h>
+#endif
+
+#ifdef __cplusplus
+	#include <functional>
+	#include <memory>
+	#include <string>
+	#include <unordered_map>
+
+	#include <cocos2d.h>
+	#include <Box2D/Box2D.h>
+
+	using namespace std;
+	using namespace cocos2d;
+#endif
+
 #endif
