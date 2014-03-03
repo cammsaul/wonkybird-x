@@ -22,10 +22,7 @@ bool AppDelegate::applicationDidFinishLaunching() {
     pDirector->setDisplayStats(true);
 
     // set FPS. the default value is 1.0/60 if you don't call this
-    pDirector->setAnimationInterval(1.0 / 60);
-
-    // create a scene. it's an autorelease object
-//	mainScene_ = std::make_shared<MainScene>();
+    pDirector->setAnimationInterval(1.0f / 60.0f);
 
     // run
     pDirector->runWithScene(mainScene_.get());

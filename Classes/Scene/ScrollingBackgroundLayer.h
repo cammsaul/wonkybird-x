@@ -10,10 +10,12 @@
 #define WONKYBIRD_SCROLLINGBACKGROUNDLAYER_H
 
 #include <cocos2d.h>
+#include "GameLayer.h"
+
 using namespace cocos2d;
 using namespace std;
 
-class ScrollingBackgroundLayer : public CCLayer {
+class ScrollingBackgroundLayer : public GameLayer {
 public:
 	ScrollingBackgroundLayer();
 private:

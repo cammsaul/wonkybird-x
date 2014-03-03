@@ -8,5 +8,6 @@
 
 #include "ScrollingBackgroundLayer.h"
 
-ScrollingBackgroundLayer::ScrollingBackgroundLayer()
+ScrollingBackgroundLayer::ScrollingBackgroundLayer():
+	GameLayer("Clouds")
 {}
