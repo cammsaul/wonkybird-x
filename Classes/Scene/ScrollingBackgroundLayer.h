@@ -11,6 +11,7 @@
 
 #include "GameLayer.h"
 #include "Box2DItem.h"
+#include "TiledMapWithBox2D.h"
 
 class ScrollingBackgroundLayer : public GameLayer {
 public:
@@ -18,11 +19,6 @@ public:
 	
 	virtual void update(float dt) override;
 private:
-	class TiledMapWithBox2D: public CCTMXTiledMap, public Box2DItem {
-		virtual b2Vec2 PositionForBox2D() const override;
-		virtual void SetPositionForBox2D(const b2Vec2& pos) override;
-		virtual b2Vec2 ContentSizeForBox2D() const override;
-	};
 	CCUniquePtr<TiledMapWithBox2D> grass_;
 	
 	void CreateCloud();

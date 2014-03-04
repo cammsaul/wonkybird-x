@@ -12,11 +12,10 @@
 
 ScrollingBackgroundLayer::ScrollingBackgroundLayer():
 	GameLayer("Clouds"),
-	grass_()
+	grass_(new TiledMapWithBox2D("Grass.tmx"))
 {
 	// create the grass
-	grass_->initWithTMXFile("Grass.tmx");
-	addChild(grass_.get());
+	addChild(dynamic_cast<CCNode*>(grass_.get()));
 	grass_->setPosition(ccp(0, GroundHeight() - 32.0f));
 	grass_->BodyDef()->type = b2_dynamicBody;
 	grass_->FixtureDef()->filter.categoryBits = 0;
@@ -90,17 +89,4 @@ void ScrollingBackgroundLayer::ResetCloud(CCUniquePtr<CCSprite>&& cloud) {
 
 void ScrollingBackgroundLayer::CloudResetCallback(CCNode* node) {
 	ResetCloud(CCUniquePtr<CCSprite>{ dynamic_cast<CCSprite*>(node) });
-}
-
-
-b2Vec2 ScrollingBackgroundLayer::TiledMapWithBox2D::PositionForBox2D() const {
-	return {getPositionX() / kPTMRatio, getPositionY() / kPTMRatio};
-}
-
-void ScrollingBackgroundLayer::TiledMapWithBox2D::SetPositionForBox2D(const b2Vec2& pos) {
-	setPosition(pos.x * kPTMRatio, pos.y * kPTMRatio);
-}
-
-b2Vec2 ScrollingBackgroundLayer::TiledMapWithBox2D::ContentSizeForBox2D() const {
-	return { getContentSize().width / kPTMRatio, getContentSize().height / kPTMRatio };
 }

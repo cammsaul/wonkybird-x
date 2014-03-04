@@ -12,6 +12,7 @@
 #include "Box2DLayer.h"
 #include "GameSprite.h"
 #include "Bird.h"
+#include "Pipe.h"
 
 class GameplayLayer : public Box2DLayer {
 public:
@@ -22,15 +23,18 @@ public:
 	virtual bool ccTouchBegan(CCTouch *pTouch, CCEvent *pEvent) override;
     virtual void ccTouchEnded(CCTouch *pTouch, CCEvent *pEvent) override;
 private:
-	void UpdateMainMenu();
-	void UpdateGetReady();
-	void UpdateActive();
-	void UpdateGameOver();
+	void UpdateMainMenu(float dt);
+	void UpdateGetReady(float dt);
+	void UpdateActive(float dt);
+	void UpdateGameOver(float dt);
 
-//	void AddBird(BirdPtr bird);
 	void RemoveBird(BirdPtr bird);
 	void AddExtraBirds();
 	void RemoveExtraBirds();
+	
+	void AddPipe(int size, bool upsideDown);
+	void RemoveOldPipes();
+	void AddRandomPipeIfNeeded();
 	
 	template <class BirdT>
 	BirdPtr AddBird();
@@ -43,6 +47,8 @@ private:
 	BirdPtr pigeon_;
 	BirdPtr mainBird_;
 	GameSprite ground_;
+	
+	deque<CCSharedPtr<Pipe>> pipes_;
 	
 	unsigned touchBeginTime_; ///< time current touch began, used to keep track for touch-sensitive birds like Rasta
 };

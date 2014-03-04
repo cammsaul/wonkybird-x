@@ -13,8 +13,8 @@
 #include "ReflectiveClass.h"
 
 class Bird;
-using BirdPtr = shared_ptr<Bird>;
-using Flock = unordered_set<BirdPtr>;
+using BirdPtr = CCSharedPtr<Bird>;
+using Flock = vector<BirdPtr>;
 
 class Bird : public ReflectiveClass, public GameSprite {
 public:

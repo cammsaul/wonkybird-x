@@ -26,8 +26,10 @@ public:
 	float GameSpeed() const;
 	bool IsReversed() const; ///< whether game is currently running in reverse
 	
-	void update(); ///< MainScene will take care of calling this
+	void IncrementScore() { if (GState() & GStateRound1) round1Score_++; else round2Score_++; }
 	
+	/// internal ///
+	void update(); ///< MainScene will take care of calling this
 	GameManager();
 private:
 	GameState LastFrameState_;

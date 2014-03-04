@@ -28,7 +28,7 @@ public:
 	virtual void UpdateShape(); ///< set shape of the fixture right before it's added to world. Default implementation just creates box to match ContentSizeForBox2D()
 	virtual void CreateFixtures(); ///< override to create custom fixture(s) for a body after it has been added to world. Default implementation is body_->CreateFixture(&fixtureDef_)
 	
-	void AddToWorld(b2World& world);
+	virtual void AddToWorld(b2World& world);
 	void RemoveFromWorld();
 	void MoveToNewPosition();
 	

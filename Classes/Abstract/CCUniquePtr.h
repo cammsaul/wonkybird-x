@@ -34,4 +34,22 @@ public:
 	}
 };
 
+template <class T>
+class CCSharedPtr : public shared_ptr<T> {
+public:
+	CCSharedPtr():
+		shared_ptr<T>(make_shared<T, CCDeleter>())
+	{
+		shared_ptr<T>::get()->retain();
+	}
+	
+	CCSharedPtr(T* item):
+		shared_ptr<T>(item, CCDeleter())
+	{
+		if (item) {
+			item->retain();
+		}
+	}
+};
+
 #endif

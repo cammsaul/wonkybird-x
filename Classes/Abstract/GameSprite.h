@@ -11,18 +11,12 @@
 
 #include "Box2DItem.h"
 
-class GameSprite : public CCSprite, public Box2DItem {
+class GameNode : public virtual CCNode, public virtual Box2DItem {
 public:
-	GameSprite(); ///< game sprite with no image, e.g. for use as wall, etc
-	GameSprite(const string& spriteFrameName);
-	virtual ~GameSprite() = default;
-	
 	virtual void SetPositionForBox2D(const b2Vec2& pos) override;
 	virtual b2Vec2 PositionForBox2D() const override;
 	
 	virtual b2Vec2 ContentSizeForBox2D() const override;
-	
-	virtual void Update(float dt);
 	
 	bool IsOffscreen() const { return X() < -(getContentSize().width / 2.0f); }
 	
@@ -30,6 +24,15 @@ public:
 	float Y() const { return getPositionY(); }
 	void SetX(float x) { setPosition({x, Y()}); }
 	void SetY(float y) { setPosition({X(), y}); }
+	
+	virtual void Update(float dt);
+};
+
+class GameSprite : public virtual CCSprite, public virtual GameNode {
+public:
+	GameSprite(); ///< game sprite with no image, e.g. for use as wall, etc
+	GameSprite(const string& spriteFrameName);
+	virtual ~GameSprite() = default;
 private:
 };
 

@@ -11,13 +11,14 @@
 #include "Pigeon.h"
 #include "GameManager.h"
 
-//static const std::hash<BirdPtr>(BirdPtr ptr) BirdsHashFn = [](BirdPtr birdPtr) -> std::hash<BirdPtr> {
-//	return std::hash<BirdPtr>();
-//};
-//
-//static auto BirdsEqlFn = [](BirdPtr first, BirdPtr second) -> bool {
-//	return true;
-//};
+float MaxTotalSize() {
+	return MIN((InitialMaxSize + (CurrentRoundScore() / 2)), MaxMaxSize);
+}
+
+float RandomPipeSize() {
+	const int SizeRange = MaxTotalSize() - (MinPipeSize * 2);
+	return (random() % SizeRange) + MinPipeSize;
+}
 
 
 GameplayLayer::GameplayLayer():
@@ -26,7 +27,8 @@ GameplayLayer::GameplayLayer():
 	toucan_   (nullptr),
 	pigeon_   (nullptr),
 	mainBird_ (nullptr),
-	ground_   ()
+	ground_   (),
+	pipes_	  ()
 {
 	// add the ground
 	ground_.BodyDef()->type = b2_staticBody;
@@ -49,20 +51,14 @@ void GameplayLayer::registerWithTouchDispatcher() {
 void GameplayLayer::update(float dt) {
 	Box2DLayer::update(dt);
 	
-	static bool hasAddedBird = false;
-	if (!hasAddedBird) {
-		hasAddedBird = true;
-		AddBird<Toucan>();
-	}
-	
 	if (GStateIsMainMenu()) {
-		UpdateMainMenu();
+		UpdateMainMenu(dt);
 	} else if (GStateIsGetReady()) {
-		UpdateGetReady();
+		UpdateGetReady(dt);
 	} else if (GStateIsActive()) {
-		UpdateActive();
+		UpdateActive(dt);
 	} else if (GStateIsGameOver()) {
-		UpdateGameOver();
+		UpdateGameOver(dt);
 	}
 	
 	auto gameObjects = CCUniquePtr<CCArray>(spriteBatchNode_.getChildren());
@@ -76,7 +72,7 @@ void GameplayLayer::update(float dt) {
 	}
 }
 
-void GameplayLayer::UpdateMainMenu() {
+void GameplayLayer::UpdateMainMenu(float dt) {
 	if (!toucan_) toucan_ = AddBird<Toucan>();
 	if (!pigeon_) pigeon_ = AddBird<Pigeon>();
 	toucan_->FlapAroundOnMainScreen(birds_);
@@ -87,7 +83,7 @@ void GameplayLayer::UpdateMainMenu() {
 	}
 }
 
-void GameplayLayer::UpdateGetReady() {
+void GameplayLayer::UpdateGetReady(float dt) {
 	if (LastFrameState() != GStateGetReady && LastFrameState() != GStateMainMenu) {
 		// switch out the birds
 		if (typeid(*CurrentBird()) == typeid(Toucan)) {
@@ -117,13 +113,13 @@ void GameplayLayer::UpdateGetReady() {
 	const float BirdXDiff = ((CurrentBird()->X() - ScreenHalfWidth()) / kPTMRatio) * 4;
 	CurrentBird()->SetVelocity({-BirdXDiff, -BirdYDiff});
 	
-//	for (Pipe *p in self.pipes) {
-//		[self removeChild:p.layer cleanup:YES];
-//	}
-//	[self.pipes removeAllObjects];
+	for (auto pipe : pipes_) {
+		removeChild(pipe->Layer().get(), true);
+	}
+	pipes_.clear();
 }
 
-void GameplayLayer::UpdateActive() {
+void GameplayLayer::UpdateActive(float dt) {
 	if (LastFrameScore() != GStateActive) {
 		RemoveExtraBirds();
 		CurrentBird()->SetX(ScreenHalfWidth());
@@ -144,38 +140,91 @@ void GameplayLayer::UpdateActive() {
 	if (CurrentBird()->State() == Bird::State::Dead) {
 		SetGState(GStateGameOver);
 	} else {
-//		[self addRandomPipeIfNeeded];
+		AddRandomPipeIfNeeded();
 	}
 	
-//	for (Pipe *p in self.pipes) {
-//		const float pipeXVelocity = PipeXVelocity * GameManager::sharedInstance().gameSpeed;
-//		p.item.body->SetLinearVelocity({pipeXVelocity, 0});
-//		[p updateStateWithDeltaTime:delta];
-//	}
+	for (auto itr = pipes_.begin(); itr != pipes_.end(); itr++) {
+		auto pipe = *itr;
+		pipe->SetVelocity({PipeXVelocity * GameManager::sharedInstance().GameSpeed(), 0});
+		pipe->Update(dt);
+	}
 }
 
-void GameplayLayer::UpdateGameOver() {
-//	for (Pipe *p in self.pipes) {
-//		p.item.body->SetLinearVelocity({0, 0});
-//		[p updateStateWithDeltaTime:delta];
-//	}
+void GameplayLayer::UpdateGameOver(float dt) {
+	for (auto pipe : pipes_) {
+		pipe->Body()->SetLinearVelocity({0, 0});
+		pipe->Update(dt);
+	}
+}
+
+void GameplayLayer::AddPipe(int pipeSize, bool upsideDown) {
+	assert(pipeSize >= MinPipeSize);
+	assert(pipeSize <= MaxPipeSize);
+	assert(pipeSize <= MaxTotalSize() - MinPipeSize);
+	
+	auto pipe = CCSharedPtr<Pipe> { new Pipe(pipeSize, upsideDown) };
+	const float pipeHalfHeight = pipe->getContentSize().height / 2.0f;
+	const float x = GameManager::sharedInstance().IsReversed() ? (0 - pipe->getContentSize().width) : (ScreenWidth() + pipe->getContentSize().width / 2);
+	const float y = upsideDown ? (ScreenHeight() - pipeHalfHeight + 2) : (pipeHalfHeight + GroundHeight() + 2);
+	pipe->setPosition({x, y});
+	addChild(pipe->Layer().get());
+	pipe->AddToWorld(world_);
+	pipes_.push_back(pipe);
+	
+	pipe->Body()->SetLinearVelocity({PipeXVelocity * GameManager::sharedInstance().GameSpeed(), -kGravityVelocity});
+	pipe->Body()->SetGravityScale(0.0f); // pipes unaffected by gravity !
+	
+	// call self recursively to add upside-down pipe if needed
+	if (!upsideDown) {
+		const auto newPipeSize = MaxTotalSize() - pipeSize;
+		AddPipe(newPipeSize, true);
+	}
+}
+
+void GameplayLayer::RemoveOldPipes() {
+	if (pipes_.empty()) return;
+	
+	auto pipe = pipes_.front();
+	if (pipe->X() < -(pipe->getContentSize().width / 2) || (pipe->X() > ScreenWidth() + pipe->getContentSize().width)) {
+		pipes_.pop_front();
+		removeChild(pipe->Layer().get(), true);
+		RemoveOldPipes();
+	}
+}
+
+void GameplayLayer::AddRandomPipeIfNeeded() {
+	RemoveOldPipes();
+	
+	if (pipes_.size() >= kMaxNumPipes) return;
+	
+	if (pipes_.size()) {
+		// how far was the most recent pipe?
+		auto lastPipe = pipes_.back();
+		
+		if ((GameManager::sharedInstance().IsReversed() && lastPipe->Layer() && lastPipe->Layer()->getPositionX() < (ScreenWidth() * (1 - NextPipeDistance)))
+			|| (!GameManager::sharedInstance().IsReversed() && lastPipe->Layer()->getPositionX() > ScreenWidth() * NextPipeDistance)) return; // too soon
+	}
+	
+	AddPipe(RandomPipeSize(), false);
 }
 
 template <class BirdT>
 BirdPtr GameplayLayer::AddBird() {
-//	if (birds_.find(std::find_if(birds_.begin(), birds_.end(), [=](BirdPtr b){ return typeid(*b) != typeid(BirdT); })) != birds_.end()) {
-		printf("Adding new bird.\n");
-		BirdPtr bird = make_shared<BirdT>();
-		bird->InitializeAnimations(spriteBatchNode_.getTexture());
-		birds_.insert(bird);
-		bird->setPosition({ScreenHalfWidth(), ScreenHeight() * kBirdMenuHeight});
-		spriteBatchNode_.addChild(bird.get());
-		bird->AddToWorld(world_);
-		return bird;
-//	} else {
-//		printf("Bird of type already exists.");
-//		return nullptr;
-//	}
+	BirdPtr newBird { new BirdT() };
+	for (auto bird : birds_) {
+		if (bird->MetaClass() == newBird->MetaClass()) {
+			printf("Bird of type already exists.\n");
+			return nullptr;
+		}
+	}
+	
+	printf("Adding new bird.\n");
+	newBird->InitializeAnimations(spriteBatchNode_.getTexture());
+	birds_.push_back(newBird);
+	newBird->setPosition({ScreenHalfWidth(), ScreenHeight() * kBirdMenuHeight});
+	spriteBatchNode_.addChild(newBird.get());
+	newBird->AddToWorld(world_);
+	return newBird;
 }
 
 void GameplayLayer::RemoveBird(BirdPtr bird) {
