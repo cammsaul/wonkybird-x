@@ -1,9 +1,6 @@
 #ifndef  _APP_DELEGATE_H_
 #define  _APP_DELEGATE_H_
 
-#include <memory>
-
-#include "cocos2d.h"
 #include "MainScene.h"
 
 /**
@@ -11,7 +8,7 @@
 
 The reason for implement as private inheritance is to hide some interface call by CCDirector.
 */
-class  AppDelegate : private cocos2d::CCApplication
+class  AppDelegate : private CCApplication
 {
 public:
     AppDelegate();
@@ -37,7 +34,7 @@ public:
     virtual void applicationWillEnterForeground();
 	
 private:
-	std::unique_ptr<MainScene> mainScene_;
+	unique_ptr<MainScene> mainScene_;
 };
 
 #endif // _APP_DELEGATE_H_

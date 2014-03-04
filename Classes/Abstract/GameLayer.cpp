@@ -5,8 +5,6 @@
 //  Created by Cam Saul on 3/3/14.
 //
 //
-#include <sprite_nodes/CCSpriteFrameCache.h>
-
 #include "GameLayer.h"
 
 GameLayer::GameLayer(const std::string& textureAtlasName):

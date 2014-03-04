@@ -11,9 +11,6 @@
 
 #include "GameSprite.h"
 
-using namespace cocos2d;
-using namespace std;
-
 class Bird : public GameSprite {
 public:
 	Bird();

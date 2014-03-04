@@ -10,17 +10,17 @@
     #import <UIKit/UIKit.h>
 #endif
 
-#ifdef __cplusplus
-	#include <functional>
-	#include <memory>
-	#include <string>
-	#include <unordered_map>
+#include <functional>
+#include <memory>
+#include <random>
+#include <string>
+#include <unordered_map>
+#include <unordered_set>
 
-	#include <cocos2d.h>
-	#include <Box2D/Box2D.h>
+#include <cocos2d.h>
+#include <Box2D/Box2D.h>
 
-	using namespace std;
-	using namespace cocos2d;
-#endif
+using namespace std;
+using namespace cocos2d;
 
 #endif

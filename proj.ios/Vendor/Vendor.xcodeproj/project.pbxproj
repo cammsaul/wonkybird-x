@@ -53,6 +53,10 @@
 		32984CA918C53CBA005A62A1 /* b2WeldJoint.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 32984C4D18C53CBA005A62A1 /* b2WeldJoint.cpp */; };
 		32984CAA18C53CBA005A62A1 /* b2WheelJoint.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 32984C4F18C53CBA005A62A1 /* b2WheelJoint.cpp */; };
 		32984CAF18C53CBA005A62A1 /* b2Rope.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 32984C7D18C53CBA005A62A1 /* b2Rope.cpp */; };
+		32984D7218C53E2E005A62A1 /* CDAudioManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 32984CDF18C53E2E005A62A1 /* CDAudioManager.m */; };
+		32984D7318C53E2E005A62A1 /* CDOpenALSupport.m in Sources */ = {isa = PBXBuildFile; fileRef = 32984CE218C53E2E005A62A1 /* CDOpenALSupport.m */; };
+		32984D7418C53E2E005A62A1 /* CocosDenshion.m in Sources */ = {isa = PBXBuildFile; fileRef = 32984CE418C53E2E005A62A1 /* CocosDenshion.m */; };
+		32984D7618C53E2E005A62A1 /* SimpleAudioEngine_objc.m in Sources */ = {isa = PBXBuildFile; fileRef = 32984CE718C53E2E005A62A1 /* SimpleAudioEngine_objc.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -163,6 +167,18 @@
 		32984C5018C53CBA005A62A1 /* b2WheelJoint.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = b2WheelJoint.h; sourceTree = "<group>"; };
 		32984C7D18C53CBA005A62A1 /* b2Rope.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = b2Rope.cpp; sourceTree = "<group>"; };
 		32984C7E18C53CBA005A62A1 /* b2Rope.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = b2Rope.h; sourceTree = "<group>"; };
+		32984CDB18C53E2E005A62A1 /* Export.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Export.h; sourceTree = "<group>"; };
+		32984CDC18C53E2E005A62A1 /* SimpleAudioEngine.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SimpleAudioEngine.h; sourceTree = "<group>"; };
+		32984CDE18C53E2E005A62A1 /* CDAudioManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CDAudioManager.h; sourceTree = "<group>"; };
+		32984CDF18C53E2E005A62A1 /* CDAudioManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CDAudioManager.m; sourceTree = "<group>"; };
+		32984CE018C53E2E005A62A1 /* CDConfig.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CDConfig.h; sourceTree = "<group>"; };
+		32984CE118C53E2E005A62A1 /* CDOpenALSupport.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CDOpenALSupport.h; sourceTree = "<group>"; };
+		32984CE218C53E2E005A62A1 /* CDOpenALSupport.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CDOpenALSupport.m; sourceTree = "<group>"; };
+		32984CE318C53E2E005A62A1 /* CocosDenshion.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CocosDenshion.h; sourceTree = "<group>"; };
+		32984CE418C53E2E005A62A1 /* CocosDenshion.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CocosDenshion.m; sourceTree = "<group>"; };
+		32984CE518C53E2E005A62A1 /* SimpleAudioEngine.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = SimpleAudioEngine.mm; sourceTree = "<group>"; };
+		32984CE618C53E2E005A62A1 /* SimpleAudioEngine_objc.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SimpleAudioEngine_objc.h; sourceTree = "<group>"; };
+		32984CE718C53E2E005A62A1 /* SimpleAudioEngine_objc.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SimpleAudioEngine_objc.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -180,6 +196,7 @@
 		32984BB518C53C90005A62A1 = {
 			isa = PBXGroup;
 			children = (
+				32984CC218C53E2E005A62A1 /* CocosDenshion */,
 				32984BF018C53CBA005A62A1 /* Box2D */,
 				32984BC018C53C90005A62A1 /* Frameworks */,
 				32984BBF18C53C90005A62A1 /* Products */,
@@ -358,6 +375,41 @@
 			path = Rope;
 			sourceTree = "<group>";
 		};
+		32984CC218C53E2E005A62A1 /* CocosDenshion */ = {
+			isa = PBXGroup;
+			children = (
+				32984CDA18C53E2E005A62A1 /* include */,
+				32984CDD18C53E2E005A62A1 /* ios */,
+			);
+			path = CocosDenshion;
+			sourceTree = "<group>";
+		};
+		32984CDA18C53E2E005A62A1 /* include */ = {
+			isa = PBXGroup;
+			children = (
+				32984CDB18C53E2E005A62A1 /* Export.h */,
+				32984CDC18C53E2E005A62A1 /* SimpleAudioEngine.h */,
+			);
+			path = include;
+			sourceTree = "<group>";
+		};
+		32984CDD18C53E2E005A62A1 /* ios */ = {
+			isa = PBXGroup;
+			children = (
+				32984CDE18C53E2E005A62A1 /* CDAudioManager.h */,
+				32984CDF18C53E2E005A62A1 /* CDAudioManager.m */,
+				32984CE018C53E2E005A62A1 /* CDConfig.h */,
+				32984CE118C53E2E005A62A1 /* CDOpenALSupport.h */,
+				32984CE218C53E2E005A62A1 /* CDOpenALSupport.m */,
+				32984CE318C53E2E005A62A1 /* CocosDenshion.h */,
+				32984CE418C53E2E005A62A1 /* CocosDenshion.m */,
+				32984CE518C53E2E005A62A1 /* SimpleAudioEngine.mm */,
+				32984CE618C53E2E005A62A1 /* SimpleAudioEngine_objc.h */,
+				32984CE718C53E2E005A62A1 /* SimpleAudioEngine_objc.m */,
+			);
+			path = ios;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -426,8 +478,10 @@
 				32984C8018C53CBA005A62A1 /* b2CollideCircle.cpp in Sources */,
 				32984C9518C53CBA005A62A1 /* b2World.cpp in Sources */,
 				32984C8518C53CBA005A62A1 /* b2DynamicTree.cpp in Sources */,
+				32984D7618C53E2E005A62A1 /* SimpleAudioEngine_objc.m in Sources */,
 				32984C9918C53CBA005A62A1 /* b2CircleContact.cpp in Sources */,
 				32984CA218C53CBA005A62A1 /* b2GearJoint.cpp in Sources */,
+				32984D7218C53E2E005A62A1 /* CDAudioManager.m in Sources */,
 				32984C9718C53CBA005A62A1 /* b2ChainAndCircleContact.cpp in Sources */,
 				32984C8B18C53CBA005A62A1 /* b2BlockAllocator.cpp in Sources */,
 				32984C8F18C53CBA005A62A1 /* b2StackAllocator.cpp in Sources */,
@@ -443,7 +497,9 @@
 				32984CA318C53CBA005A62A1 /* b2Joint.cpp in Sources */,
 				32984C8D18C53CBA005A62A1 /* b2Math.cpp in Sources */,
 				32984C8618C53CBA005A62A1 /* b2TimeOfImpact.cpp in Sources */,
+				32984D7318C53E2E005A62A1 /* CDOpenALSupport.m in Sources */,
 				32984C8A18C53CBA005A62A1 /* b2PolygonShape.cpp in Sources */,
+				32984D7418C53E2E005A62A1 /* CocosDenshion.m in Sources */,
 				32984C8718C53CBA005A62A1 /* b2ChainShape.cpp in Sources */,
 				32984CA818C53CBA005A62A1 /* b2RopeJoint.cpp in Sources */,
 				32984C9218C53CBA005A62A1 /* b2ContactManager.cpp in Sources */,
@@ -536,7 +592,14 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = YES;
+				CLANG_ENABLE_OBJC_ARC = NO;
 				DSTROOT = /tmp/Vendor.dst;
+				GCC_WARN_INHIBIT_ALL_WARNINGS = YES;
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"/Users/cam/cocos2d-x-2.2.2/projects/WonkyBird/proj.ios/Vendor/CocosDenshion/third_party/blackberry/libraries/armle-v7",
+					"/Users/cam/cocos2d-x-2.2.2/projects/WonkyBird/proj.ios/Vendor/CocosDenshion/third_party/blackberry/libraries/x86",
+				);
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
@@ -548,7 +611,14 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = YES;
+				CLANG_ENABLE_OBJC_ARC = NO;
 				DSTROOT = /tmp/Vendor.dst;
+				GCC_WARN_INHIBIT_ALL_WARNINGS = YES;
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"/Users/cam/cocos2d-x-2.2.2/projects/WonkyBird/proj.ios/Vendor/CocosDenshion/third_party/blackberry/libraries/armle-v7",
+					"/Users/cam/cocos2d-x-2.2.2/projects/WonkyBird/proj.ios/Vendor/CocosDenshion/third_party/blackberry/libraries/x86",
+				);
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
@@ -575,6 +645,7 @@
 				32984BE318C53C90005A62A1 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

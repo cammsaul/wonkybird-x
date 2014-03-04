@@ -11,9 +11,6 @@
 
 #include "Bird.h"
 
-using namespace cocos2d;
-using namespace std;
-
 class Toucan : public Bird {
 public:
 	Toucan();

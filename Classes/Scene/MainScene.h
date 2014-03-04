@@ -14,7 +14,7 @@
 #include "GameplayLayer.h"
 #include "HUDLayer.h"
 
-class MainScene : public cocos2d::CCScene {
+class MainScene : public CCScene {
 public:
 	MainScene();
 	
@@ -22,10 +22,10 @@ public:
 	
 //	virtual void update(float dt) override;
 private:
-	std::unique_ptr<StaticBackgroundLayer> staticBackgroundLayer_;
-	std::unique_ptr<ScrollingBackgroundLayer> scrollingBackgroundLayer_;
-	std::unique_ptr<GameplayLayer> gameplayLayer_;
-	std::unique_ptr<HUDLayer> hudLayer_;
+	unique_ptr<StaticBackgroundLayer> staticBackgroundLayer_;
+	unique_ptr<ScrollingBackgroundLayer> scrollingBackgroundLayer_;
+	unique_ptr<GameplayLayer> gameplayLayer_;
+	unique_ptr<HUDLayer> hudLayer_;
 };
 
 #endif

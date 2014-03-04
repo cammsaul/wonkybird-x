@@ -9,5 +9,13 @@
 #include "GameplayLayer.h"
 
 GameplayLayer::GameplayLayer():
-	Box2DLayer("Textures")
-{}
+	Box2DLayer("Textures"),
+	birds_ {}
+{
+	scheduleUpdate();
+}
+
+void GameplayLayer::update(float dt) {
+	Box2DLayer::update(dt);
+	printf("GameplayLayer::update\n");
+}

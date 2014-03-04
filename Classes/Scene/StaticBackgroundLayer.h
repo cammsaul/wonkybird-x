@@ -9,10 +9,6 @@
 #ifndef WONKYBIRD_STATICBACKGROUNDLAYER_H
 #define WONKYBIRD_STATICBACKGROUNDLAYER_H
 
-#include <cocos2d.h>
-using namespace cocos2d;
-using namespace std;
-
 class StaticBackgroundLayer : public CCLayer {
 public:
 	StaticBackgroundLayer();
@@ -26,7 +22,7 @@ private:
 	unique_ptr<CCSprite> nightBackground_;
 	unique_ptr<CCSprite> toucanBackground_;
 	
-	unique_ptr<CCSprite> AddBackground(const std::string& filename);
+	unique_ptr<CCSprite> AddBackground(const string& filename);
 };
 
 #endif
