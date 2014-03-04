@@ -7,6 +7,7 @@
 //
 
 #include "HUDLayer.h"
+#include "GameManager.h"
 
 static const string TitleLabelKey			= "Title.png";
 static const string GetReadyLabelKey		= "Get_Ready.png";
@@ -113,19 +114,39 @@ void HUDLayer::RemoveSpriteWithKeyIfNeeded(const string* key) {
 }
 
 void HUDLayer::AddOrReomveSpriteWithKey(const string* key, GameState states) {
-	const auto gameState = GState();
-	if ((int)gameState & (int)states)	AddSpriteWithKeyIfNeeded(key);
-	else								RemoveSpriteWithKeyIfNeeded(key);
+	if (GState() & states)	AddSpriteWithKeyIfNeeded(key);
+	else					RemoveSpriteWithKeyIfNeeded(key);
 }
 
 
-void HUDLayer::update(float dt) {
+void HUDLayer::update(float delta) {
 	if (GState() != LastState()) {
 		for (const auto& spriteInfo : spriteInfo_) {
 			const auto* key = &spriteInfo.first;
 			const GameState& states = spriteInfo.second.first;
 			AddOrReomveSpriteWithKey(key, states);
 		}
+		
+		scoreLabel_.setVisible(GStateIsActive());
+		scoreBoardBestLabel_.setVisible(GStateIsGameOver());
+		scoreBoardScoreLabel_.setVisible(GStateIsGameOver());
+	}
+	
+	if (GStateIsGetReady()) {
+		static float timeSinceLastTap = 0;
+		timeSinceLastTap += delta;
+		if (timeSinceLastTap > 0.8f) {
+			timeSinceLastTap = 0;
+			auto& tapSprite = sprites_[TapFingerKey];
+			tapSprite->setScale(0.8f);
+			tapSprite->runAction(CCScaleTo::create(0.25f, 1.0f));
+		}
+	}
+	if (GStateIsActive()) {
+		scoreLabel_.setString(to_string(GameManager::sharedInstance()->TotalScore()).c_str());
+	} else if (GStateIsGameOver()) {
+		scoreBoardScoreLabel_.setString(to_string(GameManager::sharedInstance()->TotalScore()).c_str());
+		scoreBoardBestLabel_.setString(to_string(GameManager::sharedInstance()->BestTotalScore()).c_str());
 	}
 }
 
@@ -137,6 +158,6 @@ void HUDLayer::ccTouchEnded(CCTouch *pTouch, CCEvent *pEvent) {
 	if (GStateIsMainMenu())			SetGState(GStateGetReady);
 	else if (GStateIsGetReady())	SetGState(GStateActive|GStateRound1);
 	else if (GStateIsActive())		SetGState(GStateGameOver);
-	else if (GStateIsGameOver())	SetGState(GStateIsMainMenu());
+	else							SetGState(GStateIsMainMenu());
 }
 

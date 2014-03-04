@@ -18,8 +18,10 @@ public:
 	
 	GameState LastState() const { return lastState_; } ///< state of the last frame.
 	
-	unsigned Round1Score() { return round1Score_; }
-	unsigned Round2Score() { return round2Score_; }
+	unsigned Round1Score()		const { return round1Score_; }
+	unsigned Round2Score()		const { return round2Score_; }
+	unsigned TotalScore()		const { return round1Score_ + round2Score_; }
+	unsigned BestTotalScore()	const { return TotalScore(); } ///< TODO
 	
 	void update(); ///< MainScene will take care of calling this
 	
