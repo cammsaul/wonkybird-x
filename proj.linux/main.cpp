@@ -1,4 +1,4 @@
-#include "../Classes/AppDelegate.h"
+#include "../Classes/Singletons/AppDelegate.h"
 #include "cocos2d.h"
 #include "CCEGLView.h"
 

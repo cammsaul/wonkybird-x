@@ -45,7 +45,7 @@ GameplayLayer::GameplayLayer():
 }
 
 void GameplayLayer::registerWithTouchDispatcher() {
-	CCDirector::sharedDirector()->getTouchDispatcher()->addTargetedDelegate(this, 0, YES);
+	CCDirector::sharedDirector()->getTouchDispatcher()->addTargetedDelegate(this, 0, true);
 }
 
 void GameplayLayer::update(float dt) {
@@ -126,18 +126,18 @@ void GameplayLayer::UpdateActive(float dt) {
 		CurrentBird()->SetXVelocity(0.0f);
 	}
 	
-	if (ABS(CurrentBird()->XVelocity()) >= BirdXVelocityDeathThreshold) {
-		BOOL shouldDie = YES;
-		if (CurrentRoundScore() == 0 && ABS(CurrentBird()->XVelocity()) <= 0.8f) {
-			shouldDie = NO; // be a little more forgiving when the round is just starting
+	if (abs(CurrentBird()->XVelocity()) >= BirdXVelocityDeathThreshold) {
+		bool shouldDie = true;
+		if (CurrentRoundScore() == 0 && abs(CurrentBird()->XVelocity()) <= 0.8f) {
+			shouldDie = false; // be a little more forgiving when the round is just starting
 		}
 		if (shouldDie) {
-			NSLog(@"Bird x: %.2f", CurrentBird()->XVelocity());
+			printf("Bird x: %.2f", CurrentBird()->XVelocity());
 			CurrentBird()->SetState(Bird::State::Dead);
 		}
 	}
 	
-	if (CurrentBird()->State() == Bird::State::Dead) {
+	if (CurrentBird()->GetState() == Bird::State::Dead) {
 		SetGState(GStateGameOver);
 	} else {
 		AddRandomPipeIfNeeded();
@@ -253,14 +253,14 @@ bool GameplayLayer::ccTouchBegan(CCTouch *pTouch, CCEvent *pEvent) {
 void GameplayLayer::ccTouchEnded(CCTouch *pTouch, CCEvent *pEvent) {
 	const unsigned numFrames = CCDirector::sharedDirector()->getTotalFrames() - touchBeginTime_;
 	
-	if (CurrentBird()->State() != Bird::State::Dead) {
+	if (CurrentBird()->GetState() != Bird::State::Dead) {
 		CurrentBird()->Body()->SetAwake(true);
 		
 		// move Bird towards horizontal center of screen if needed
 		CurrentBird()->SetXVelocity((ScreenHalfWidth() / kPTMRatio) - CurrentBird()->Box2DX());
 		CurrentBird()->ApplyTouch(numFrames);
 
-		CocosDenshion::SimpleAudioEngine::sharedEngine()->playEffect("Shaker_2.wav");
+//		CocosDenshion::SimpleAudioEngine::sharedEngine()->playEffect("Shaker_2.wav");
 	}
 }
 

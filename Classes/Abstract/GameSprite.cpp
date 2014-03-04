@@ -24,6 +24,8 @@ void GameNode::Update(float dt) {} // default implementation does nothing
 
 GameSprite::GameSprite() {}
 
+GameSprite::~GameSprite() {}
+
 GameSprite::GameSprite(const string& spriteFrameName) {
 	initWithSpriteFrameName(spriteFrameName.c_str());
 }

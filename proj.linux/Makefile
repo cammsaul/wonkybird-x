@@ -1,10 +1,28 @@
 EXECUTABLE = WonkyBird
 
-INCLUDES = -I.. -I../Classes
+INCLUDES = -include ../proj.ios/Prefix.pch -I.. -I../Classes -I../Classes/Abstract -I../Classes/GameObjects -I../Classes/Scene -I../Classes/Singletons
 
 SOURCES = main.cpp \
-        ../Classes/AppDelegate.cpp \
-        ../Classes/HelloWorldScene.cpp
+	../Classes/Abstract/Box2DItem.cpp \
+	../Classes/Abstract/Box2DLayer.cpp \
+	../Classes/Abstract/GameLayer.cpp \
+	../Classes/Abstract/GameSprite.cpp \
+	../Classes/Abstract/GLES-Render.cpp \
+	../Classes/Abstract/ReflectiveClass.cpp \
+	../Classes/Abstract/TiledMapWithBox2D.cpp \
+	../Classes/GameObjects/Bird.cpp \
+	../Classes/GameObjects/Pigeon.cpp \
+	../Classes/GameObjects/Pipe.cpp \
+	../Classes/GameObjects/Toucan.cpp \
+	../Classes/Scene/GameplayLayer.cpp \
+	../Classes/Scene/HUDLayer.cpp \
+	../Classes/Scene/MainScene.cpp \
+	../Classes/Scene/ScrollingBackgroundLayer.cpp \
+	../Classes/Scene/StaticBackgroundLayer.cpp \
+	../Classes/Singletons/AppDelegate.cpp \
+	../Classes/Singletons/GameManager.cpp
+
+CXXFLAGS = "-std=c++11"
 
 COCOS_ROOT = ../../..
 include $(COCOS_ROOT)/cocos2dx/proj.linux/cocos2dx.mk

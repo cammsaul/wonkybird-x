@@ -1,4 +1,4 @@
-#include "AppDelegate.h"
+#include "Singletons/AppDelegate.h"
 #include "cocos2d.h"
 #include "CCEventType.h"
 #include "platform/android/jni/JniHelper.h"

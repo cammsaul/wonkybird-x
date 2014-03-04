@@ -20,7 +20,7 @@ public:
 	virtual bool ccTouchBegan(CCTouch *pTouch, CCEvent *pEvent) override;
     virtual void ccTouchEnded(CCTouch *pTouch, CCEvent *pEvent) override;
 private:
-	using SpriteInfo = pair<GameState, CCPoint>;
+	typedef pair<GameState, CCPoint> SpriteInfo;
 	unordered_map<string, SpriteInfo> spriteInfo_;
 	unordered_map<string, unique_ptr<CCSprite>> sprites_;
 	CCLabelBMFont scoreLabel_;

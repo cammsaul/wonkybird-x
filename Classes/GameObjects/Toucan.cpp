@@ -14,6 +14,8 @@ const Metaclass* const Toucan::MetaClass() const {
 	return &m;
 }
 
+Toucan::~Toucan() {}
+
 void Toucan::ApplyTouch(unsigned numFrames) {
 	SetYVelocity(-kGravityVelocity * (.05f + (.075f * numFrames)));
 }
@@ -21,7 +23,7 @@ void Toucan::ApplyTouch(unsigned numFrames) {
 void Toucan::FlapAroundOnMainScreen(Flock allBirds) {
 	auto RandTimes10 = []{ return Rand() * kBirdMenuRandVelocity; };
 	
-	if (ABS(YVelocity()) < 2) {
+	if (abs(YVelocity()) < 2) {
 		const float BirdXDiff = (X() - ScreenHalfWidth()) / ScreenHalfWidth(); /// < 1.0 = right edge, -1.0 = left
 		
 		static const float MinAntiGravityAmount = 0.0f;
@@ -51,7 +53,7 @@ void Toucan::FlapAroundOnMainScreen(Flock allBirds) {
 			}
 		}
 		
-		if (ABS(YVelocity()) < 2.0f) {
+		if (abs(YVelocity()) < 2.0f) {
 			Body()->ApplyTorque(-RotationBox2D());
 		}
 	}

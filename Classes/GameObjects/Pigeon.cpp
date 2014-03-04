@@ -14,6 +14,8 @@ const Metaclass* const Pigeon::MetaClass() const {
 	return &m;
 }
 
+Pigeon::~Pigeon() {}
+
 void Pigeon::ApplyTouch(unsigned numFrames) {
 	if (YVelocity() < 0) {
 		SetYVelocity(-kGravityVelocity * 0.6f);
@@ -26,7 +28,7 @@ void Pigeon::ApplyTouch(unsigned numFrames) {
 void Pigeon::FlapAroundOnMainScreen(Flock allBirds) {
 	auto RandTimes10 = []{ return Rand() * kBirdMenuRandVelocity; };
 	
-	if (ABS(YVelocity()) < 2) {
+	if (abs(YVelocity()) < 2) {
 		const float BirdXDiff = (X() - ScreenHalfWidth()) / ScreenHalfWidth(); /// < 1.0 = right edge, -1.0 = left
 		
 		const float newYVel = -kGravityVelocity * ((ScreenHeight() * kBirdMenuHeight) - Y()) * Rand() * Rand() * 0.1f;

@@ -9,13 +9,14 @@
 #ifndef WONKYBIRD_STATICBACKGROUNDLAYER_H
 #define WONKYBIRD_STATICBACKGROUNDLAYER_H
 
+typedef shared_ptr<CCSprite> BGSprite;
+
 class StaticBackgroundLayer : public CCLayer {
 public:
 	StaticBackgroundLayer();
 		
 	virtual void update(float dt) override;
 private:
-	using BGSprite = shared_ptr<CCSprite>;
 	BGSprite dayBackground_;
 	BGSprite nightBackground_;
 	BGSprite toucanBackground_;

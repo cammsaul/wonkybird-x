@@ -11,7 +11,6 @@
 		1AC3624916D4A1E8000847F2 /* AppController.mm in Sources */ = {isa = PBXBuildFile; fileRef = 1AC3624316D4A1E8000847F2 /* AppController.mm */; };
 		1AC3624B16D4A1E8000847F2 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 1AC3624516D4A1E8000847F2 /* main.m */; };
 		1ACB3244164770DE00914215 /* libcurl.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 1ACB3243164770DE00914215 /* libcurl.a */; };
-		1AFAF8B816D35DE700DB1158 /* HelloWorldScene.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 1AFAF8B516D35DE700DB1158 /* HelloWorldScene.cpp */; };
 		1AFCDA8216D4A25900906EA6 /* RootViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = 1AFCDA8116D4A25900906EA6 /* RootViewController.mm */; };
 		1D60589F0D05DD5A006BFB54 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1D30AB110D05D00D00671497 /* Foundation.framework */; };
 		1DF5F4E00D08C38300B7A737 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1DF5F4DF0D08C38300B7A737 /* UIKit.framework */; };
@@ -118,8 +117,6 @@
 		1AC3624516D4A1E8000847F2 /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = SOURCE_ROOT; };
 		1AC3624616D4A1E8000847F2 /* Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Prefix.pch; sourceTree = SOURCE_ROOT; };
 		1ACB3243164770DE00914215 /* libcurl.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libcurl.a; path = ../../cocos2dx/platform/third_party/ios/libraries/libcurl.a; sourceTree = "<group>"; };
-		1AFAF8B516D35DE700DB1158 /* HelloWorldScene.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = HelloWorldScene.cpp; path = ../Classes/HelloWorldScene.cpp; sourceTree = "<group>"; };
-		1AFAF8B616D35DE700DB1158 /* HelloWorldScene.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = HelloWorldScene.h; path = ../Classes/HelloWorldScene.h; sourceTree = "<group>"; };
 		1AFCDA8016D4A25900906EA6 /* RootViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RootViewController.h; sourceTree = SOURCE_ROOT; };
 		1AFCDA8116D4A25900906EA6 /* RootViewController.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = RootViewController.mm; sourceTree = SOURCE_ROOT; };
 		1D30AB110D05D00D00671497 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -143,7 +140,7 @@
 		326DF4E118C510FC004E1F4B /* Background_Toucan@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Background_Toucan@2x.png"; sourceTree = "<group>"; };
 		326DF4E618C51708004E1F4B /* Constants.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = Constants.h; path = ../Classes/Singletons/Constants.h; sourceTree = "<group>"; };
 		326DF4E718C51A98004E1F4B /* AppDelegate.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = AppDelegate.cpp; sourceTree = "<group>"; };
-		326DF4E818C51A98004E1F4B /* AppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
+		326DF4E818C51A98004E1F4B /* AppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AppDelegate.h; path = ../Singletons/AppDelegate.h; sourceTree = "<group>"; };
 		326DF4EB18C51AA0004E1F4B /* MainScene.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = MainScene.cpp; sourceTree = "<group>"; };
 		326DF4EC18C51AA0004E1F4B /* MainScene.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MainScene.h; sourceTree = "<group>"; };
 		326DF4ED18C51AA0004E1F4B /* StaticBackgroundLayer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = StaticBackgroundLayer.cpp; sourceTree = "<group>"; };
@@ -264,8 +261,6 @@
 				326DF4E518C516F1004E1F4B /* Singletons */,
 				326DF54B18C525E2004E1F4B /* GameObjects */,
 				326DF4EA18C51AA0004E1F4B /* Scene */,
-				1AFAF8B616D35DE700DB1158 /* HelloWorldScene.h */,
-				1AFAF8B516D35DE700DB1158 /* HelloWorldScene.cpp */,
 			);
 			name = Classes;
 			path = ../classes;
@@ -327,7 +322,6 @@
 		326DF4E518C516F1004E1F4B /* Singletons */ = {
 			isa = PBXGroup;
 			children = (
-				326DF4E818C51A98004E1F4B /* AppDelegate.h */,
 				326DF4E718C51A98004E1F4B /* AppDelegate.cpp */,
 				326DF55C18C5271E004E1F4B /* GameManager.h */,
 				326DF55B18C5271E004E1F4B /* GameManager.cpp */,
@@ -340,6 +334,7 @@
 			isa = PBXGroup;
 			children = (
 				326DF4EC18C51AA0004E1F4B /* MainScene.h */,
+				326DF4E818C51A98004E1F4B /* AppDelegate.h */,
 				326DF4EB18C51AA0004E1F4B /* MainScene.cpp */,
 				326DF4EE18C51AA0004E1F4B /* StaticBackgroundLayer.h */,
 				326DF4ED18C51AA0004E1F4B /* StaticBackgroundLayer.cpp */,
@@ -638,7 +633,6 @@
 				326DF55718C52667004E1F4B /* Pigeon.cpp in Sources */,
 				32231E1918C5DB3A0097167F /* SimpleAudioEngine.mm in Sources */,
 				326DF4FF18C51EB6004E1F4B /* HUDLayer.cpp in Sources */,
-				1AFAF8B816D35DE700DB1158 /* HelloWorldScene.cpp in Sources */,
 				1AC3624916D4A1E8000847F2 /* AppController.mm in Sources */,
 				321D602C18C55D9F003921FC /* GLES-Render.cpp in Sources */,
 				1AC3624B16D4A1E8000847F2 /* main.m in Sources */,

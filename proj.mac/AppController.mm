@@ -36,9 +36,9 @@
 		// create the window
 		// note that using NSResizableWindowMask causes the window to be a little
 		// smaller and therefore ipad graphics are not loaded
-        NSRect rect = NSMakeRect(200, 200, 480, 320);
+        NSRect rect = NSMakeRect(100, 100, 1200, 800);
 		window = [[NSWindow alloc] initWithContentRect:rect
-			styleMask:( NSClosableWindowMask | NSTitledWindowMask )
+			styleMask:( NSClosableWindowMask|NSTitledWindowMask|NSResizableWindowMask )
 			backing:NSBackingStoreBuffered
 			defer:YES];
         

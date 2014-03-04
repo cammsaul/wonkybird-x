@@ -6,6 +6,7 @@
 //
 //
 
+#include <cmath>
 
 #include "Bird.h"
 
@@ -38,7 +39,7 @@ void Bird::InitializeAnimations(CCTexture2D* texture) {
 		static const vector<unsigned> frameNums { 1, 2, 3, 2 };
 		auto frames = CCUniquePtr<CCArray>(CCArray::create());
 		for (auto frameNum : frameNums) {
-			auto frame = CCUniquePtr<CCSpriteFrame>(CCSpriteFrameCache::sharedSpriteFrameCache()->spriteFrameByName(SpriteNameWithSuffix(to_string(frameNum)).c_str()));
+			auto frame = CCUniquePtr<CCSpriteFrame>(CCSpriteFrameCache::sharedSpriteFrameCache()->spriteFrameByName(SpriteNameWithSuffix(::to_string(frameNum)).c_str()));
 			frames->addObject(frame.get());
 		}
 		flappingAnimation_ = CCUniquePtr<CCAnimation>(CCAnimation::createWithSpriteFrames(frames.get(), 0.04f));
@@ -47,13 +48,13 @@ void Bird::InitializeAnimations(CCTexture2D* texture) {
 		static const vector<unsigned> frameNums2 { 1, 2 };
 		auto frames2 = CCUniquePtr<CCArray>(CCArray::create());
 		for (auto frameNum : frameNums2) {
-			auto frame = CCUniquePtr<CCSpriteFrame>(CCSpriteFrameCache::sharedSpriteFrameCache()->spriteFrameByName(SpriteNameWithSuffix(to_string(frameNum)).c_str()));
+			auto frame = CCUniquePtr<CCSpriteFrame>(CCSpriteFrameCache::sharedSpriteFrameCache()->spriteFrameByName(SpriteNameWithSuffix(::to_string(frameNum)).c_str()));
 			frames2->addObject(frame.get());
 		}
 		fallingAnimation_ = CCUniquePtr<CCAnimation>(CCAnimation::createWithSpriteFrames(frames2.get(), 0.1f));
 	}
 	
-	SetState(State::Flapping);
+	SetState(Bird::State::Flapping);
 }
 
 void Bird::SetState(enum Bird::State state) {
@@ -100,7 +101,7 @@ void Bird::Update(float dt) {
 	if (getRotation() > 90)  setRotation(90);
 	if (getRotation() < -90) setRotation(-90);
 				
-	const bool lowYVelocity = ABS(YVelocity()) < 0.1f;
+	const bool lowYVelocity = abs(YVelocity()) < 0.1f;
 	Body()->ApplyTorque(-(RotationBox2D() + AngularVelocity()) + (lowYVelocity ? 0 : YVelocity()));
 	
 	if (GStateIsMainMenu()) {

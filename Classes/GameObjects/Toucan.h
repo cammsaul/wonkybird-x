@@ -14,7 +14,7 @@
 class Toucan : public Bird {
 public:
 //	Toucan();
-	virtual ~Toucan() = default;
+	virtual ~Toucan();
 	virtual const Metaclass* const MetaClass() const override;
 	
 	virtual void ApplyTouch(unsigned numFrames) override;

@@ -25,18 +25,13 @@ static const string FacebookButtonKey		= "Button_Facebook.png";
 static const string TwitterGrayButtonKey	= "Button_Twitter_Gray.png";
 static const string FacebookGrayButtonKey	= "Button_Facebook_Gray.png";
 
-struct HUDSpriteInfo {
-	GameState states;
-	CCPoint position;	
-};
-
 HUDLayer::HUDLayer():
-GameLayer("HUD"),
-spriteInfo_(),
-sprites_(),
-scoreLabel_(),
-scoreBoardScoreLabel_(),
-scoreBoardBestLabel_()
+	GameLayer("HUD"),
+	spriteInfo_(),
+	sprites_(),
+	scoreLabel_(),
+	scoreBoardScoreLabel_(),
+	scoreBoardBestLabel_()
 {
 	const float labelYPosition = ScreenHeight() * 0.75f;
 	const float rateButtonY = ScreenHeight() * 0.45f;
@@ -86,7 +81,7 @@ scoreBoardBestLabel_()
 }
 
 void HUDLayer::registerWithTouchDispatcher() {
-	CCDirector::sharedDirector()->getTouchDispatcher()->addTargetedDelegate(this, 0, YES);
+	CCDirector::sharedDirector()->getTouchDispatcher()->addTargetedDelegate(this, 0, true);
 }
 
 void HUDLayer::AddSpriteWithKeyIfNeeded(const string* key) {

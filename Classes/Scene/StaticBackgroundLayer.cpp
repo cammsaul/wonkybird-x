@@ -8,7 +8,7 @@
 
 #include "StaticBackgroundLayer.h"
 
-using BGSprite = shared_ptr<CCSprite>;
+//using BGSprite = shared_ptr<CCSprite>;
 
 StaticBackgroundLayer::StaticBackgroundLayer():
 	dayBackground_			{ nullptr },

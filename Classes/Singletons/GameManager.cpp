@@ -43,7 +43,7 @@ bool GameManager::IsReversed() const {
 
 #pragma mark - Global Helper functions
 
-NSUInteger CurrentRoundScore() {
+unsigned CurrentRoundScore() {
 	return GState() & GStateRound1 ? GameManager::sharedInstance().Round1Score() : GameManager::sharedInstance().Round2Score();
 }
 
@@ -61,4 +61,10 @@ GameState GState() {
 
 void SetGState(int gState) {
 	GameManager::sharedInstance().SetGState((GameState)gState);
+}
+
+string to_string(int i) {
+	char out[100];
+	sprintf(out, "%d", i);
+	return out;
 }

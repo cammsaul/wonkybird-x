@@ -13,8 +13,8 @@
 #include "ReflectiveClass.h"
 
 class Bird;
-using BirdPtr = CCSharedPtr<Bird>;
-using Flock = vector<BirdPtr>;
+typedef CCSharedPtr<Bird> BirdPtr;
+typedef vector<BirdPtr> Flock;
 
 class Bird : public ReflectiveClass, public GameSprite {
 public:
@@ -33,8 +33,8 @@ public:
 	
 	virtual void Update(float dt) override;
 	
-	enum State State() const { return state_; }
-	virtual void SetState(enum State birdState);
+	Bird::State GetState() const { return state_; }
+	virtual void SetState(Bird::State birdState);
 	
 	virtual void ApplyTouch(unsigned numFrames) = 0; ///< apply a touch to the bird when GameState is active
 	virtual void FlapAroundOnMainScreen(Flock otherBirds) = 0; ///< Instruct the bird to start flapping around main screen

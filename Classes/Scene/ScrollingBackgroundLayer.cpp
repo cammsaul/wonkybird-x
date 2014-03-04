@@ -20,7 +20,7 @@ ScrollingBackgroundLayer::ScrollingBackgroundLayer():
 	grass_->BodyDef()->type = b2_dynamicBody;
 	grass_->FixtureDef()->filter.categoryBits = 0;
 	grass_->BodyDef()->gravityScale = 0;
-	grass_->AddToWorld(MainScene::SharedInstance().Box2DLayer().World());
+	grass_->AddToWorld(MainScene::SharedInstance().GetBox2DLayer().World());
 
 	scheduleUpdate();
 }

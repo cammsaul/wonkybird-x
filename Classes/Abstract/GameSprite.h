@@ -32,7 +32,7 @@ class GameSprite : public virtual CCSprite, public virtual GameNode {
 public:
 	GameSprite(); ///< game sprite with no image, e.g. for use as wall, etc
 	GameSprite(const string& spriteFrameName);
-	virtual ~GameSprite() = default;
+	virtual ~GameSprite();
 private:
 };
 

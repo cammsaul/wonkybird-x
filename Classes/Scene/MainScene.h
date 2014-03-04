@@ -21,7 +21,7 @@ public:
 	virtual bool init() override;
 	virtual void update(float dt) override;
 	
-	Box2DLayer& Box2DLayer() const { return *gameplayLayer_; }
+	Box2DLayer& GetBox2DLayer() const { return *gameplayLayer_; }
 private:
 	unique_ptr<StaticBackgroundLayer> staticBackgroundLayer_;
 	unique_ptr<ScrollingBackgroundLayer> scrollingBackgroundLayer_;

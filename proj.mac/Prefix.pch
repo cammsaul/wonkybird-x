@@ -2,6 +2,31 @@
 // Prefix header for all source files of the 'Paralaxer' target in the 'Paralaxer' project
 //
 
+#ifndef PREFIX_PCH
+#define PREFIX_PCH
+
 #ifdef __OBJC__
+	#import <Foundation/Foundation.h>
 	#import <Cocoa/Cocoa.h>
+#endif
+
+#include <deque>
+#include <functional>
+#include <memory>
+#include <random>
+#include <string>
+#include <typeinfo>
+#include <unordered_map>
+#include <unordered_set>
+
+#include <cocos2d.h>
+#include <Box2D/Box2D.h>
+//#include <CocosDenshion/include/SimpleAudioEngine.h>
+
+using namespace std;
+using namespace cocos2d;
+
+#include "Constants.h"
+#include "CCUniquePtr.h"
+
 #endif
