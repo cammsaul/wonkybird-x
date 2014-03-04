@@ -13,12 +13,22 @@
 
 class Bird : public GameSprite {
 public:
-	Bird();
-	virtual ~Bird() = default;
+	enum class State {
+		Dead,
+		Falling,
+		Flapping
+	};
+	
+	Bird(const string& spriteFrameName);
+	virtual ~Bird();
+	
+	enum State State() const { return state_; }
+	virtual void SetState(enum State birdState) { state_ = birdState; }
 	
 	virtual void ApplyTouch(unsigned numFrames) = 0;	///< apply a touch to the bird when GameState is active
 	virtual void FlapAroundOnMainScreen() = 0;			///< Instruct the bird to start flapping around main screen
-private:
+protected:
+	enum State state_;
 };
 
 #endif

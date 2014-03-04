@@ -10,6 +10,7 @@
 #define WONKYBIRD_GAMEPLAYLAYER_H
 
 #include "Box2DLayer.h"
+#include "GameSprite.h"
 #include "Bird.h"
 
 class GameplayLayer : public Box2DLayer {
@@ -18,9 +19,28 @@ public:
 	
 	virtual void update(float dt) override;
 private:
-	void AddBird(shared_ptr<Bird> bird);
+	using BirdPtr = shared_ptr<Bird>;
+	
+	void UpdateMainMenu();
+	void UpdateGetReady();
+	void UpdateActive();
+	void UpdateGameOver();
 
-	unordered_set<shared_ptr<Bird>> birds_;
+//	void AddBird(BirdPtr bird);
+	void RemoveBird(BirdPtr bird);
+	void AddExtraBirds();
+	void RemoveExtraBirds();
+	
+	template <class BirdT>
+	BirdPtr AddBird();
+	
+	BirdPtr MainBird() { return mainBird_; }
+	void SetMainBird(BirdPtr bird) { mainBird_ = bird; }
+	
+	unordered_set<BirdPtr> birds_;
+	BirdPtr toucan_;
+	BirdPtr pigeon_;
+	BirdPtr mainBird_;
 	GameSprite ground_;
 };
 

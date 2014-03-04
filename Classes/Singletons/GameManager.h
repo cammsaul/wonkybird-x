@@ -23,6 +23,8 @@ public:
 	unsigned TotalScore()		const { return round1Score_ + round2Score_; }
 	unsigned BestTotalScore()	const { return TotalScore(); } ///< TODO
 	
+	float GameSpeed()			const { return 1.0f; } ///<TODO
+	
 	void update(); ///< MainScene will take care of calling this
 	
 	GameManager();

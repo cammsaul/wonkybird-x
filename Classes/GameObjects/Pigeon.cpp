@@ -8,7 +8,8 @@
 
 #include "Pigeon.h"
 
-Pigeon::Pigeon()
+Pigeon::Pigeon():
+	Bird("Pigeon_1.png")
 {}
 
 void Pigeon::ApplyTouch(unsigned numFrames) {

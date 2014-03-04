@@ -8,7 +8,8 @@
 
 #include "Toucan.h"
 
-Toucan::Toucan()
+Toucan::Toucan():
+	Bird("Toucan_1.png")
 {}
 
 void Toucan::ApplyTouch(unsigned numFrames) {

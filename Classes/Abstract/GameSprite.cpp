@@ -25,3 +25,5 @@ b2Vec2 GameSprite::PositionForBox2D() const {
 b2Vec2 GameSprite::ContentSizeForBox2D() const {
 	return { getContentSize().width / kPTMRatio, getContentSize().height / kPTMRatio };
 }
+
+void GameSprite::Update(float dt) {} // default implementation does nothing

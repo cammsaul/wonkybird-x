@@ -21,6 +21,13 @@ public:
 	virtual b2Vec2 PositionForBox2D() const override;
 	
 	virtual b2Vec2 ContentSizeForBox2D() const override;
+	
+	virtual void Update(float dt);
+	
+	float X() const { return getPositionX(); }
+	float Y() const { return getPositionY(); }
+	void SetX(float x) { setPosition({x, Y()}); }
+	void SetY(float y) { setPosition({X(), y}); }
 private:
 };
 

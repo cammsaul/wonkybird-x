@@ -8,6 +8,10 @@
 
 #include "Bird.h"
 
-Bird::Bird():
-	GameSprite("Toucan_1.png")
+Bird::Bird(const string& spriteFrameName):
+	GameSprite(spriteFrameName)
 {}
+
+Bird::~Bird() {
+	printf("~Bird()\n");
+}
