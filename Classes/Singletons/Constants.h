@@ -53,7 +53,7 @@ static const int InitialMaxSize = 6;
 static const int MaxMaxSize = 9;
 static const int MaxPipeSize = MaxMaxSize - MinPipeSize;
 
-static const int GroundHeight = 130;
+static inline int GroundHeight() { return ScreenHeight() * 0.23f; }
 static const int kMaxNumPipes = 12;
 
 static const int CrazyBackwardsModeScore = 25;		///< game reverses every time you pass this many points in a single round
