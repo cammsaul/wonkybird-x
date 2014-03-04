@@ -14,6 +14,10 @@
 class Toucan : public Bird {
 public:
 	Toucan();
+	virtual ~Toucan() = default;
+	
+	virtual void ApplyTouch(unsigned numFrames) override;
+	virtual void FlapAroundOnMainScreen() override;
 private:
 };
 

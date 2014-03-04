@@ -14,6 +14,10 @@
 class Pigeon : public Bird {
 public:
 	Pigeon();
+	virtual ~Pigeon() = default;
+	
+	virtual void ApplyTouch(unsigned numFrames) override;
+	virtual void FlapAroundOnMainScreen() override;
 private:
 };
 

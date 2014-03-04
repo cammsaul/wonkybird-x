@@ -30,6 +30,18 @@ public:
 	void AddToWorld(b2World& world);
 	void RemoveFromWorld();
 	void MoveToNewPosition();
+	
+	b2Vec2 Velocity() const { return body_->GetLinearVelocity(); }
+	float XVelocity() const { return Velocity().x; }
+	float YVelocity() const { return Velocity().y; }
+	void SetVelocity(b2Vec2 vel)  { body_->SetLinearVelocity(vel); }
+	void SetXVelocity(float xVel) { SetVelocity({xVel, YVelocity()}); }
+	void SetYVelocity(float yVel) { SetVelocity({XVelocity(), yVel}); }
+	
+	float RotationBox2DDegrees() const { return CC_RADIANS_TO_DEGREES(RotationBox2D()); } // * (-90.0f / M_PI_2); }
+	float RotationBox2D()		 const { return body_->GetAngle(); }
+	float AngularVelocity()		 const { return body_->GetAngularVelocity(); }
+	void SetAngularVelocity(float angVelocity) { body_->SetAngularVelocity(angVelocity); }
 private:
 	b2Body* body_;
 	shared_ptr<b2BodyDef> bodyDef_;

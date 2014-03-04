@@ -10,3 +10,11 @@
 
 Pigeon::Pigeon()
 {}
+
+void Pigeon::ApplyTouch(unsigned numFrames) {
+	
+}
+
+void Pigeon::FlapAroundOnMainScreen() {
+	
+}

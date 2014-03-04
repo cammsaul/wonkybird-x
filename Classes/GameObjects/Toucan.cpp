@@ -10,3 +10,11 @@
 
 Toucan::Toucan()
 {}
+
+void Toucan::ApplyTouch(unsigned numFrames) {
+	SetYVelocity(-kGravityVelocity * (.05f + (.075f * numFrames)));
+}
+
+void Toucan::FlapAroundOnMainScreen() {
+	
+}
