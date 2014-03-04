@@ -18,21 +18,25 @@ static inline float ScreenWidth()		{ return ScreenSize().width; }
 static inline float ScreenHalfWidth()	{ return ScreenWidth() / 2.0f; }
 static inline float ScreenHeight()		{ return ScreenSize().height; }
 static inline float ScreenHalfHeight()	{ return ScreenHeight() / 2.0f; }
-static inline bool IsIphone5()			{ return ScreenHeight() > 480.0f; }
+static inline bool IsIphone5()			{ return ScreenHeight() > (480.0f * 2.0f); }
 
-enum class GameState {
-	MainMenu	= 0b0001,
-	GetReady	= 0b0010,
-	Active		= 0b0100,
-	GameOver	= 0b1000
-};
+typedef enum : int {
+	GStateMainMenu	= 0b000001, ///< 01
+	GStateGetReady	= 0b000010, ///< 02
+	GStateActive	= 0b000100, ///< 04
+	GStateGameOver	= 0b001000, ///< 08
+	GStateRound1	= 0b010000, ///< 16
+	GStateRound2	= 0b100000  ///< 32
+} GameState;
 
+
+GameState LastState();
 GameState GState();
-void SetGState(GameState gState);
-static inline bool GStateIsActive()		{ return GState() == GameState::Active; }
-static inline bool GStateIsGetReady()	{ return GState() == GameState::GetReady; }
-static inline bool GStateIsMainMenu()	{ return GState() == GameState::MainMenu; }
-static inline bool GStateIsGameOver()	{ return GState() == GameState::GameOver; }
+void SetGState(int gState);
+static inline bool GStateIsActive()		{ return GState() & GStateActive; }
+static inline bool GStateIsGetReady()	{ return GState() & GStateGetReady; }
+static inline bool GStateIsMainMenu()	{ return GState() & GStateMainMenu; }
+static inline bool GStateIsGameOver()	{ return GState() & GStateGameOver; }
 
 unsigned CurrentRoundScore(); ///< Returns the score for the current game round.
 
@@ -65,5 +69,7 @@ static const float kBirdMenuHeight = 0.6f; ///< Bird is 60% way up screen when f
 
 static const int32 Box2DLayerVelocityIterations = 3; ///< Number of iterations Box2D world should do for every frame. Higher number means more accurate physics, but comes with a performance penalty.
 static const int32 Box2DLayerPositionIterations = 2; ///< Number of iterations Box2D world should do for every frame. Higher number means more accurate physics, but comes with a performance penalty.
+
+static const float HUDSpriteRemovalDuration = 0.5f; ///< How long the sprites in the HUD take to animate out
 
 #endif

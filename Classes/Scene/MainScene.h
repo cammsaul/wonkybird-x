@@ -16,11 +16,9 @@
 
 class MainScene : public CCScene {
 public:
-	MainScene();
-	
 	virtual bool init() override;
 	
-//	virtual void update(float dt) override;
+	virtual void update(float dt) override;
 private:
 	unique_ptr<StaticBackgroundLayer> staticBackgroundLayer_;
 	unique_ptr<ScrollingBackgroundLayer> scrollingBackgroundLayer_;

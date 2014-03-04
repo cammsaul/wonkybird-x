@@ -7,13 +7,7 @@
 //
 
 #include "MainScene.h"
-
-using namespace cocos2d;
-
-MainScene::MainScene():
-	staticBackgroundLayer_ { nullptr }
-{}
-
+#include "GameManager.h"
 
 bool MainScene::init() {
 	if (!CCScene::init()) { return false; }
@@ -30,7 +24,11 @@ bool MainScene::init() {
 	hudLayer_ = unique_ptr<HUDLayer>{ new HUDLayer() };
 	addChild(hudLayer_.get());
 	
-//	this->scheduleUpdate();
+	this->scheduleUpdate();
 	
 	return true;
+}
+
+void MainScene::update(float dt) {
+	GameManager::sharedInstance()->update();
 }
