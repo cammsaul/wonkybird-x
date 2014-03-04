@@ -18,6 +18,8 @@ StaticBackgroundLayer::StaticBackgroundLayer():
 	isDay_					{ true }
 {
 	SetCurrentBackground(DayBackground());
+	currentBackground_->stopAllActions(); // don't fade in the first time
+	currentBackground_->setOpacity(255);
 	scheduleUpdate();
 }
 
