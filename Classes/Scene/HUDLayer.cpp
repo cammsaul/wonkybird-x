@@ -151,13 +151,75 @@ void HUDLayer::update(float delta) {
 }
 
 bool HUDLayer::ccTouchBegan(CCTouch *pTouch, CCEvent *pEvent) {
+	if (GStateIsActive()) return false;
+	
+	auto TouchedSprite = [&](const string& spriteKey) -> CCSprite* {
+		auto& sprite = sprites_[spriteKey];
+		return (sprite && sprite->boundingBox().containsPoint(pTouch->getLocationInView())) ? sprite.get() : nullptr;
+	};
+	for (auto spriteKey : vector<string>{PlayButtonKey, RateButtonKey, LeaderBoardButtonKey}) {
+		if (auto sprite = TouchedSprite(spriteKey)) {
+			sprite->setScale(0.9f);
+		}
+	}
 	return true;
 }
 
 void HUDLayer::ccTouchEnded(CCTouch *pTouch, CCEvent *pEvent) {
-	if (GStateIsMainMenu())			SetGState(GStateGetReady);
-	else if (GStateIsGetReady())	SetGState(GStateActive|GStateRound1);
-	else if (GStateIsActive())		SetGState(GStateGameOver);
-	else							SetGState(GStateIsMainMenu());
+	if (GStateIsActive()) return;
+	
+	auto TouchOnSprite = [=](const string& spriteKey) -> bool {
+		auto& sprite = sprites_[spriteKey];
+		return sprite && sprite->boundingBox().containsPoint(pTouch->getLocation()) && sprite->isVisible();
+//		if (touched) {
+//			[[Mixpanel sharedInstance] track:[NSString stringWithFormat:@"button_touch_%@", spriteKey]];
+//		}
+	};
+	
+	for (auto spriteKey : vector<string>{PlayButtonKey, RateButtonKey, LeaderBoardButtonKey}) {
+		if (auto& sprite = sprites_[spriteKey]) {
+			sprite->setScale(1.0f);
+		}
+	}
+	
+	if (GState() & GameState(GStateMainMenu|GStateGameOver)) {
+		if (TouchOnSprite(PlayButtonKey)) {
+			SetGState(GStateGetReady);
+		}
+		else if (TouchOnSprite(RateButtonKey))
+		{
+//			NSNumber *appID = [NSBundle mainBundle].infoDictionary[@"LBAppID"];
+//			NSAssert([appID intValue], @"Set the key 'LBAppID' in the app's info.plist!");
+//			[[UIApplication sharedApplication] openURL:[NSURL URLWithString:[NSString stringWithFormat:@"itms-apps://itunes.apple.com/app/id%@", appID]]];
+		}
+		else if (TouchOnSprite(LeaderBoardButtonKey))
+		{
+//			[[GameKitManager sharedInstance] showLeaderboard];
+		}
+		else if (TouchOnSprite(TwitterGrayButtonKey))
+		{
+//			[self shareToTwitter];
+		}
+		else if (TouchOnSprite(TwitterButtonKey))
+		{
+//			[TwitterManager sharedInstance].enableShareToTwitter = NO;
+//			self[TwitterButtonKey].visible = NO;
+//			self[TwitterGrayButtonKey].visible = YES;
+		}
+		else if (TouchOnSprite(FacebookGrayButtonKey))
+		{
+//			[self shareToFB];
+		}
+		else if (TouchOnSprite(FacebookButtonKey))
+		{
+//			[FacebookShare sharedInstance].enableShareToFB = NO;
+//			self[FacebookButtonKey].visible = NO;
+//			self[FacebookGrayButtonKey].visible = YES;
+		}
+		return;
+	}
+	if (GStateIsGetReady()) {
+		SetGState(GStateActive);
+	}
 }
 
