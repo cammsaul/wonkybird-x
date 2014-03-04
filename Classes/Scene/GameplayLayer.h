@@ -18,6 +18,9 @@ public:
 	GameplayLayer();
 	
 	virtual void update(float dt) override;
+	virtual void registerWithTouchDispatcher() override;
+	virtual bool ccTouchBegan(CCTouch *pTouch, CCEvent *pEvent) override;
+    virtual void ccTouchEnded(CCTouch *pTouch, CCEvent *pEvent) override;
 private:
 	void UpdateMainMenu();
 	void UpdateGetReady();
@@ -32,7 +35,7 @@ private:
 	template <class BirdT>
 	BirdPtr AddBird();
 	
-	BirdPtr MainBird() { return mainBird_; }
+	BirdPtr CurrentBird() { return mainBird_; }
 	void SetMainBird(BirdPtr bird) { mainBird_ = bird; }
 	
 	Flock birds_;
@@ -40,6 +43,8 @@ private:
 	BirdPtr pigeon_;
 	BirdPtr mainBird_;
 	GameSprite ground_;
+	
+	unsigned touchBeginTime_; ///< time current touch began, used to keep track for touch-sensitive birds like Rasta
 };
 
 #endif

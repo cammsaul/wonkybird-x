@@ -19,6 +19,7 @@
 		321D602318C559CA003921FC /* Box2DItem.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 321D602118C559CA003921FC /* Box2DItem.cpp */; };
 		321D602C18C55D9F003921FC /* GLES-Render.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 321D602A18C55D9F003921FC /* GLES-Render.cpp */; };
 		32231E1118C5CA5B0097167F /* ReflectiveClass.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 32231E0F18C5CA5B0097167F /* ReflectiveClass.cpp */; };
+		32231E1918C5DB3A0097167F /* SimpleAudioEngine.mm in Sources */ = {isa = PBXBuildFile; fileRef = 32231E1818C5DB3A0097167F /* SimpleAudioEngine.mm */; };
 		326DF4E218C510FC004E1F4B /* Background@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 326DF4DF18C510FC004E1F4B /* Background@2x.png */; };
 		326DF4E318C510FC004E1F4B /* Background_Night@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 326DF4E018C510FC004E1F4B /* Background_Night@2x.png */; };
 		326DF4E418C510FC004E1F4B /* Background_Toucan@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 326DF4E118C510FC004E1F4B /* Background_Toucan@2x.png */; };
@@ -129,6 +130,7 @@
 		321D602B18C55D9F003921FC /* GLES-Render.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "GLES-Render.h"; sourceTree = "<group>"; };
 		32231E0F18C5CA5B0097167F /* ReflectiveClass.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ReflectiveClass.cpp; sourceTree = "<group>"; };
 		32231E1018C5CA5B0097167F /* ReflectiveClass.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ReflectiveClass.h; sourceTree = "<group>"; };
+		32231E1818C5DB3A0097167F /* SimpleAudioEngine.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = SimpleAudioEngine.mm; path = Vendor/CocosDenshion/ios/SimpleAudioEngine.mm; sourceTree = "<group>"; };
 		326DF4DF18C510FC004E1F4B /* Background@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Background@2x.png"; sourceTree = "<group>"; };
 		326DF4E018C510FC004E1F4B /* Background_Night@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Background_Night@2x.png"; sourceTree = "<group>"; };
 		326DF4E118C510FC004E1F4B /* Background_Toucan@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Background_Toucan@2x.png"; sourceTree = "<group>"; };
@@ -276,6 +278,7 @@
 				1AC3624616D4A1E8000847F2 /* Prefix.pch */,
 				326DF4E618C51708004E1F4B /* Constants.h */,
 				15AA9C4015B7EC450033D6C2 /* Classes */,
+				32231E1818C5DB3A0097167F /* SimpleAudioEngine.mm */,
 				29B97323FDCFA39411CA2CEA /* Frameworks */,
 				080E96DDFE201D6D7F000001 /* ios */,
 				32984BE718C53C90005A62A1 /* Vendor.xcodeproj */,
@@ -619,6 +622,7 @@
 				326DF55D18C5271E004E1F4B /* GameManager.cpp in Sources */,
 				326DF4E918C51A98004E1F4B /* AppDelegate.cpp in Sources */,
 				326DF55718C52667004E1F4B /* Pigeon.cpp in Sources */,
+				32231E1918C5DB3A0097167F /* SimpleAudioEngine.mm in Sources */,
 				326DF4FF18C51EB6004E1F4B /* HUDLayer.cpp in Sources */,
 				1AFAF8B816D35DE700DB1158 /* HelloWorldScene.cpp in Sources */,
 				1AC3624916D4A1E8000847F2 /* AppController.mm in Sources */,

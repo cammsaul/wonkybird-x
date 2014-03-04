@@ -39,6 +39,11 @@ GameplayLayer::GameplayLayer():
 	// TODO : add the roof
 	
 	scheduleUpdate();
+	setTouchEnabled(true);
+}
+
+void GameplayLayer::registerWithTouchDispatcher() {
+	CCDirector::sharedDirector()->getTouchDispatcher()->addTargetedDelegate(this, 0, YES);
 }
 
 void GameplayLayer::update(float dt) {
@@ -60,11 +65,11 @@ void GameplayLayer::update(float dt) {
 		UpdateGameOver();
 	}
 	
-	CCArray* gameObjects = spriteBatchNode_.getChildren();
-	const auto count = gameObjects->count();
-	for (int i = 0; i < count; i++) {
-		auto* gameObject = gameObjects->objectAtIndex(i);
-		auto* gameSprite = dynamic_cast<GameSprite *>(gameObject);
+	auto gameObjects = CCUniquePtr<CCArray>(spriteBatchNode_.getChildren());
+//	const auto count = gameObjects->count();
+	for (int i = 0; i < gameObjects->count(); i++) {
+		CCUniquePtr<CCObject> gameObject { gameObjects->objectAtIndex(i) };
+		CCUniquePtr<GameSprite> gameSprite { dynamic_cast<GameSprite *>(gameObject.get()) };
 		if (gameSprite) {
 			gameSprite->Update(dt);
 		}
@@ -77,7 +82,7 @@ void GameplayLayer::UpdateMainMenu() {
 	toucan_->FlapAroundOnMainScreen(birds_);
 	pigeon_->FlapAroundOnMainScreen(birds_);
 	
-	if (!MainBird()) {
+	if (!CurrentBird()) {
 		SetMainBird(toucan_);
 	}
 }
@@ -85,7 +90,7 @@ void GameplayLayer::UpdateMainMenu() {
 void GameplayLayer::UpdateGetReady() {
 	if (LastFrameState() != GStateGetReady && LastFrameState() != GStateMainMenu) {
 		// switch out the birds
-		if (typeid(*MainBird()) == typeid(Toucan)) {
+		if (typeid(*CurrentBird()) == typeid(Toucan)) {
 			if (!pigeon_) pigeon_ = AddBird<Pigeon>();
 			SetMainBird(pigeon_);
 			
@@ -99,7 +104,7 @@ void GameplayLayer::UpdateGetReady() {
 		}
 	}
 	
-	for (auto b : birds_) if (b != MainBird()) {
+	for (auto b : birds_) if (b != CurrentBird()) {
 		b->SetXVelocity(PipeXVelocity * GameManager::sharedInstance()->GameSpeed());
 		if (b->X() < -(b->getContentSize().width / 2.0f)) {
 			RemoveBird(b);
@@ -107,10 +112,10 @@ void GameplayLayer::UpdateGetReady() {
 		}
 	}
 	
-	MainBird()->SetState(Bird::State::Flapping);
-	const float BirdYDiff = ((MainBird()->Y() - (ScreenHeight() * BirdGetReadyHeight)) / kPTMRatio) * 4;
-	const float BirdXDiff = ((MainBird()->X() - ScreenHalfWidth()) / kPTMRatio) * 4;
-	MainBird()->SetVelocity({-BirdXDiff, -BirdYDiff});
+	CurrentBird()->SetState(Bird::State::Flapping);
+	const float BirdYDiff = ((CurrentBird()->Y() - (ScreenHeight() * BirdGetReadyHeight)) / kPTMRatio) * 4;
+	const float BirdXDiff = ((CurrentBird()->X() - ScreenHalfWidth()) / kPTMRatio) * 4;
+	CurrentBird()->SetVelocity({-BirdXDiff, -BirdYDiff});
 	
 //	for (Pipe *p in self.pipes) {
 //		[self removeChild:p.layer cleanup:YES];
@@ -121,22 +126,22 @@ void GameplayLayer::UpdateGetReady() {
 void GameplayLayer::UpdateActive() {
 	if (LastFrameScore() != GStateActive) {
 		RemoveExtraBirds();
-		MainBird()->SetX(ScreenHalfWidth());
-		MainBird()->SetXVelocity(0.0f);
+		CurrentBird()->SetX(ScreenHalfWidth());
+		CurrentBird()->SetXVelocity(0.0f);
 	}
 	
-	if (ABS(MainBird()->XVelocity()) >= BirdXVelocityDeathThreshold) {
+	if (ABS(CurrentBird()->XVelocity()) >= BirdXVelocityDeathThreshold) {
 		BOOL shouldDie = YES;
-		if (CurrentRoundScore() == 0 && ABS(MainBird()->XVelocity()) <= 0.8f) {
+		if (CurrentRoundScore() == 0 && ABS(CurrentBird()->XVelocity()) <= 0.8f) {
 			shouldDie = NO; // be a little more forgiving when the round is just starting
 		}
 		if (shouldDie) {
-			NSLog(@"Bird x: %.2f", MainBird()->XVelocity());
-			MainBird()->SetState(Bird::State::Dead);
+			NSLog(@"Bird x: %.2f", CurrentBird()->XVelocity());
+			CurrentBird()->SetState(Bird::State::Dead);
 		}
 	}
 	
-	if (MainBird()->State() == Bird::State::Dead) {
+	if (CurrentBird()->State() == Bird::State::Dead) {
 		SetGState(GStateGameOver);
 	} else {
 //		[self addRandomPipeIfNeeded];
@@ -180,7 +185,7 @@ void GameplayLayer::RemoveBird(BirdPtr bird) {
 
 void GameplayLayer::RemoveExtraBirds() {
 	for (auto itr = birds_.begin(); itr != birds_.end();) {
-		if (*itr != MainBird()) {
+		if (*itr != CurrentBird()) {
 			(*itr)->removeFromParentAndCleanup(true);
 			itr = birds_.erase(itr);
 		} else {
@@ -188,3 +193,25 @@ void GameplayLayer::RemoveExtraBirds() {
 		}
 	}
 }
+
+bool GameplayLayer::ccTouchBegan(CCTouch *pTouch, CCEvent *pEvent) {
+	if (!GStateIsActive()) return false;
+	
+	touchBeginTime_ = CCDirector::sharedDirector()->getTotalFrames();
+	return true;
+}
+
+void GameplayLayer::ccTouchEnded(CCTouch *pTouch, CCEvent *pEvent) {
+	const unsigned numFrames = CCDirector::sharedDirector()->getTotalFrames() - touchBeginTime_;
+	
+	if (CurrentBird()->State() != Bird::State::Dead) {
+		CurrentBird()->Body()->SetAwake(true);
+		
+		// move Bird towards horizontal center of screen if needed
+		CurrentBird()->SetXVelocity((ScreenHalfWidth() / kPTMRatio) - CurrentBird()->Box2DX());
+		CurrentBird()->ApplyTouch(numFrames);
+
+		CocosDenshion::SimpleAudioEngine::sharedEngine()->playEffect("Shaker_2.wav");
+	}
+}
+

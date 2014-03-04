@@ -20,6 +20,7 @@
 
 #include <cocos2d.h>
 #include <Box2D/Box2D.h>
+#include <CocosDenshion/include/SimpleAudioEngine.h>
 
 using namespace std;
 using namespace cocos2d;

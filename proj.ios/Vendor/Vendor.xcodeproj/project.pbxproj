@@ -7,6 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		32231E1318C5DA200097167F /* CDAudioManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 32984CDF18C53E2E005A62A1 /* CDAudioManager.m */; };
+		32231E1418C5DA200097167F /* CDOpenALSupport.m in Sources */ = {isa = PBXBuildFile; fileRef = 32984CE218C53E2E005A62A1 /* CDOpenALSupport.m */; };
+		32231E1518C5DA200097167F /* CocosDenshion.m in Sources */ = {isa = PBXBuildFile; fileRef = 32984CE418C53E2E005A62A1 /* CocosDenshion.m */; };
+		32231E1718C5DA200097167F /* SimpleAudioEngine_objc.m in Sources */ = {isa = PBXBuildFile; fileRef = 32984CE718C53E2E005A62A1 /* SimpleAudioEngine_objc.m */; };
 		32984BC218C53C90005A62A1 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 32984BC118C53C90005A62A1 /* Foundation.framework */; };
 		32984C7F18C53CBA005A62A1 /* b2BroadPhase.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 32984BF418C53CBA005A62A1 /* b2BroadPhase.cpp */; };
 		32984C8018C53CBA005A62A1 /* b2CollideCircle.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 32984BF618C53CBA005A62A1 /* b2CollideCircle.cpp */; };
@@ -53,10 +57,6 @@
 		32984CA918C53CBA005A62A1 /* b2WeldJoint.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 32984C4D18C53CBA005A62A1 /* b2WeldJoint.cpp */; };
 		32984CAA18C53CBA005A62A1 /* b2WheelJoint.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 32984C4F18C53CBA005A62A1 /* b2WheelJoint.cpp */; };
 		32984CAF18C53CBA005A62A1 /* b2Rope.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 32984C7D18C53CBA005A62A1 /* b2Rope.cpp */; };
-		32984D7218C53E2E005A62A1 /* CDAudioManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 32984CDF18C53E2E005A62A1 /* CDAudioManager.m */; };
-		32984D7318C53E2E005A62A1 /* CDOpenALSupport.m in Sources */ = {isa = PBXBuildFile; fileRef = 32984CE218C53E2E005A62A1 /* CDOpenALSupport.m */; };
-		32984D7418C53E2E005A62A1 /* CocosDenshion.m in Sources */ = {isa = PBXBuildFile; fileRef = 32984CE418C53E2E005A62A1 /* CocosDenshion.m */; };
-		32984D7618C53E2E005A62A1 /* SimpleAudioEngine_objc.m in Sources */ = {isa = PBXBuildFile; fileRef = 32984CE718C53E2E005A62A1 /* SimpleAudioEngine_objc.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -478,16 +478,17 @@
 				32984C8018C53CBA005A62A1 /* b2CollideCircle.cpp in Sources */,
 				32984C9518C53CBA005A62A1 /* b2World.cpp in Sources */,
 				32984C8518C53CBA005A62A1 /* b2DynamicTree.cpp in Sources */,
-				32984D7618C53E2E005A62A1 /* SimpleAudioEngine_objc.m in Sources */,
 				32984C9918C53CBA005A62A1 /* b2CircleContact.cpp in Sources */,
 				32984CA218C53CBA005A62A1 /* b2GearJoint.cpp in Sources */,
-				32984D7218C53E2E005A62A1 /* CDAudioManager.m in Sources */,
+				32231E1318C5DA200097167F /* CDAudioManager.m in Sources */,
 				32984C9718C53CBA005A62A1 /* b2ChainAndCircleContact.cpp in Sources */,
 				32984C8B18C53CBA005A62A1 /* b2BlockAllocator.cpp in Sources */,
 				32984C8F18C53CBA005A62A1 /* b2StackAllocator.cpp in Sources */,
 				32984C8418C53CBA005A62A1 /* b2Distance.cpp in Sources */,
 				32984C9318C53CBA005A62A1 /* b2Fixture.cpp in Sources */,
+				32231E1518C5DA200097167F /* CocosDenshion.m in Sources */,
 				32984CA418C53CBA005A62A1 /* b2MouseJoint.cpp in Sources */,
+				32231E1718C5DA200097167F /* SimpleAudioEngine_objc.m in Sources */,
 				32984C9818C53CBA005A62A1 /* b2ChainAndPolygonContact.cpp in Sources */,
 				32984CA018C53CBA005A62A1 /* b2DistanceJoint.cpp in Sources */,
 				32984C7F18C53CBA005A62A1 /* b2BroadPhase.cpp in Sources */,
@@ -497,10 +498,9 @@
 				32984CA318C53CBA005A62A1 /* b2Joint.cpp in Sources */,
 				32984C8D18C53CBA005A62A1 /* b2Math.cpp in Sources */,
 				32984C8618C53CBA005A62A1 /* b2TimeOfImpact.cpp in Sources */,
-				32984D7318C53E2E005A62A1 /* CDOpenALSupport.m in Sources */,
 				32984C8A18C53CBA005A62A1 /* b2PolygonShape.cpp in Sources */,
-				32984D7418C53E2E005A62A1 /* CocosDenshion.m in Sources */,
 				32984C8718C53CBA005A62A1 /* b2ChainShape.cpp in Sources */,
+				32231E1418C5DA200097167F /* CDOpenALSupport.m in Sources */,
 				32984CA818C53CBA005A62A1 /* b2RopeJoint.cpp in Sources */,
 				32984C9218C53CBA005A62A1 /* b2ContactManager.cpp in Sources */,
 				32984C9018C53CBA005A62A1 /* b2Timer.cpp in Sources */,
