@@ -18,6 +18,8 @@ public:
 	
 	virtual void update(float dt) override;
 private:
+	void AddBird(shared_ptr<Bird> bird);
+
 	unordered_set<shared_ptr<Bird>> birds_;
 };
 

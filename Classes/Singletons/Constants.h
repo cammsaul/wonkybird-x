@@ -61,4 +61,6 @@ static const int CrazySwitchBackgroundsScore = 10;	///< switch background every 
 static const int CrazyBackgroundSkewScore = 50;		///< apply skew transforms to BG every point after this
 static const int CrazyBackgroundToucanChance = 1000; ///< approx every 1000 points we will switch the BG to toucan for a lil bit
 
+static const float kBirdMenuHeight = 0.6f; ///< Bird is 60% way up screen when flapping in menu
+
 #endif

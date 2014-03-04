@@ -7,6 +7,7 @@
 //
 
 #include "GameplayLayer.h"
+#include "Toucan.h"
 
 GameplayLayer::GameplayLayer():
 	Box2DLayer("Textures"),
@@ -18,4 +19,16 @@ GameplayLayer::GameplayLayer():
 void GameplayLayer::update(float dt) {
 	Box2DLayer::update(dt);
 	printf("GameplayLayer::update\n");
+	
+	static bool hasAddedBird = false;
+	if (!hasAddedBird) {
+		AddBird(make_shared<Toucan>(Toucan{}));
+	}
+}
+
+void GameplayLayer::AddBird(shared_ptr<Bird> bird) {
+	birds_.insert(bird);
+	bird->setPosition({ScreenHalfWidth(), ScreenHeight() * kBirdMenuHeight});
+	spriteBatchNode_.addChild(bird.get());
+	bird->AddToWorld(world_);
 }

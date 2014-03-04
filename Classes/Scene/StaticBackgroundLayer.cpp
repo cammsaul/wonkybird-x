@@ -7,7 +7,6 @@
 //
 
 #include "StaticBackgroundLayer.h"
-#include "Constants.h"
 
 StaticBackgroundLayer::StaticBackgroundLayer():
 	dayBackground_			{ nullptr },

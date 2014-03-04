@@ -12,7 +12,7 @@
 class GameLayer : public CCLayer {
 public:
 	GameLayer(const string& textureAtlasName);
-private:
+protected:
 	CCSpriteBatchNode spriteBatchNode_;
 };
 

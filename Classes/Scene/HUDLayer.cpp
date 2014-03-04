@@ -7,7 +7,6 @@
 //
 
 #include "HUDLayer.h"
-#include "Constants.h"
 
 HUDLayer::HUDLayer():
 GameLayer("HUD"),

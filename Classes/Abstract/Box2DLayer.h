@@ -10,14 +10,18 @@
 #define WONKYBIRD_Box2DLayer_H
 
 #include "GameLayer.h"
+#include "GLES-Render.h"
 
 class Box2DLayer : public GameLayer {
 public:
 	Box2DLayer(const string& textureAtlasName);
 	
+	virtual void draw() override;
 	virtual void update(float dt) override;
-private:
+protected:
 	b2World world_;
+private:
+	GLESDebugDraw debugDraw_;
 };
 
 #endif
