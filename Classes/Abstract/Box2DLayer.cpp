@@ -7,6 +7,7 @@
 //
 
 #include "Box2DLayer.h"
+#include "Box2DItem.h"
 
 Box2DLayer::Box2DLayer(const string& textureAtlasName):
 	GameLayer(textureAtlasName),
@@ -15,8 +16,6 @@ Box2DLayer::Box2DLayer(const string& textureAtlasName):
 {
 	world_.SetDebugDraw(&debugDraw_);
 	debugDraw_.SetFlags(b2Draw::e_shapeBit);
-//	scheduleUpdate();
-//	this->schedule(schedule_selector(Box2DLayer::update), 0, 1, 0);
 }
 
 void Box2DLayer::draw() {
@@ -29,5 +28,12 @@ void Box2DLayer::draw() {
 }
 
 void Box2DLayer::update(float dt) {
-	printf("Box2DLayer::update\n");
+	world_.Step(dt, Box2DLayerVelocityIterations, Box2DLayerPositionIterations);
+	
+	auto* body = world_.GetBodyList();
+	while (body) {
+		Box2DItem *item = static_cast<Box2DItem *>(body->GetUserData());
+		item->SetPositionForBox2D(body->GetPosition());
+		body = body->GetNext();
+	}
 }

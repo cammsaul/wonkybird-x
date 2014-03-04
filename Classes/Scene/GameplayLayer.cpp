@@ -18,10 +18,10 @@ GameplayLayer::GameplayLayer():
 
 void GameplayLayer::update(float dt) {
 	Box2DLayer::update(dt);
-	printf("GameplayLayer::update\n");
 	
 	static bool hasAddedBird = false;
 	if (!hasAddedBird) {
+		hasAddedBird = true;
 		AddBird(make_shared<Toucan>(Toucan{}));
 	}
 }

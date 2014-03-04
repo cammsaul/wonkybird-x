@@ -12,19 +12,14 @@ Box2DItem::Box2DItem():
 	body_(nullptr),
 	bodyDef_(),
 	shape_(),
-	fixture_()
-{}
+	fixtureDef_()
+{
+	fixtureDef_.shape = &shape_;
+	bodyDef_.type = b2_dynamicBody;
+}
 
 Box2DItem::~Box2DItem() {
 	RemoveFromWorld();
-}
-
-b2Vec2 Box2DItem::PositionForBox2D() const {
-	return {0, 0};
-}
-
-b2Vec2 Box2DItem::ContentSizeForBox2D() const {
-	return {0, 0};
 }
 
 void Box2DItem::UpdateShape() {
@@ -34,6 +29,16 @@ void Box2DItem::UpdateShape() {
 void Box2DItem::AddToWorld(b2World& world) {
 	bodyDef_.position = PositionForBox2D();
 	UpdateShape();
+	
+	body_ = world.CreateBody(&bodyDef_);
+	body_->SetUserData(this);
+	body_->SetActive(true);
+	
+	CreateFixtures();
+}
+
+void Box2DItem::CreateFixtures() {
+	body_->CreateFixture(&fixtureDef_);
 }
 
 void Box2DItem::RemoveFromWorld() {
@@ -44,5 +49,8 @@ void Box2DItem::RemoveFromWorld() {
 }
 
 void Box2DItem::MoveToNewPosition() {
-	
+	assert(body_);
+	auto* world = body_->GetWorld();
+	RemoveFromWorld();
+	AddToWorld(*world);
 }

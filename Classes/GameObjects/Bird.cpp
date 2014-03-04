@@ -9,5 +9,5 @@
 #include "Bird.h"
 
 Bird::Bird():
-GameSprite("Toucan_1.png")
+	GameSprite("Toucan_1.png")
 {}

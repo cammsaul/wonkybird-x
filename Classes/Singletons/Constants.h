@@ -36,7 +36,7 @@ static inline bool GStateIsGameOver()	{ return GState() == GameState::GameOver; 
 
 unsigned CurrentRoundScore(); ///< Returns the score for the current game round.
 
-static auto Rand = std::bind (std::uniform_real_distribution<float>(0.0f, 1.0f), std::default_random_engine()); // nice random number between 0.0f and 1.0f
+static auto Rand = bind (uniform_real_distribution<float>(0.0f, 1.0f), default_random_engine()); // nice random number between 0.0f and 1.0f
 
 static const float PipeXVelocity = -1.1f; ///< base x velocity for pipe movement
 static const float ScorePipeXVelocityMultiplier = 0.01f; ///< Amount each point should increase pipe velocity. e.g. if ScorePipeXVelocityMultiplier = 0.01f, 100 points means pipes move at double speed
@@ -62,5 +62,8 @@ static const int CrazyBackgroundSkewScore = 50;		///< apply skew transforms to B
 static const int CrazyBackgroundToucanChance = 1000; ///< approx every 1000 points we will switch the BG to toucan for a lil bit
 
 static const float kBirdMenuHeight = 0.6f; ///< Bird is 60% way up screen when flapping in menu
+
+static const int32 Box2DLayerVelocityIterations = 3; ///< Number of iterations Box2D world should do for every frame. Higher number means more accurate physics, but comes with a performance penalty.
+static const int32 Box2DLayerPositionIterations = 2; ///< Number of iterations Box2D world should do for every frame. Higher number means more accurate physics, but comes with a performance penalty.
 
 #endif

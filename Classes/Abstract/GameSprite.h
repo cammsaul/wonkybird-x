@@ -15,6 +15,11 @@ class GameSprite : public CCSprite, public Box2DItem {
 public:
 	GameSprite(const string& spriteFrameName);
 	virtual ~GameSprite() = default;
+	
+	virtual void SetPositionForBox2D(const b2Vec2& pos) override;
+	virtual b2Vec2 PositionForBox2D() const override;
+	
+	virtual b2Vec2 ContentSizeForBox2D() const override;
 private:
 };
 
