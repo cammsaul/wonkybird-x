@@ -19,8 +19,6 @@ public:
 	
 	virtual void update(float dt) override;
 private:
-	using BirdPtr = shared_ptr<Bird>;
-	
 	void UpdateMainMenu();
 	void UpdateGetReady();
 	void UpdateActive();
@@ -37,7 +35,7 @@ private:
 	BirdPtr MainBird() { return mainBird_; }
 	void SetMainBird(BirdPtr bird) { mainBird_ = bird; }
 	
-	unordered_set<BirdPtr> birds_;
+	Flock birds_;
 	BirdPtr toucan_;
 	BirdPtr pigeon_;
 	BirdPtr mainBird_;

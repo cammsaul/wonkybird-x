@@ -11,8 +11,6 @@
 #include "Pigeon.h"
 #include "GameManager.h"
 
-using BirdPtr = shared_ptr<Bird>;
-//
 //static const std::hash<BirdPtr>(BirdPtr ptr) BirdsHashFn = [](BirdPtr birdPtr) -> std::hash<BirdPtr> {
 //	return std::hash<BirdPtr>();
 //};
@@ -76,8 +74,8 @@ void GameplayLayer::update(float dt) {
 void GameplayLayer::UpdateMainMenu() {
 	if (!toucan_) toucan_ = AddBird<Toucan>();
 	if (!pigeon_) pigeon_ = AddBird<Pigeon>();
-	toucan_->FlapAroundOnMainScreen();
-	pigeon_->FlapAroundOnMainScreen();
+	toucan_->FlapAroundOnMainScreen(birds_);
+	pigeon_->FlapAroundOnMainScreen(birds_);
 	
 	if (!MainBird()) {
 		SetMainBird(toucan_);

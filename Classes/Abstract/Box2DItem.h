@@ -15,6 +15,7 @@ public:
 	
 	virtual ~Box2DItem();
 	
+	b2Body* Body()							{ return body_; }
 	shared_ptr<b2BodyDef> BodyDef()			{ return bodyDef_; }
 	shared_ptr<b2FixtureDef> FixtureDef()	{ return fixtureDef_; }
 	shared_ptr<b2PolygonShape> Shape()		{ return shape_; }
@@ -37,6 +38,9 @@ public:
 	void SetVelocity(b2Vec2 vel)  { body_->SetLinearVelocity(vel); }
 	void SetXVelocity(float xVel) { SetVelocity({xVel, YVelocity()}); }
 	void SetYVelocity(float yVel) { SetVelocity({XVelocity(), yVel}); }
+	
+	float Box2DX() const { return PositionForBox2D().x; }
+	float Box2DY() const { return PositionForBox2D().y; }
 	
 	float RotationBox2DDegrees() const { return CC_RADIANS_TO_DEGREES(RotationBox2D()); } // * (-90.0f / M_PI_2); }
 	float RotationBox2D()		 const { return body_->GetAngle(); }

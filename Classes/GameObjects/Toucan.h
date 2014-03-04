@@ -17,7 +17,7 @@ public:
 	virtual ~Toucan() = default;
 	
 	virtual void ApplyTouch(unsigned numFrames) override;
-	virtual void FlapAroundOnMainScreen() override;
+	virtual void FlapAroundOnMainScreen(Flock allBirds) override;
 private:
 };
 
