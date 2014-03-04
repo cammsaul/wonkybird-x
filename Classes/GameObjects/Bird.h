@@ -33,12 +33,13 @@ public:
 };
 
 #include "GameSprite.h"
+#include "ReflectiveClass.h"
 
 class Bird;
 using BirdPtr = shared_ptr<Bird>;
 using Flock = unordered_set<BirdPtr>;
 
-class Bird : public GameSprite {
+class Bird : public ReflectiveClass, public GameSprite {
 public:
 	enum class State {
 		Dead,
@@ -46,8 +47,14 @@ public:
 		Flapping
 	};
 	
-	Bird(const string& spriteFrameName);
+	Bird();
 	virtual ~Bird();
+	
+	void InitializeAnimations(CCTexture2D* texture); ///< Call this after creating a new bird to init animations if needed, so Bird can reflect upon class and load the right animations
+	
+	virtual const Metaclass* const MetaClass() const override;
+	
+	virtual void Update(float dt) override;
 	
 	enum State State() const { return state_; }
 	virtual void SetState(enum State birdState);
@@ -57,8 +64,10 @@ public:
 protected:
 	enum State state_;
 private:
+	bool hasInitializedAnimations_;
 	CCUniquePtr<CCAnimation> flappingAnimation_;
 	CCUniquePtr<CCAnimation> fallingAnimation_;
+	
 	string SpriteNameWithSuffix(string suffix);
 };
 

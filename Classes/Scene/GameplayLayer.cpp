@@ -161,6 +161,7 @@ BirdPtr GameplayLayer::AddBird() {
 //	if (birds_.find(std::find_if(birds_.begin(), birds_.end(), [=](BirdPtr b){ return typeid(*b) != typeid(BirdT); })) != birds_.end()) {
 		printf("Adding new bird.\n");
 		BirdPtr bird = make_shared<BirdT>();
+		bird->InitializeAnimations(spriteBatchNode_.getTexture());
 		birds_.insert(bird);
 		bird->setPosition({ScreenHalfWidth(), ScreenHeight() * kBirdMenuHeight});
 		spriteBatchNode_.addChild(bird.get());

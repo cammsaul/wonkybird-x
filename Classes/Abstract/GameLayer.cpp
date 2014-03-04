@@ -13,7 +13,7 @@ spriteBatchNode_ {}
 	auto plistFilename = (textureAtlasName + "@2x.plist");
 	auto textureFilename = (textureAtlasName + "@2x.png");
 	spriteBatchNode_.initWithFile(textureFilename.c_str(), 20);
-	cocos2d::CCSpriteFrameCache::sharedSpriteFrameCache()->addSpriteFramesWithFile(plistFilename.c_str(), textureFilename.c_str());
+	cocos2d::CCSpriteFrameCache::sharedSpriteFrameCache()->addSpriteFramesWithFile(plistFilename.c_str(), spriteBatchNode_.getTexture());
 	
 	addChild(&spriteBatchNode_);
 }

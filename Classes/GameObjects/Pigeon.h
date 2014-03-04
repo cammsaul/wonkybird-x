@@ -13,8 +13,9 @@
 
 class Pigeon : public Bird {
 public:
-	Pigeon();
+//	Pigeon();
 	virtual ~Pigeon() = default;
+	virtual const Metaclass* const MetaClass() const override;
 	
 	virtual void ApplyTouch(unsigned numFrames) override;
 	virtual void FlapAroundOnMainScreen(Flock allBirds) override;

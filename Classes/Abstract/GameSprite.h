@@ -24,6 +24,8 @@ public:
 	
 	virtual void Update(float dt);
 	
+	bool IsOffscreen() const { return X() < -(getContentSize().width / 2.0f); }
+	
 	float X() const { return getPositionX(); }
 	float Y() const { return getPositionY(); }
 	void SetX(float x) { setPosition({x, Y()}); }

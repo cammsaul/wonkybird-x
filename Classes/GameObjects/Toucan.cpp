@@ -9,9 +9,10 @@
 #include "Toucan.h"
 #include "Pigeon.h"
 
-Toucan::Toucan():
-	Bird("Toucan_1.png")
-{}
+const Metaclass* const Toucan::MetaClass() const {
+	static const Metaclass m = { "Toucan" };
+	return &m;
+}
 
 void Toucan::ApplyTouch(unsigned numFrames) {
 	SetYVelocity(-kGravityVelocity * (.05f + (.075f * numFrames)));

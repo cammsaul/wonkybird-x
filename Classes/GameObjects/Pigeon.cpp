@@ -9,12 +9,18 @@
 #include "Pigeon.h"
 #include "Toucan.h"
 
-Pigeon::Pigeon():
-	Bird("Pigeon_1.png")
-{}
+const Metaclass* const Pigeon::MetaClass() const {
+	static const Metaclass m = { "Pigeon" };
+	return &m;
+}
 
 void Pigeon::ApplyTouch(unsigned numFrames) {
-	
+	if (YVelocity() < 0) {
+		SetYVelocity(-kGravityVelocity * 0.6f);
+		
+		const float angle = RotationBox2D();
+		Body()->ApplyTorque(-angle);
+	}
 }
 
 void Pigeon::FlapAroundOnMainScreen(Flock allBirds) {

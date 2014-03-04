@@ -18,6 +18,7 @@
 		288765A50DF7441C002DB57D /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 288765A40DF7441C002DB57D /* CoreGraphics.framework */; };
 		321D602318C559CA003921FC /* Box2DItem.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 321D602118C559CA003921FC /* Box2DItem.cpp */; };
 		321D602C18C55D9F003921FC /* GLES-Render.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 321D602A18C55D9F003921FC /* GLES-Render.cpp */; };
+		32231E1118C5CA5B0097167F /* ReflectiveClass.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 32231E0F18C5CA5B0097167F /* ReflectiveClass.cpp */; };
 		326DF4E218C510FC004E1F4B /* Background@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 326DF4DF18C510FC004E1F4B /* Background@2x.png */; };
 		326DF4E318C510FC004E1F4B /* Background_Night@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 326DF4E018C510FC004E1F4B /* Background_Night@2x.png */; };
 		326DF4E418C510FC004E1F4B /* Background_Toucan@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 326DF4E118C510FC004E1F4B /* Background_Toucan@2x.png */; };
@@ -126,6 +127,8 @@
 		321D602218C559CA003921FC /* Box2DItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Box2DItem.h; sourceTree = "<group>"; };
 		321D602A18C55D9F003921FC /* GLES-Render.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = "GLES-Render.cpp"; sourceTree = "<group>"; };
 		321D602B18C55D9F003921FC /* GLES-Render.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "GLES-Render.h"; sourceTree = "<group>"; };
+		32231E0F18C5CA5B0097167F /* ReflectiveClass.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ReflectiveClass.cpp; sourceTree = "<group>"; };
+		32231E1018C5CA5B0097167F /* ReflectiveClass.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ReflectiveClass.h; sourceTree = "<group>"; };
 		326DF4DF18C510FC004E1F4B /* Background@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Background@2x.png"; sourceTree = "<group>"; };
 		326DF4E018C510FC004E1F4B /* Background_Night@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Background_Night@2x.png"; sourceTree = "<group>"; };
 		326DF4E118C510FC004E1F4B /* Background_Toucan@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Background_Toucan@2x.png"; sourceTree = "<group>"; };
@@ -354,6 +357,8 @@
 				326DF55E18C5276B004E1F4B /* Box2DLayer.cpp */,
 				321D602218C559CA003921FC /* Box2DItem.h */,
 				321D602118C559CA003921FC /* Box2DItem.cpp */,
+				32231E1018C5CA5B0097167F /* ReflectiveClass.h */,
+				32231E0F18C5CA5B0097167F /* ReflectiveClass.cpp */,
 			);
 			name = Abstract;
 			path = ../Classes/Abstract;
@@ -610,6 +615,7 @@
 				326DF56018C5276B004E1F4B /* Box2DLayer.cpp in Sources */,
 				326DF55418C52647004E1F4B /* Toucan.cpp in Sources */,
 				326DF54E18C52604004E1F4B /* GameSprite.cpp in Sources */,
+				32231E1118C5CA5B0097167F /* ReflectiveClass.cpp in Sources */,
 				326DF55D18C5271E004E1F4B /* GameManager.cpp in Sources */,
 				326DF4E918C51A98004E1F4B /* AppDelegate.cpp in Sources */,
 				326DF55718C52667004E1F4B /* Pigeon.cpp in Sources */,
