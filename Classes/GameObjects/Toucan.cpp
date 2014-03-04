@@ -46,7 +46,7 @@ void Toucan::FlapAroundOnMainScreen(Flock allBirds) {
 		// move towards pigeons
 		for (BirdPtr bird : allBirds) {
 			if (bird.get() == this) continue;
-			if (typeid(*bird) == typeid(Pigeon)) {
+			if (bird->MetaClass()->Name() == "Pigeon") {
 				Body()->ApplyForceToCenter({(bird->Box2DX() - Box2DX()) * 0.5f, (bird->Box2DY() - Box2DY()) * 0.5f});
 			}
 		}

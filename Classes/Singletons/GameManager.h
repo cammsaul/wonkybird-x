@@ -11,7 +11,7 @@
 
 class GameManager {
 public:
-	static shared_ptr<GameManager> sharedInstance();
+	static GameManager& sharedInstance();
 	
 	GameState GState() const { return gameState_; }
 	void SetGState(GameState gState) { gameState_ = gState; }
@@ -23,7 +23,8 @@ public:
 	unsigned TotalScore()		const { return round1Score_ + round2Score_; }
 	unsigned BestTotalScore()	const { return TotalScore(); } ///< TODO
 	
-	float GameSpeed()			const { return 1.0f; } ///<TODO
+	float GameSpeed() const;
+	bool IsReversed() const; ///< whether game is currently running in reverse
 	
 	void update(); ///< MainScene will take care of calling this
 	
@@ -35,7 +36,7 @@ private:
 	unsigned round1Score_;
 	unsigned round2Score_;
 
-	static shared_ptr<GameManager> sharedInstance_;
+	static unique_ptr<GameManager> sharedInstance_;
 };
 
 #endif

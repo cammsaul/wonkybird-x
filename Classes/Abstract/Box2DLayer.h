@@ -16,6 +16,8 @@ class Box2DLayer : public GameLayer {
 public:
 	Box2DLayer(const string& textureAtlasName);
 	
+	b2World& World() { return world_; }
+	
 	virtual void draw() override;
 	virtual void update(float dt) override;
 protected:

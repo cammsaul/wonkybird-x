@@ -10,7 +10,6 @@
 #include "Bird.h"
 
 string Bird::SpriteNameWithSuffix(string suffix) {
-	printf("typeinfo: %s\n", typeid(this).name());
 	return MetaClass()->Name() + "_" + suffix + ".png";
 }
 
@@ -20,7 +19,11 @@ Bird::Bird():
 	GameSprite(),
 	state_((enum State)-1) // next call will trigger animation change
 {
-	//	SetState(State::Flapping);
+	static bool hasLoadedShapeDefs = false;
+	if (!hasLoadedShapeDefs) {
+		hasLoadedShapeDefs = true;
+		#warning Need to load the shape cache here
+	}
 }
 
 void Bird::InitializeAnimations(CCTexture2D* texture) {
@@ -97,7 +100,7 @@ void Bird::Update(float dt) {
 	if (getRotation() < -90) setRotation(-90);
 				
 	const bool lowYVelocity = ABS(YVelocity()) < 0.1f;
-	Body()->ApplyTorque(-(RotationBox2DDegrees() + AngularVelocity()) + (lowYVelocity ? 0 : YVelocity()));
+	Body()->ApplyTorque(-(RotationBox2D() + AngularVelocity()) + (lowYVelocity ? 0 : YVelocity()));
 	
 	if (GStateIsMainMenu()) {
 		SetState(YVelocity() < 0.2f ? State::Falling : State::Flapping);

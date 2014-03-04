@@ -9,29 +9,6 @@
 #ifndef WONKYBIRD_BIRD_H
 #define WONKYBIRD_BIRD_H
 
-class CCDeleter {
-public:
-	template <class T>
-	void operator()(T* p) {
-		p->release();
-	}
-};
-
-template <class T>
-class CCUniquePtr : public unique_ptr<T, CCDeleter> {
-public:
-	CCUniquePtr():
-	unique_ptr<T, CCDeleter>(new T())
-	{
-		unique_ptr<T, CCDeleter>::get()->retain();
-	}
-	CCUniquePtr(T* item):
-	unique_ptr<T, CCDeleter>(item)
-	{
-		unique_ptr<T, CCDeleter>::get()->retain();
-	}
-};
-
 #include "GameSprite.h"
 #include "ReflectiveClass.h"
 

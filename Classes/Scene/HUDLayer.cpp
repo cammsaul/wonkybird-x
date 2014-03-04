@@ -143,10 +143,10 @@ void HUDLayer::update(float delta) {
 		}
 	}
 	if (GStateIsActive()) {
-		scoreLabel_.setString(to_string(GameManager::sharedInstance()->TotalScore()).c_str());
+		scoreLabel_.setString(to_string(GameManager::sharedInstance().TotalScore()).c_str());
 	} else if (GStateIsGameOver()) {
-		scoreBoardScoreLabel_.setString(to_string(GameManager::sharedInstance()->TotalScore()).c_str());
-		scoreBoardBestLabel_.setString(to_string(GameManager::sharedInstance()->BestTotalScore()).c_str());
+		scoreBoardScoreLabel_.setString(to_string(GameManager::sharedInstance().TotalScore()).c_str());
+		scoreBoardBestLabel_.setString(to_string(GameManager::sharedInstance().BestTotalScore()).c_str());
 	}
 }
 

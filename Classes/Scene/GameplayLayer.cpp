@@ -105,7 +105,7 @@ void GameplayLayer::UpdateGetReady() {
 	}
 	
 	for (auto b : birds_) if (b != CurrentBird()) {
-		b->SetXVelocity(PipeXVelocity * GameManager::sharedInstance()->GameSpeed());
+		b->SetXVelocity(PipeXVelocity * GameManager::sharedInstance().GameSpeed());
 		if (b->X() < -(b->getContentSize().width / 2.0f)) {
 			RemoveBird(b);
 			break; // don't remove any more birds this round, since RemoveBird() affects birds_
@@ -148,7 +148,7 @@ void GameplayLayer::UpdateActive() {
 	}
 	
 //	for (Pipe *p in self.pipes) {
-//		const float pipeXVelocity = PipeXVelocity * [GameManager sharedInstance].gameSpeed;
+//		const float pipeXVelocity = PipeXVelocity * GameManager::sharedInstance().gameSpeed;
 //		p.item.body->SetLinearVelocity({pipeXVelocity, 0});
 //		[p updateStateWithDeltaTime:delta];
 //	}

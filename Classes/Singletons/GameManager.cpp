@@ -8,10 +8,13 @@
 
 #include "GameManager.h"
 
-shared_ptr<GameManager> GameManager::sharedInstance_ = make_shared<GameManager>();
+unique_ptr<GameManager> GameManager::sharedInstance_ = nullptr;
 
-shared_ptr<GameManager> GameManager::sharedInstance() {
-	return sharedInstance_;
+GameManager& GameManager::sharedInstance() {
+	if (!GameManager::sharedInstance_) {
+		GameManager::sharedInstance_ = unique_ptr<GameManager>(new GameManager());
+	}
+	return *sharedInstance_;
 }
 
 GameManager::GameManager():
@@ -19,7 +22,7 @@ GameManager::GameManager():
 	round1Score_(0),
 	round2Score_(0)
 {
-	if (GameManager::sharedInstance()) assert(!"Created a duplicate GameManager!");
+	if (GameManager::sharedInstance_) assert(!"Created a duplicate GameManager!");
 }
 
 void GameManager::update() {
@@ -27,25 +30,35 @@ void GameManager::update() {
 	LastFrameScore_ = CurrentRoundScore();
 }
 
+float GameManager::GameSpeed() const {
+	if (GState() & (GStateMainMenu|GStateGameOver)) return 0;
+	
+	return 1.0f + (ScorePipeXVelocityMultiplier * CurrentRoundScore()) * (IsReversed() ? -1.0f : 1.0f);
+}
+		
+bool GameManager::IsReversed() const {
+	return (CurrentRoundScore()/ CrazyBackwardsModeScore) % 2 != 0;
+}
+
 
 #pragma mark - Global Helper functions
 
 NSUInteger CurrentRoundScore() {
-	return GState() & GStateRound1 ? GameManager::sharedInstance()->Round1Score() : GameManager::sharedInstance()->Round2Score();
+	return GState() & GStateRound1 ? GameManager::sharedInstance().Round1Score() : GameManager::sharedInstance().Round2Score();
 }
 
 GameState LastFrameState() {
-	return GameManager::sharedInstance()->LastFrameState();
+	return GameManager::sharedInstance().LastFrameState();
 }
 
 unsigned LastFrameScore() {
-	return GameManager::sharedInstance()->LastFrameScore();
+	return GameManager::sharedInstance().LastFrameScore();
 }
 
 GameState GState() {
-	return GameManager::sharedInstance()->GState();
+	return GameManager::sharedInstance().GState();
 }
 
 void SetGState(int gState) {
-	GameManager::sharedInstance()->SetGState((GameState)gState);
+	GameManager::sharedInstance().SetGState((GameState)gState);
 }

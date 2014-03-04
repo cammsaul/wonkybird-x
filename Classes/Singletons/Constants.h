@@ -9,7 +9,7 @@
 #ifndef WONKYBIRD_CONSTANTS_H
 #define WONKYBIRD_CONSTANTS_H
 
-static const float kPTMRatio = 100.0f;
+static const float kPTMRatio = 100.0f; // retina scaling problem: 100.0f;
 
 static const float kGravityVelocity = -(kPTMRatio / 10.0f);
 
@@ -72,5 +72,7 @@ static const int32 Box2DLayerVelocityIterations = 3; ///< Number of iterations B
 static const int32 Box2DLayerPositionIterations = 2; ///< Number of iterations Box2D world should do for every frame. Higher number means more accurate physics, but comes with a performance penalty.
 
 static const float HUDSpriteRemovalDuration = 0.5f; ///< How long the sprites in the HUD take to animate out
+
+static const int MaxNumClouds = 6;
 
 #endif
