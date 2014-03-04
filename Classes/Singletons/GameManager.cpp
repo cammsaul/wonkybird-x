@@ -23,7 +23,8 @@ GameManager::GameManager():
 }
 
 void GameManager::update() {
-	lastState_ = GState();
+	LastFrameState_ = GState();
+	LastFrameScore_ = CurrentRoundScore();
 }
 
 
@@ -33,8 +34,12 @@ NSUInteger CurrentRoundScore() {
 	return GState() & GStateRound1 ? GameManager::sharedInstance()->Round1Score() : GameManager::sharedInstance()->Round2Score();
 }
 
-GameState LastState() {
-	return GameManager::sharedInstance()->LastState();
+GameState LastFrameState() {
+	return GameManager::sharedInstance()->LastFrameState();
+}
+
+unsigned LastFrameScore() {
+	return GameManager::sharedInstance()->LastFrameScore();
 }
 
 GameState GState() {

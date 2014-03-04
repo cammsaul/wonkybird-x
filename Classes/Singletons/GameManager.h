@@ -16,8 +16,8 @@ public:
 	GameState GState() const { return gameState_; }
 	void SetGState(GameState gState) { gameState_ = gState; }
 	
-	GameState LastState() const { return lastState_; } ///< state of the last frame.
-	
+	GameState LastFrameState()		const { return LastFrameState_; } ///< state of the last frame.
+	unsigned LastFrameScore()	const { return LastFrameScore_; } ///< score of the last frame.
 	unsigned Round1Score()		const { return round1Score_; }
 	unsigned Round2Score()		const { return round2Score_; }
 	unsigned TotalScore()		const { return round1Score_ + round2Score_; }
@@ -27,8 +27,9 @@ public:
 	
 	GameManager();
 private:
-	GameState lastState_;
+	GameState LastFrameState_;
 	GameState gameState_;
+	unsigned LastFrameScore_;
 	unsigned round1Score_;
 	unsigned round2Score_;
 

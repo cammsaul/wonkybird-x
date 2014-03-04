@@ -30,7 +30,7 @@ typedef enum : int {
 } GameState;
 
 
-GameState LastState();
+GameState LastFrameState();
 GameState GState();
 void SetGState(int gState);
 static inline bool GStateIsActive()		{ return GState() & GStateActive; }
@@ -39,6 +39,7 @@ static inline bool GStateIsMainMenu()	{ return GState() & GStateMainMenu; }
 static inline bool GStateIsGameOver()	{ return GState() & GStateGameOver; }
 
 unsigned CurrentRoundScore(); ///< Returns the score for the current game round.
+unsigned LastFrameScore(); ///< Score for the previous frame
 
 static auto Rand = bind (uniform_real_distribution<float>(0.0f, 1.0f), default_random_engine()); // nice random number between 0.0f and 1.0f
 

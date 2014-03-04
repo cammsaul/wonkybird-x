@@ -120,7 +120,7 @@ void HUDLayer::AddOrReomveSpriteWithKey(const string* key, GameState states) {
 
 
 void HUDLayer::update(float delta) {
-	if (GState() != LastState()) {
+	if (GState() != LastFrameState()) {
 		for (const auto& spriteInfo : spriteInfo_) {
 			const auto* key = &spriteInfo.first;
 			const GameState& states = spriteInfo.second.first;
