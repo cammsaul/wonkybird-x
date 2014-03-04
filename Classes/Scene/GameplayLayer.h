@@ -21,6 +21,7 @@ private:
 	void AddBird(shared_ptr<Bird> bird);
 
 	unordered_set<shared_ptr<Bird>> birds_;
+	GameSprite ground_;
 };
 
 #endif

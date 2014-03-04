@@ -15,6 +15,10 @@ public:
 	
 	virtual ~Box2DItem();
 	
+	shared_ptr<b2BodyDef> BodyDef()			{ return bodyDef_; }
+	shared_ptr<b2FixtureDef> FixtureDef()	{ return fixtureDef_; }
+	shared_ptr<b2PolygonShape> Shape()		{ return shape_; }
+	
 	virtual b2Vec2 PositionForBox2D() const = 0;
 	virtual void SetPositionForBox2D(const b2Vec2& pos) = 0;
 	
@@ -28,9 +32,9 @@ public:
 	void MoveToNewPosition();
 private:
 	b2Body* body_;
-	b2BodyDef bodyDef_;
-	b2PolygonShape shape_;
-	b2FixtureDef fixtureDef_;
+	shared_ptr<b2BodyDef> bodyDef_;
+	shared_ptr<b2PolygonShape> shape_;
+	shared_ptr<b2FixtureDef> fixtureDef_;
 };
 
 #endif

@@ -9,13 +9,13 @@
 #include "Box2DItem.h"
 
 Box2DItem::Box2DItem():
-	body_(nullptr),
-	bodyDef_(),
-	shape_(),
-	fixtureDef_()
+	body_		(nullptr),
+	bodyDef_	(make_shared<b2BodyDef>()),
+	shape_		(make_shared<b2PolygonShape>()),
+	fixtureDef_	(make_shared<b2FixtureDef>())
 {
-	fixtureDef_.shape = &shape_;
-	bodyDef_.type = b2_dynamicBody;
+	fixtureDef_->shape = shape_.get();
+	bodyDef_->type = b2_dynamicBody;
 }
 
 Box2DItem::~Box2DItem() {
@@ -23,14 +23,17 @@ Box2DItem::~Box2DItem() {
 }
 
 void Box2DItem::UpdateShape() {
-	shape_.SetAsBox(ContentSizeForBox2D().x / 2.0f, ContentSizeForBox2D().y / 2.0f);
+	assert(ContentSizeForBox2D().x && ContentSizeForBox2D().y);
+	shape_->SetAsBox(ContentSizeForBox2D().x / 2.0f, ContentSizeForBox2D().y / 2.0f);
+	assert(shape_->m_vertexCount >= 3);
+	assert(fixtureDef_->shape == shape_.get());
 }
 
 void Box2DItem::AddToWorld(b2World& world) {
-	bodyDef_.position = PositionForBox2D();
+	bodyDef_->position = PositionForBox2D();
 	UpdateShape();
 	
-	body_ = world.CreateBody(&bodyDef_);
+	body_ = world.CreateBody(bodyDef_.get());
 	body_->SetUserData(this);
 	body_->SetActive(true);
 	
@@ -38,7 +41,7 @@ void Box2DItem::AddToWorld(b2World& world) {
 }
 
 void Box2DItem::CreateFixtures() {
-	body_->CreateFixture(&fixtureDef_);
+	body_->CreateFixture(fixtureDef_.get());
 }
 
 void Box2DItem::RemoveFromWorld() {

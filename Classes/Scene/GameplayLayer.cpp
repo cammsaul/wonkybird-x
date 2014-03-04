@@ -11,8 +11,19 @@
 
 GameplayLayer::GameplayLayer():
 	Box2DLayer("Textures"),
-	birds_ {}
+	birds_ {},
+	ground_()
 {
+	// add the ground
+	ground_.BodyDef()->type = b2_staticBody;
+	ground_.setPosition({ScreenHalfWidth(), GroundHeight / 2.0f});
+	ground_.setContentSize({ScreenWidth() * 2 /* extend out past edges a bit */, GroundHeight});
+	ground_.FixtureDef()->density = 0.0f;
+	ground_.FixtureDef()->friction = 0.8f;
+	ground_.AddToWorld(world_);
+	
+	// TODO : add the roof
+	
 	scheduleUpdate();
 }
 

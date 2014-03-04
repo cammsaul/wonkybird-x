@@ -13,6 +13,7 @@
 
 class GameSprite : public CCSprite, public Box2DItem {
 public:
+	GameSprite(); ///< game sprite with no image, e.g. for use as wall, etc
 	GameSprite(const string& spriteFrameName);
 	virtual ~GameSprite() = default;
 	

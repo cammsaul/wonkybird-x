@@ -8,6 +8,8 @@
 
 #include "GameSprite.h"
 
+GameSprite::GameSprite() {}
+
 GameSprite::GameSprite(const string& spriteFrameName) {
 	initWithSpriteFrameName(spriteFrameName.c_str());
 }
