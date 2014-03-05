@@ -851,8 +851,8 @@
 		32231E3218C604530097167F /* GameObjects */ = {
 			isa = PBXGroup;
 			children = (
-				32231E3318C604530097167F /* Bird.cpp */,
 				32231E3418C604530097167F /* Bird.h */,
+				32231E3318C604530097167F /* Bird.cpp */,
 				32231E3518C604530097167F /* Pigeon.cpp */,
 				32231E3618C604530097167F /* Pigeon.h */,
 				32231E3718C604530097167F /* Pipe.cpp */,

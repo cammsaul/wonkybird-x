@@ -17,7 +17,7 @@ const Metaclass* const Toucan::MetaClass() const {
 Toucan::~Toucan() {}
 
 void Toucan::ApplyTouch(unsigned numFrames) {
-	SetYVelocity(-kGravityVelocity * (.05f + (.075f * numFrames)));
+	SetYVelocity(-GravityVelocity() * (.05f + (.075f * numFrames)));
 }
 
 void Toucan::FlapAroundOnMainScreen(Flock allBirds) {
@@ -40,7 +40,7 @@ void Toucan::FlapAroundOnMainScreen(Flock allBirds) {
 		
 		const float heightCorrectionVel = ((ScreenHeight() * kBirdMenuHeight) - Y()) * Rand() * AntiGravityAmount * 0.1f; ///< add neccessary velocity to keep Bird around the right y spot during flapping
 		
-		const float newYVel = (-kGravityVelocity * AntiGravityAmount) + heightCorrectionVel + RandTimes10();
+		const float newYVel = (-GravityVelocity() * AntiGravityAmount) + heightCorrectionVel + RandTimes10();
 		
 		const float xVel = (Rand() > .5f) ? (RandTimes10() * -BirdXDiff) : ((RandTimes10() * 2) - kBirdMenuRandVelocity);
 		Body()->ApplyForceToCenter({xVel, newYVel});

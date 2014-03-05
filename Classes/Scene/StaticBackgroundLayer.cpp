@@ -68,6 +68,11 @@ BGSprite StaticBackgroundLayer::AddBackground(const string& filename, int zIndex
 	auto bgSprite = BGSprite { CCSprite::create(filename.c_str()) };
 	assert(bgSprite);
 	bgSprite->CCNode::setPosition(ScreenHalfWidth(), ScreenHalfHeight());
+	
+	// scale BG as needed
+	bgSprite->setScaleX(ScreenWidth() / 640.0f);
+	bgSprite->setScaleY(ScreenHeight() / 1136.0f);
+	
 	addChild(bgSprite.get(), zIndex);
 	return bgSprite;
 }

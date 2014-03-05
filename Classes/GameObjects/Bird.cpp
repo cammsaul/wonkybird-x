@@ -20,7 +20,7 @@ Bird::Bird():
 	GameSprite(),
 	state_((enum State)-1) // next call will trigger animation change
 {
-	BodyDef()->gravityScale = 2.0f;
+//	BodyDef()->gravityScale = 2.0f;
 	static bool hasLoadedShapeDefs = false;
 	if (!hasLoadedShapeDefs) {
 		hasLoadedShapeDefs = true;

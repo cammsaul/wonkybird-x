@@ -11,7 +11,7 @@
 
 Box2DLayer::Box2DLayer(const string& textureAtlasName):
 	GameLayer(textureAtlasName),
-	world_({0, kGravityVelocity}),
+	world_({0, GravityVelocity()}),
 	debugDraw_(kPTMRatio)
 {
 	world_.SetDebugDraw(&debugDraw_);

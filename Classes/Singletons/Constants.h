@@ -11,14 +11,16 @@
 
 static const float kPTMRatio = 100.0f; // retina scaling problem: 100.0f;
 
-static const float kGravityVelocity = -(kPTMRatio / 10.0f);
+inline CCSize ScreenSize()		{ return CCDirector::sharedDirector()->getWinSize(); }
+inline float ScreenWidth()		{ return ScreenSize().width; }
+inline float ScreenHalfWidth()	{ return ScreenWidth() / 2.0f; }
+inline float ScreenHeight()		{ return ScreenSize().height; }
+inline float ScreenHalfHeight()	{ return ScreenHeight() / 2.0f; }
+inline bool IsIphone5()			{ return ScreenHeight() > (480.0f * 2.0f); }
 
-static inline CCSize ScreenSize()		{ return CCDirector::sharedDirector()->getWinSize(); }
-static inline float ScreenWidth()		{ return ScreenSize().width; }
-static inline float ScreenHalfWidth()	{ return ScreenWidth() / 2.0f; }
-static inline float ScreenHeight()		{ return ScreenSize().height; }
-static inline float ScreenHalfHeight()	{ return ScreenHeight() / 2.0f; }
-static inline bool IsIphone5()			{ return ScreenHeight() > (480.0f * 2.0f); }
+inline float GravityVelocity() {
+	return (kPTMRatio * (ScreenHeight() / 640)) / -10.0f;
+}
 
 typedef enum : int {
 	GStateMainMenu	= 0b000001, ///< 01
@@ -33,10 +35,10 @@ typedef enum : int {
 GameState LastFrameState();
 GameState GState();
 void SetGState(int gState);
-static inline bool GStateIsActive()		{ return GState() & GStateActive; }
-static inline bool GStateIsGetReady()	{ return GState() & GStateGetReady; }
-static inline bool GStateIsMainMenu()	{ return GState() & GStateMainMenu; }
-static inline bool GStateIsGameOver()	{ return GState() & GStateGameOver; }
+inline bool GStateIsActive()		{ return GState() & GStateActive; }
+inline bool GStateIsGetReady()	{ return GState() & GStateGetReady; }
+inline bool GStateIsMainMenu()	{ return GState() & GStateMainMenu; }
+inline bool GStateIsGameOver()	{ return GState() & GStateGameOver; }
 
 unsigned CurrentRoundScore(); ///< Returns the score for the current game round.
 unsigned LastFrameScore(); ///< Score for the previous frame
@@ -58,7 +60,7 @@ static const int InitialMaxSize = 6;
 static const int MaxMaxSize = 9;
 static const int MaxPipeSize = MaxMaxSize - MinPipeSize;
 
-static inline int GroundHeight() { return ScreenHeight() * 0.23f; }
+inline int GroundHeight() { return ScreenHeight() * 0.23f; }
 static const int kMaxNumPipes = 12;
 
 static const int CrazyBackwardsModeScore = 25;		///< game reverses every time you pass this many points in a single round

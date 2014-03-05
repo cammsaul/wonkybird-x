@@ -171,7 +171,7 @@ void GameplayLayer::AddPipe(int pipeSize, bool upsideDown) {
 	pipe->AddToWorld(world_);
 	pipes_.push_back(pipe);
 	
-	pipe->Body()->SetLinearVelocity({PipeXVelocity * GameManager::sharedInstance().GameSpeed(), -kGravityVelocity});
+	pipe->Body()->SetLinearVelocity({PipeXVelocity * GameManager::sharedInstance().GameSpeed(), -GravityVelocity()});
 	pipe->Body()->SetGravityScale(0.0f); // pipes unaffected by gravity !
 	
 	// call self recursively to add upside-down pipe if needed
