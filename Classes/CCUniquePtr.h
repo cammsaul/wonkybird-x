@@ -10,6 +10,7 @@
 #define WONKYBIRD_GamePtr_H
 
 #include <cxxabi.h>
+#include "NoCopy.h"
 
 template <typename T>
 inline string readable_name() {
@@ -37,27 +38,21 @@ inline string readable_name(const T& t) {
 	else return mangled_name;
 }
 
-template <typename T>
-using GamePtrReleaseFn = function<void(T*)>;
-
-template <typename T>
-class DebugReleaseFn : public GamePtrReleaseFn<T> {
+class DebugReleaser {
 public:
-	DebugReleaseFn():
-		GamePtrReleaseFn<T>([](T* t){
-			printf("Released: %s (ref count: %d)\n", readable_name(t).c_str(), t->getReferenceCount());
-		})
-	{}
+	template <typename T>
+	static void Release(T* t) {
+		printf("Released: %s (ref count: %d)\n", readable_name(t).c_str(), t->getReferenceCount());
+	}
 };
 
-template <typename T>
-class NullReleaseFn : public GamePtrReleaseFn<T> {
+class NullReleaser {
 public:
-	NullReleaseFn():
-	GamePtrReleaseFn<T>([](T*){}) {}
+	template <typename T>
+	static void Release(T*) {};
 };
 
-template <class T, class ReleaseFn = DebugReleaseFn<T>>
+template <class T, typename Releaser = DebugReleaser>
 class GamePtr {
 public:
 	GamePtr():
@@ -98,12 +93,7 @@ public:
 	
 	~GamePtr() {
 		if (obj_) {
-			GamePtrReleaseFn<T> releaseFn = ReleaseFn();
-			if (!releaseFn) {
-				throw runtime_error("bad release fn!: " + readable_name<ReleaseFn>() + " (type is: " + readable_name(releaseFn) + ")");
-			} else {
-				releaseFn(obj_);
-			}
+			Releaser::Release(obj_);
 			obj_->release();
 		}
 	}

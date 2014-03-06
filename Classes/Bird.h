@@ -13,7 +13,16 @@
 #include "ReflectiveClass.h"
 
 class Bird;
-typedef GamePtr<Bird> BirdPtr;
+
+class BirdReleaser {
+public:
+	static void Release(Bird* b) {
+		printf("NICE!\n");
+	};
+};
+
+//, decltype(BirdFn)
+typedef GamePtr<Bird, BirdReleaser> BirdPtr;
 typedef vector<BirdPtr> Flock;
 
 class Bird : public ReflectiveClass, public GameSprite {
