@@ -1,6 +1,4 @@
-#include "../Classes/Singletons/AppDelegate.h"
-#include "cocos2d.h"
-#include "CCEGLView.h"
+#include "../Classes/AppDelegate.h"
 
 #include <stdlib.h>
 #include <stdio.h>
@@ -13,7 +11,7 @@ int main(int argc, char **argv)
 {
     // create the application instance
     AppDelegate app;
-    CCEGLView* eglView = CCEGLView::sharedOpenGLView();
-    eglView->setFrameSize(800, 480);
-    return CCApplication::sharedApplication()->run();
+    EGLView eglView;
+    eglView.init("Cocos2d-x Game",900,640);
+    return Application::getInstance()->run();
 }
