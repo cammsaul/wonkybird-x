@@ -96,7 +96,7 @@ HUDLayer::HUDLayer():
 		impl_->sprites_[key] = nullptr;
 	}
 	
-	impl_->listener_ = Binder<HUDLayer>().TouchBegan(&HUDLayer::HUDLayer::onTouchBegan).Bind(this);
+	impl_->listener_ = Binder<HUDLayer>().TouchBegan(&HUDLayer::onTouchBegan).TouchEnded(&HUDLayer::onTouchEnded).Bind(this);
 
 	scheduleUpdate();
 }
@@ -108,10 +108,6 @@ void HUDLayer::Impl::AddSpriteWithKeyIfNeeded(const string* key) {
 	sprite = GamePtr<Sprite>(Sprite::createWithSpriteFrameName(*key));
 	sprite->setPosition(spriteInfo_[*key].second);
 	this_.spriteBatchNode_->addChild(sprite.Get());
-}
-
-void HUDLayer::Impl::RemoveSpriteCallback(Node *node, const string* key) {
-	
 }
 
 void HUDLayer::Impl::RemoveSpriteWithKeyIfNeeded(const string* key) {
