@@ -11,7 +11,9 @@
 
 #include <cxxabi.h>
 
-inline string readable_name(const char *mangled_name) {
+template <typename T>
+inline string readable_name() {
+	auto mangled_name = typeid(T).name();
 	int status ;
 	char *temp = __cxxabiv1::__cxa_demangle(mangled_name, nullptr, nullptr, &status);
 	if(temp) {
@@ -19,26 +21,43 @@ inline string readable_name(const char *mangled_name) {
 		free(temp);
 		return result;
 	}
-	else return mangled_name ;
+	else return mangled_name;
 }
 
-// dump a debug message when obj is released, useful for debugging too much copying
-class DebugReleaseFn {
-public:
-	template <typename T>
-	static void Release(T* t) {
-		printf("Deleted: %s (%d)\n", readable_name(typeid(T).name()).c_str(), t->getReferenceCount());
+template <typename T>
+inline string readable_name(const T& t) {
+	auto mangled_name = typeid(t).name();
+	int status ;
+	char *temp = __cxxabiv1::__cxa_demangle(mangled_name, nullptr, nullptr, &status);
+	if(temp) {
+		string result{temp};
+		free(temp);
+		return result;
 	}
-};
+	else return mangled_name;
+}
 
-/// no pre-release behavior, default
-class NullReleaseFn {
+template <typename T>
+using GamePtrReleaseFn = function<void(T*)>;
+
+template <typename T>
+class DebugReleaseFn : public GamePtrReleaseFn<T> {
 public:
-	template <typename T>
-	static void Release(T* t){};
+	DebugReleaseFn():
+		GamePtrReleaseFn<T>([](T* t){
+			printf("Released: %s (ref count: %d)\n", readable_name(t).c_str(), t->getReferenceCount());
+		})
+	{}
 };
 
-template <class T, class ReleaseFn = DebugReleaseFn>
+template <typename T>
+class NullReleaseFn : public GamePtrReleaseFn<T> {
+public:
+	NullReleaseFn():
+	GamePtrReleaseFn<T>([](T*){}) {}
+};
+
+template <class T, class ReleaseFn = DebugReleaseFn<T>>
 class GamePtr {
 public:
 	GamePtr():
@@ -61,14 +80,7 @@ public:
 		}
 	}
 	
-	GamePtr& operator=(const GamePtr&) = delete;
-//	GamePtr& operator=(const GamePtr& rhs) {
-//		if (this != &rhs) {
-//			obj_ = rhs.obj_;
-//			if (obj_) obj_->retain();
-//		}
-//		return *this;
-//	}
+	GamePtr& operator=(const GamePtr&) = delete; // disallow copy assignment, use explict copy construction instead
 	
 	// moving ok
 	GamePtr(GamePtr&& rhs) {
@@ -86,7 +98,12 @@ public:
 	
 	~GamePtr() {
 		if (obj_) {
-			ReleaseFn::Release(obj_);
+			GamePtrReleaseFn<T> releaseFn = ReleaseFn();
+			if (!releaseFn) {
+				throw runtime_error("bad release fn!: " + readable_name<ReleaseFn>() + " (type is: " + readable_name(releaseFn) + ")");
+			} else {
+				releaseFn(obj_);
+			}
 			obj_->release();
 		}
 	}
@@ -95,7 +112,7 @@ public:
 	T* operator->() { return Get(); }
 	T* Get() {
 		if (!obj_) {
-			throw runtime_error { "nullptr dereference in GamePtr<" + readable_name(typeid(T).name()) + ">" };
+			throw runtime_error { "nullptr dereference in GamePtr<" + readable_name(obj_) + ">" };
 		}
 		return obj_;
 	}

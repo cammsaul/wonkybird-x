@@ -14,7 +14,7 @@
 template <typename T>
 string DumpSmartPtr(T& Ptr) {
 	char buff[50];
-	sprintf(buff, "%s 0x%016lx", readable_name(typeid(*Ptr).name()).c_str(), (size_t)Ptr.Get());
+	sprintf(buff, "%s 0x%016lx", readable_name(Ptr).c_str(), (size_t)Ptr.Get());
 	return string{buff};
 }
 
