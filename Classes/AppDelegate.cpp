@@ -8,7 +8,7 @@ struct AppDelegate::Impl {
 };
 
 AppDelegate::AppDelegate():
-	impl_(make_shared<Impl>())
+	impl(make_shared<Impl>())
 {
 
 }
@@ -31,10 +31,10 @@ bool AppDelegate::applicationDidFinishLaunching() {
     director->setAnimationInterval(1.0 / 60);
 
     // create a scene. it's an autorelease object
-	impl_->mainScene_ = new MainScene();
+	impl->mainScene_ = new MainScene();
 	
     // run
-    director->runWithScene(impl_->mainScene_.Get());
+    director->runWithScene(impl->mainScene_.Get());
 
     return true;
 }

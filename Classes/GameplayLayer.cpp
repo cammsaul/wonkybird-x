@@ -12,6 +12,8 @@
 #include "GameManager.h"
 #include "GameListener.h"
 
+using namespace std::placeholders;
+
 float MaxTotalSize() {
 	return MIN((InitialMaxSize + (CurrentRoundScore() / 2)), MaxMaxSize);
 }
@@ -21,37 +23,73 @@ float RandomPipeSize() {
 	return (random() % SizeRange) + MinPipeSize;
 }
 
-using namespace std::placeholders;
+struct GameplayLayer::Impl {
+	void UpdateMainMenu(float dt);
+	void UpdateGetReady(float dt);
+	void UpdateActive(float dt);
+	void UpdateGameOver(float dt);
+	
+	void AddExtraBirds();
+	void RemoveExtraBirds();
+	
+	void AddPipe(int size, bool upsideDown);
+	void RemoveOldPipes();
+	void AddRandomPipeIfNeeded();
+	
+	template <class BirdT>
+	BirdPtr AddBird();
+	
+	BirdPtr& CurrentBird() { return currentBird_; }
+	void SetCurrentBird(BirdPtr& bird) { currentBird_ = BirdPtr(bird); }
+	
+	Flock birds_;
+	BirdPtr toucan_;
+	BirdPtr pigeon_;
+	BirdPtr currentBird_;
+	GameSprite ground_;
+	
+	GameListener::Ptr listener_;
+	
+	deque<GamePtr<Pipe>> pipes_;
+	
+	unsigned touchBeginTime_; ///< time current touch began, used to keep track for touch-sensitive birds like Rasta
+	
+	GameplayLayer& this_;
+	Impl(GameplayLayer& parent):
+	this_(parent)
+	{
+		// add the ground
+		ground_.BodyDef()->type = b2_staticBody;
+		ground_.setPosition({ScreenHalfWidth(), GroundHeight() / 2.0f});
+		ground_.setContentSize({ScreenWidth() * 2 /* extend out past edges a bit */, GroundHeight()});
+		ground_.FixtureDef()->density = 0.0f;
+		ground_.FixtureDef()->friction = 0.8f;
+		ground_.AddToWorld(this_.world_);
+		
+		// todo - add roof
+	}
+
+};
 
 GameplayLayer::GameplayLayer():
-	Box2DLayer("Textures")
+	Box2DLayer("Textures"),
+	impl(new Impl(*this))
 {
-	// add the ground
-	ground_.BodyDef()->type = b2_staticBody;
-	ground_.setPosition({ScreenHalfWidth(), GroundHeight() / 2.0f});
-	ground_.setContentSize({ScreenWidth() * 2 /* extend out past edges a bit */, GroundHeight()});
-	ground_.FixtureDef()->density = 0.0f;
-	ground_.FixtureDef()->friction = 0.8f;
-	ground_.AddToWorld(world_);
-	
-	// TODO : add the roof
-	
+	impl->listener_ = Binder<GameplayLayer>().TouchBegan(&GameplayLayer::onTouchBegan).TouchEnded(&GameplayLayer::onTouchEnded).Bind(this);
 	scheduleUpdate();
-	
-	listener_ = Binder<GameplayLayer>().TouchBegan(&GameplayLayer::onTouchBegan).Bind(this);
 }
 
 void GameplayLayer::update(float dt) {
 	Box2DLayer::update(dt);
 	
 	if (GStateIsMainMenu()) {
-		UpdateMainMenu(dt);
+		impl->UpdateMainMenu(dt);
 	} else if (GStateIsGetReady()) {
-		UpdateGetReady(dt);
+		impl->UpdateGetReady(dt);
 	} else if (GStateIsActive()) {
-		UpdateActive(dt);
+		impl->UpdateActive(dt);
 	} else if (GStateIsGameOver()) {
-		UpdateGameOver(dt);
+		impl->UpdateGameOver(dt);
 	}
 	
 	for (auto* obj : spriteBatchNode_->getChildren()) {
@@ -61,28 +99,30 @@ void GameplayLayer::update(float dt) {
 	}
 }
 
-void GameplayLayer::UpdateMainMenu(float dt) {
+BirdPtr& GameplayLayer::CurrentBird() { return impl->CurrentBird(); }
+
+void GameplayLayer::Impl::UpdateMainMenu(float dt) {
 	if (!toucan_) toucan_ = AddBird<Toucan>();
 	if (!pigeon_) pigeon_ = AddBird<Pigeon>();
 	toucan_->FlapAroundOnMainScreen(birds_);
 	pigeon_->FlapAroundOnMainScreen(birds_);
 	
 	if (!CurrentBird()) {
-		SetMainBird(toucan_);
+		SetCurrentBird(toucan_);
 	}
 }
 
-void GameplayLayer::UpdateGetReady(float dt) {
+void GameplayLayer::Impl::UpdateGetReady(float dt) {
 	if (LastFrameState() != GStateGetReady && LastFrameState() != GStateMainMenu) {
 		// switch out the birds
 		if (typeid(*CurrentBird()) == typeid(Toucan)) {
 			if (!pigeon_) pigeon_ = AddBird<Pigeon>();
-			SetMainBird(pigeon_);
+			SetCurrentBird(pigeon_);
 			
 			auto mask = ~GStateRound1;
 			SetGState((GState() & mask)|GStateRound2);
 		} else if (!toucan_) { toucan_ = AddBird<Toucan>();
-			SetMainBird(toucan_);
+			SetCurrentBird(toucan_);
 			
 			auto mask = ~GStateRound2;
 			SetGState((GState() & mask)|GStateRound1);
@@ -100,12 +140,12 @@ void GameplayLayer::UpdateGetReady(float dt) {
 	CurrentBird()->SetVelocity({-BirdXDiff, -BirdYDiff});
 	
 	for (auto& pipe : pipes_) {
-		removeChild(pipe->Layer().Get(), true);
+		this_.removeChild(pipe->Layer().Get(), true);
 	}
 	pipes_.clear();
 }
 
-void GameplayLayer::UpdateActive(float dt) {
+void GameplayLayer::Impl::UpdateActive(float dt) {
 	if (LastFrameState() != GStateActive) {
 		RemoveExtraBirds();
 		CurrentBird()->SetX(ScreenHalfWidth());
@@ -136,14 +176,14 @@ void GameplayLayer::UpdateActive(float dt) {
 	}
 }
 
-void GameplayLayer::UpdateGameOver(float dt) {
+void GameplayLayer::Impl::UpdateGameOver(float dt) {
 	for (auto& pipe : pipes_) {
 		pipe->Body()->SetLinearVelocity({0, 0});
 		pipe->Update(dt);
 	}
 }
 
-void GameplayLayer::AddPipe(int pipeSize, bool upsideDown) {
+void GameplayLayer::Impl::AddPipe(int pipeSize, bool upsideDown) {
 	assert(pipeSize >= MinPipeSize);
 	assert(pipeSize <= MaxPipeSize);
 	assert(pipeSize <= MaxTotalSize() - MinPipeSize);
@@ -153,8 +193,8 @@ void GameplayLayer::AddPipe(int pipeSize, bool upsideDown) {
 	const float x = GameManager::sharedInstance().IsReversed() ? (0 - pipe->getContentSize().width) : (ScreenWidth() + pipe->getContentSize().width / 2);
 	const float y = upsideDown ? (ScreenHeight() - pipeHalfHeight + 2) : (pipeHalfHeight + GroundHeight() + 2);
 	pipe->setPosition({x, y});
-	addChild(pipe->Layer().Get());
-	pipe->AddToWorld(world_);
+	this_.addChild(pipe->Layer().Get());
+	pipe->AddToWorld(this_.world_);
 	pipes_.push_back(pipe);
 	
 	pipe->Body()->SetLinearVelocity({PipeXVelocity * GameManager::sharedInstance().GameSpeed(), -GravityVelocity()});
@@ -167,18 +207,18 @@ void GameplayLayer::AddPipe(int pipeSize, bool upsideDown) {
 	}
 }
 
-void GameplayLayer::RemoveOldPipes() {
+void GameplayLayer::Impl::RemoveOldPipes() {
 	if (pipes_.empty()) return;
 	
 	auto& pipe = pipes_.front();
 	if (pipe->X() < -(pipe->getContentSize().width / 2) || (pipe->X() > ScreenWidth() + pipe->getContentSize().width)) {
 		pipes_.pop_front();
-		removeChild(pipe->Layer().Get(), true);
+		this_.removeChild(pipe->Layer().Get(), true);
 		RemoveOldPipes();
 	}
 }
 
-void GameplayLayer::AddRandomPipeIfNeeded() {
+void GameplayLayer::Impl::AddRandomPipeIfNeeded() {
 	RemoveOldPipes();
 	
 	if (pipes_.size() >= kMaxNumPipes) return;
@@ -195,7 +235,7 @@ void GameplayLayer::AddRandomPipeIfNeeded() {
 }
 
 template <class BirdT>
-BirdPtr GameplayLayer::AddBird() {
+BirdPtr GameplayLayer::Impl::AddBird() {
 	BirdPtr newBird { new BirdT() };
 	for (auto& bird : birds_) {
 		if (bird->MetaClass() == newBird->MetaClass()) {
@@ -205,15 +245,15 @@ BirdPtr GameplayLayer::AddBird() {
 	}
 	
 	printf("Adding new bird: %s\n", DumpSmartPtr(newBird).c_str());
-	newBird->InitializeAnimations(spriteBatchNode_->getTexture());
+	newBird->InitializeAnimations(this_.spriteBatchNode_->getTexture());
 	birds_.push_back(newBird);
 	newBird->setPosition({ScreenHalfWidth(), ScreenHeight() * kBirdMenuHeight});
-	spriteBatchNode_->addChild(newBird.Get());
-	newBird->AddToWorld(world_);
+	this_.spriteBatchNode_->addChild(newBird.Get());
+	newBird->AddToWorld(this_.world_);
 	return newBird;
 }
 
-void GameplayLayer::RemoveExtraBirds() {
+void GameplayLayer::Impl::RemoveExtraBirds() {
 	printf("Removing extra birds. CurrentBird = %s\n", DumpSmartPtr(CurrentBird()).c_str());
 	
 	while (birds_.size() > 1) {
@@ -233,12 +273,12 @@ void GameplayLayer::RemoveExtraBirds() {
 bool GameplayLayer::onTouchBegan(Touch *pTouch, Event *pEvent) {
 	if (!GStateIsActive()) return false;
 	
-	touchBeginTime_ = Director::getInstance()->getTotalFrames();
+	impl->touchBeginTime_ = Director::getInstance()->getTotalFrames();
 	return true;
 }
 
 void GameplayLayer::onTouchEnded(Touch *pTouch, Event *pEvent) {
-	const unsigned numFrames = Director::getInstance()->getTotalFrames() - touchBeginTime_;
+	const unsigned numFrames = Director::getInstance()->getTotalFrames() - impl->touchBeginTime_;
 	
 	if (CurrentBird()->GetState() != Bird::State::Dead) {
 		CurrentBird()->Body()->SetAwake(true);
@@ -247,7 +287,7 @@ void GameplayLayer::onTouchEnded(Touch *pTouch, Event *pEvent) {
 		CurrentBird()->SetXVelocity((ScreenHalfWidth() / kPTMRatio) - CurrentBird()->Box2DX());
 		CurrentBird()->ApplyTouch(numFrames);
 
-//		CocosDenshion::SimpleAudioEngine::sharedEngine()->playEffect("Shaker_2.wav");
+		SimpleAudioEngine::getInstance()->playEffect("Shaker_2.wav");
 	}
 }
 

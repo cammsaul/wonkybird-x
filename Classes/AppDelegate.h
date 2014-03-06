@@ -32,7 +32,7 @@ public:
     virtual void applicationWillEnterForeground();
 private:
 	struct Impl;
-	shared_ptr<Impl> impl_;
+	shared_ptr<Impl> impl;
 };
 
 #endif // _APP_DELEGATE_H_

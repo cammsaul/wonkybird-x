@@ -14,15 +14,7 @@
 
 class Bird;
 
-class BirdReleaser {
-public:
-	static void Release(Bird* b) {
-		printf("NICE!\n");
-	};
-};
-
-//, decltype(BirdFn)
-typedef GamePtr<Bird, BirdReleaser> BirdPtr;
+typedef GamePtr<Bird> BirdPtr;
 typedef vector<BirdPtr> Flock;
 
 class Bird : public ReflectiveClass, public GameSprite {

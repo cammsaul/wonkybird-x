@@ -20,7 +20,7 @@ public:
     virtual void onTouchEnded(Touch* touch, Event* event) override;
 private:
 	struct Impl;
-	unique_ptr<Impl> impl_;
+	unique_ptr<Impl> impl;
 };
 
 #endif

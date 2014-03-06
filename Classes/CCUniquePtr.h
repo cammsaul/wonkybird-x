@@ -124,6 +124,15 @@ public:
 	const T* Get() const { return obj_; }
 	
 	operator bool() const { return obj_ != nullptr; }
+	
+	bool operator !=(const GamePtr& rhs) const {
+		return obj_ != rhs.obj_;
+	}
+	
+	bool operator ==(const GamePtr& rhs) const {
+		return obj_ == rhs.obj_;
+	}
+	
 private:
 	T* obj_ = nullptr;
 };

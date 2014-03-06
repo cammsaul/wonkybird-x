@@ -51,7 +51,7 @@ struct HUDLayer::Impl {
 
 HUDLayer::HUDLayer():
 	GameLayer("HUD"),
-	impl_(new Impl(*this))
+	impl(new Impl(*this))
 {
 	const float labelYPosition = ScreenHeight() * 0.75f;
 	const float rateButtonY = ScreenHeight() * 0.45f;
@@ -63,40 +63,40 @@ HUDLayer::HUDLayer():
 	const Point labelPosition = Point(ScreenHalfWidth(), labelYPosition);
 	static const GameState ButtonStates = (GameState)(GStateMainMenu|GStateGameOver);
 	
-	impl_->scoreLabel_.initWithString("", "Font_Score_Large.fnt");
-	impl_->scoreLabel_.setPosition(Point(ScreenHalfWidth(), ScreenHeight() * 0.9f));
-	addChild(&impl_->scoreLabel_, 0);
+	impl->scoreLabel_.initWithString("", "Font_Score_Large.fnt");
+	impl->scoreLabel_.setPosition(Point(ScreenHalfWidth(), ScreenHeight() * 0.9f));
+	addChild(&impl->scoreLabel_, 0);
 	
-	impl_->scoreBoardScoreLabel_.initWithString("10", "Font_Score_Small.fnt");
-	impl_->scoreBoardScoreLabel_.setPosition(Point(ScreenHalfWidth(), scoreboardScoreYPosition));
-	addChild(&impl_->scoreBoardScoreLabel_, 1);
+	impl->scoreBoardScoreLabel_.initWithString("10", "Font_Score_Small.fnt");
+	impl->scoreBoardScoreLabel_.setPosition(Point(ScreenHalfWidth(), scoreboardScoreYPosition));
+	addChild(&impl->scoreBoardScoreLabel_, 1);
 	
-	impl_->scoreBoardBestLabel_.initWithString("100", "Font_Score_Small.fnt");
-	impl_->scoreBoardBestLabel_.setPosition(Point(ScreenHalfWidth(), scoreboardBestYPosition));
-	addChild(&impl_->scoreBoardBestLabel_, 1);
+	impl->scoreBoardBestLabel_.initWithString("100", "Font_Score_Small.fnt");
+	impl->scoreBoardBestLabel_.setPosition(Point(ScreenHalfWidth(), scoreboardBestYPosition));
+	addChild(&impl->scoreBoardBestLabel_, 1);
 	
-	impl_->spriteInfo_[TitleLabelKey]			= { GStateMainMenu,		labelPosition };
-	impl_->spriteInfo_[GetReadyLabelKey]		= { GStateGetReady,		labelPosition };
-	impl_->spriteInfo_[GameOverLabelKey]		= { GStateGameOver,		labelPosition };
-	impl_->spriteInfo_[CopyrightLabelKey]		= { GStateMainMenu,		Point(ScreenHalfWidth(), ScreenHeight() * 0.15f) };
-	impl_->spriteInfo_[ScoreBackgroundKey]		= { GStateGameOver,		Point(ScreenHalfWidth(), scoreboardYPosition) };
-	impl_->spriteInfo_[PlayButtonKey]			= { ButtonStates,		Point(ScreenWidth() * 0.25f, otherButtonsY) };
-	impl_->spriteInfo_[LeaderBoardButtonKey]	= { ButtonStates,		Point(ScreenWidth() * 0.75f, otherButtonsY) };
-	impl_->spriteInfo_[RateButtonKey]			= { ButtonStates,		Point(ScreenWidth() * 0.5f, rateButtonY) };
-	impl_->spriteInfo_[TapLeftKey]				= { GStateGetReady,		Point(ScreenWidth() * 0.3f, ScreenHeight() * BirdGetReadyHeight) };
-	impl_->spriteInfo_[TapRightKey]				= { GStateGetReady,		Point(ScreenWidth() * 0.7f, ScreenHeight() * BirdGetReadyHeight) };
-	impl_->spriteInfo_[TapFingerKey]			= { GStateGetReady,		Point(ScreenHalfWidth(), ScreenHeight() * (BirdGetReadyHeight - 0.08f)) };
-	impl_->spriteInfo_[TwitterButtonKey]		= { GStateGameOver,		Point(ScreenWidth() * 0.3f, scoreboardYPosition) };
-	impl_->spriteInfo_[FacebookButtonKey]		= { GStateGameOver,		Point(ScreenWidth() * 0.7f, scoreboardYPosition) };
-	impl_->spriteInfo_[TwitterGrayButtonKey]	= { GStateGameOver,		Point(ScreenWidth() * 0.3f, scoreboardYPosition) };
-	impl_->spriteInfo_[FacebookGrayButtonKey]	= { GStateGameOver,		Point(ScreenWidth() * 0.7f, scoreboardYPosition) };
+	impl->spriteInfo_[TitleLabelKey]			= { GStateMainMenu,		labelPosition };
+	impl->spriteInfo_[GetReadyLabelKey]		= { GStateGetReady,		labelPosition };
+	impl->spriteInfo_[GameOverLabelKey]		= { GStateGameOver,		labelPosition };
+	impl->spriteInfo_[CopyrightLabelKey]		= { GStateMainMenu,		Point(ScreenHalfWidth(), ScreenHeight() * 0.15f) };
+	impl->spriteInfo_[ScoreBackgroundKey]		= { GStateGameOver,		Point(ScreenHalfWidth(), scoreboardYPosition) };
+	impl->spriteInfo_[PlayButtonKey]			= { ButtonStates,		Point(ScreenWidth() * 0.25f, otherButtonsY) };
+	impl->spriteInfo_[LeaderBoardButtonKey]	= { ButtonStates,		Point(ScreenWidth() * 0.75f, otherButtonsY) };
+	impl->spriteInfo_[RateButtonKey]			= { ButtonStates,		Point(ScreenWidth() * 0.5f, rateButtonY) };
+	impl->spriteInfo_[TapLeftKey]				= { GStateGetReady,		Point(ScreenWidth() * 0.3f, ScreenHeight() * BirdGetReadyHeight) };
+	impl->spriteInfo_[TapRightKey]				= { GStateGetReady,		Point(ScreenWidth() * 0.7f, ScreenHeight() * BirdGetReadyHeight) };
+	impl->spriteInfo_[TapFingerKey]			= { GStateGetReady,		Point(ScreenHalfWidth(), ScreenHeight() * (BirdGetReadyHeight - 0.08f)) };
+	impl->spriteInfo_[TwitterButtonKey]		= { GStateGameOver,		Point(ScreenWidth() * 0.3f, scoreboardYPosition) };
+	impl->spriteInfo_[FacebookButtonKey]		= { GStateGameOver,		Point(ScreenWidth() * 0.7f, scoreboardYPosition) };
+	impl->spriteInfo_[TwitterGrayButtonKey]	= { GStateGameOver,		Point(ScreenWidth() * 0.3f, scoreboardYPosition) };
+	impl->spriteInfo_[FacebookGrayButtonKey]	= { GStateGameOver,		Point(ScreenWidth() * 0.7f, scoreboardYPosition) };
 	
-	for (auto itr = impl_->spriteInfo_.begin(); itr != impl_->spriteInfo_.end(); itr++) {
+	for (auto itr = impl->spriteInfo_.begin(); itr != impl->spriteInfo_.end(); itr++) {
 		const auto& key = itr->first;
-		impl_->sprites_[key] = nullptr;
+		impl->sprites_[key] = nullptr;
 	}
 	
-	impl_->listener_ = Binder<HUDLayer>().TouchBegan(&HUDLayer::onTouchBegan).TouchEnded(&HUDLayer::onTouchEnded).Bind(this);
+	impl->listener_ = Binder<HUDLayer>().TouchBegan(&HUDLayer::onTouchBegan).TouchEnded(&HUDLayer::onTouchEnded).Bind(this);
 
 	scheduleUpdate();
 }
@@ -115,7 +115,7 @@ void HUDLayer::Impl::RemoveSpriteWithKeyIfNeeded(const string* key) {
 	if (!sprite) return;
 	
 	auto* seq = CCSequence::createWithTwoActions(CCSequence::createWithTwoActions(CCScaleBy::create(HUDSpriteRemovalDuration, 4.0f), CCFadeOut::create(HUDSpriteRemovalDuration)),
-												 CallFuncN::create([&](Node* node){
+												 CallFuncN::create([=](Node* node){
 		node->removeFromParentAndCleanup(true);
 		sprites_[*key] = nullptr;
 	}));
@@ -131,15 +131,15 @@ void HUDLayer::Impl::AddOrReomveSpriteWithKey(const string* key, GameState state
 
 void HUDLayer::update(float delta) {
 	if (GState() != LastFrameState()) {
-		for (const auto& spriteInfo : impl_->spriteInfo_) {
+		for (const auto& spriteInfo : impl->spriteInfo_) {
 			const auto* key = &spriteInfo.first;
 			const GameState& states = spriteInfo.second.first;
-			impl_->AddOrReomveSpriteWithKey(key, states);
+			impl->AddOrReomveSpriteWithKey(key, states);
 		}
 		
-		impl_->scoreLabel_.setVisible(GStateIsActive());
-		impl_->scoreBoardBestLabel_.setVisible(GStateIsGameOver());
-		impl_->scoreBoardScoreLabel_.setVisible(GStateIsGameOver());
+		impl->scoreLabel_.setVisible(GStateIsActive());
+		impl->scoreBoardBestLabel_.setVisible(GStateIsGameOver());
+		impl->scoreBoardScoreLabel_.setVisible(GStateIsGameOver());
 	}
 	
 	if (GStateIsGetReady()) {
@@ -147,16 +147,16 @@ void HUDLayer::update(float delta) {
 		timeSinceLastTap += delta;
 		if (timeSinceLastTap > 0.8f) {
 			timeSinceLastTap = 0;
-			auto& tapSprite = impl_->sprites_[TapFingerKey];
+			auto& tapSprite = impl->sprites_[TapFingerKey];
 			tapSprite->setScale(0.8f);
 			tapSprite->runAction(CCScaleTo::create(0.25f, 1.0f));
 		}
 	}
 	if (GStateIsActive()) {
-		impl_->scoreLabel_.setString(to_string(GameManager::sharedInstance().TotalScore()).c_str());
+		impl->scoreLabel_.setString(to_string(GameManager::sharedInstance().TotalScore()).c_str());
 	} else if (GStateIsGameOver()) {
-		impl_->scoreBoardScoreLabel_.setString(to_string(GameManager::sharedInstance().TotalScore()).c_str());
-		impl_->scoreBoardBestLabel_.setString(to_string(GameManager::sharedInstance().BestTotalScore()).c_str());
+		impl->scoreBoardScoreLabel_.setString(to_string(GameManager::sharedInstance().TotalScore()).c_str());
+		impl->scoreBoardBestLabel_.setString(to_string(GameManager::sharedInstance().BestTotalScore()).c_str());
 	}
 }
 
@@ -164,7 +164,7 @@ bool HUDLayer::onTouchBegan(Touch *pTouch, Event *pEvent) {
 	if (GStateIsActive()) return false;
 	
 	auto TouchedSprite = [&](const string& spriteKey) -> Sprite* {
-		auto& sprite = impl_->sprites_[spriteKey];
+		auto& sprite = impl->sprites_[spriteKey];
 		return (sprite && sprite->getBoundingBox().containsPoint(pTouch->getLocationInView())) ? sprite.Get() : nullptr;
 	};
 	for (auto spriteKey : vector<string>{PlayButtonKey, RateButtonKey, LeaderBoardButtonKey}) {
@@ -179,7 +179,7 @@ void HUDLayer::onTouchEnded(Touch *pTouch, Event *pEvent) {
 	if (GStateIsActive()) return;
 	
 	auto TouchOnSprite = [=](const string& spriteKey) -> bool {
-		auto& sprite = impl_->sprites_[spriteKey];
+		auto& sprite = impl->sprites_[spriteKey];
 		return sprite && sprite->boundingBox().containsPoint(pTouch->getLocation()) && sprite->isVisible();
 //		if (touched) {
 //			[[Mixpanel sharedInstance] track:[NSString stringWithFormat:@"button_touch_%@", spriteKey]];
@@ -187,7 +187,7 @@ void HUDLayer::onTouchEnded(Touch *pTouch, Event *pEvent) {
 	};
 	
 	for (auto spriteKey : vector<string>{PlayButtonKey, RateButtonKey, LeaderBoardButtonKey}) {
-		if (auto& sprite = impl_->sprites_[spriteKey]) {
+		if (auto& sprite = impl->sprites_[spriteKey]) {
 			sprite->setScale(1.0f);
 		}
 	}

@@ -23,19 +23,19 @@ struct MainScene::Impl {
 };
 
 MainScene::MainScene():
-	impl_(new Impl())
+	impl(new Impl())
 {
 	s_mainScene = this;
 	
-	impl_->staticBackgroundLayer_ = new StaticBackgroundLayer();
-	impl_->gameplayLayer_ = new GameplayLayer();
-	impl_->scrollingBackgroundLayer_ = new ScrollingBackgroundLayer();
-	impl_->hudLayer_ = new HUDLayer();
+	impl->staticBackgroundLayer_ = new StaticBackgroundLayer();
+	impl->gameplayLayer_ = new GameplayLayer();
+	impl->scrollingBackgroundLayer_ = new ScrollingBackgroundLayer();
+	impl->hudLayer_ = new HUDLayer();
 	
-	addChild(impl_->staticBackgroundLayer_.Get(), 0); // z-order
-	addChild(impl_->gameplayLayer_.Get(), 2);
-	addChild(impl_->scrollingBackgroundLayer_.Get(), 1);
-	addChild(impl_->hudLayer_.Get(), 3);
+	addChild(impl->staticBackgroundLayer_.Get(), 0); // z-order
+	addChild(impl->gameplayLayer_.Get(), 2);
+	addChild(impl->scrollingBackgroundLayer_.Get(), 1);
+	addChild(impl->hudLayer_.Get(), 3);
 	
 	SimpleAudioEngine::getInstance()->preloadBackgroundMusic("Return_to_Earth.mp3");
 	SimpleAudioEngine::getInstance()->preloadEffect("Shaker_2.wav");
@@ -46,9 +46,33 @@ MainScene::MainScene():
 }
 
 Box2DLayer& MainScene::GetBox2DLayer() {
-	return *s_mainScene->impl_->gameplayLayer_.Get();
+	return *s_mainScene->impl->gameplayLayer_.Get();
 }
 
 void MainScene::update(float dt) {
 	GameManager::sharedInstance().update();
+	
+	if (!GStateIsMainMenu()) {
+		impl->hudLayer_->setLocalZOrder(300);
+		impl->gameplayLayer_->setLocalZOrder(200);
+	} else {
+		// flip the zOrders when Bird's flies past the buttons
+		static bool lockToggle = false; ///< disable further toggling until Bird is back to negative y velocity
+		if (impl->gameplayLayer_->CurrentBird()->Y() > 300 && !lockToggle) {
+			lockToggle = true;
+			auto temp = impl->hudLayer_->getZOrder();
+			impl->hudLayer_->setLocalZOrder(impl->gameplayLayer_->getLocalZOrder());
+			impl->gameplayLayer_->setLocalZOrder(temp);
+		} else if (impl->gameplayLayer_->CurrentBird()->Y() < 150) {
+			lockToggle = false;
+		}
+	}
+	if (GState() != LastFrameState()) {
+		if (GStateIsGameOver()) {
+			SimpleAudioEngine::getInstance()->playEffect("Perc_2.wav");
+			SimpleAudioEngine::getInstance()->pauseBackgroundMusic();
+		} else if (LastFrameState() != GStateMainMenu && GStateIsGetReady()) {
+			SimpleAudioEngine::getInstance()->resumeBackgroundMusic();
+		}
+	}
 }

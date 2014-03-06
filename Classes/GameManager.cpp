@@ -17,17 +17,22 @@ GameManager& GameManager::sharedInstance() {
 	return *sharedInstance_;
 }
 
-GameManager::GameManager():
-	gameState_((GameState)(GStateMainMenu|GStateRound1)),
-	round1Score_(0),
-	round2Score_(0)
-{
+GameManager::GameManager() {
 	if (GameManager::sharedInstance_) assert(!"Created a duplicate GameManager!");
 }
 
+void GameManager::SetGState(GameState gState) {
+	stateNeedsUpdate_ = true;
+	pendingState_ = gState;
+}
+
 void GameManager::update() {
-	LastFrameState_ = GState();
-	LastFrameScore_ = CurrentRoundScore();
+	lastFrameState_ = GState();
+	if (stateNeedsUpdate_) {
+		gameState_ = pendingState_;
+		stateNeedsUpdate_ = false;
+	}
+	lastFrameScore_ = CurrentRoundScore();
 }
 
 float GameManager::GameSpeed() const {

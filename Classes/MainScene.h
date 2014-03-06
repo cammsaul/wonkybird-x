@@ -21,7 +21,7 @@ public:
 	static Box2DLayer& GetBox2DLayer();
 private:
 	struct Impl;
-	unique_ptr<Impl> impl_;
+	unique_ptr<Impl> impl;
 };
 
 #endif
