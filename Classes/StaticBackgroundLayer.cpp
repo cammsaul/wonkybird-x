@@ -8,13 +8,7 @@
 
 #include "StaticBackgroundLayer.h"
 
-//using BGSprite = shared_ptr<Sprite>;
-
 StaticBackgroundLayer::StaticBackgroundLayer():
-	dayBackground_			{ Sprite::create() },
-	nightBackground_		{ Sprite::create() },
-	toucanBackground_		{ Sprite::create() },
-	currentBackground_		{ Sprite::create() },
 	isDay_					{ true }
 {
 	SetCurrentBackground(DayBackground());
@@ -48,7 +42,7 @@ void StaticBackgroundLayer::SetIsDay(bool isDay) {
 	SetCurrentBackground(isDay ? DayBackground() : NightBackground());
 }
 
-void StaticBackgroundLayer::SetCurrentBackground(BGSprite background) {
+void StaticBackgroundLayer::SetCurrentBackground(GamePtr<Sprite> background) {
 	if (currentBackground_ == background) return;
 	
 	background->setOpacity(0);
@@ -64,8 +58,8 @@ void StaticBackgroundLayer::SetCurrentBackground(BGSprite background) {
 	currentBackground_ = background;
 }
 
-BGSprite StaticBackgroundLayer::AddBackground(const string& filename, int zIndex) {
-	auto bgSprite = BGSprite { Sprite::create(filename) };
+GamePtr<Sprite> StaticBackgroundLayer::AddBackground(const string& filename, int zIndex) {
+	auto bgSprite = GamePtr<Sprite> { Sprite::create(filename) };
 	assert(bgSprite);
 	bgSprite->Node::setPosition(ScreenHalfWidth(), ScreenHalfHeight());
 	
@@ -77,21 +71,21 @@ BGSprite StaticBackgroundLayer::AddBackground(const string& filename, int zIndex
 	return bgSprite;
 }
 
-BGSprite StaticBackgroundLayer::DayBackground() {
+GamePtr<Sprite> StaticBackgroundLayer::DayBackground() {
 	if (!dayBackground_) {
 		dayBackground_ = AddBackground("Background@2x.png", 0);
 	}
 	return dayBackground_;
 }
 
-BGSprite StaticBackgroundLayer::NightBackground() {
+GamePtr<Sprite> StaticBackgroundLayer::NightBackground() {
 	if (!dayBackground_) {
 		dayBackground_ = AddBackground("Background_Night@2x.png", 2);
 	}
 	return dayBackground_;
 }
 
-BGSprite StaticBackgroundLayer::ToucanBackground() {
+GamePtr<Sprite> StaticBackgroundLayer::ToucanBackground() {
 	if (!dayBackground_) {
 		dayBackground_ = AddBackground("Background_Toucan@2x.png", 1);
 	}

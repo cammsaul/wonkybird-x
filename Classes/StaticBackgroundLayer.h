@@ -11,29 +11,27 @@
 
 #import "GameLayer.h"
 
-typedef GamePtr<Sprite> BGSprite;
-
 class StaticBackgroundLayer : public BasicLayer {
 public:
 	StaticBackgroundLayer();
 		
 	virtual void update(float dt) override;
 private:
-	BGSprite dayBackground_;
-	BGSprite nightBackground_;
-	BGSprite toucanBackground_;
-	BGSprite currentBackground_;
+	GamePtr<Sprite> dayBackground_;
+	GamePtr<Sprite> nightBackground_;
+	GamePtr<Sprite> toucanBackground_;
+	GamePtr<Sprite> currentBackground_;
 	
 	bool isDay_;
 	bool IsDay() const { return isDay_; }
 	void SetIsDay(bool isDay);
 	
-	BGSprite DayBackground();
-	BGSprite NightBackground();
-	BGSprite ToucanBackground();
+	GamePtr<Sprite> DayBackground();
+	GamePtr<Sprite> NightBackground();
+	GamePtr<Sprite> ToucanBackground();
 	
-	void SetCurrentBackground(BGSprite background);	
-	BGSprite AddBackground(const string& filename, int zIndex = 0);
+	void SetCurrentBackground(GamePtr<Sprite> background);
+	GamePtr<Sprite> AddBackground(const string& filename, int zIndex = 0);
 };
 
 #endif

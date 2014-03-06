@@ -3,3 +3,4 @@ Pods
 Podfile.lock
 *xcshareddata*
 proj.android/libs
+cocos2d
