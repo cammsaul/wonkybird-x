@@ -28,9 +28,7 @@ public:
 	GamePtr(T* obj):
 		obj_(obj)
 	{
-		if (!obj) {
-			printf("Warning: creating null GamePtr<%s>\n", readable_name(typeid(T).name()).c_str());
-		} else {
+		if (obj_ != nullptr) {
 			obj_->retain();
 		}
 	}

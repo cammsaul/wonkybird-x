@@ -37,6 +37,11 @@ MainScene::MainScene():
 	addChild(impl_->scrollingBackgroundLayer_.Get(), 1);
 	addChild(impl_->hudLayer_.Get(), 3);
 	
+	SimpleAudioEngine::getInstance()->preloadBackgroundMusic("Return_to_Earth.mp3");
+	SimpleAudioEngine::getInstance()->preloadEffect("Shaker_2.wav");
+	SimpleAudioEngine::getInstance()->preloadEffect("Perc_2.wav");
+	SimpleAudioEngine::getInstance()->playBackgroundMusic("Return_to_Earth.mp3");
+	
 	scheduleUpdate();
 }
 

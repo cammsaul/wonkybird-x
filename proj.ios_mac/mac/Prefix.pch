@@ -20,9 +20,10 @@ using namespace std;
 
 #include <cocos2d.h>
 #include <Box2D/Box2D.h>
-//#include <CocosDenshion/include/SimpleAudioEngine.h>
+#include <SimpleAudioEngine.h>
 
 using namespace cocos2d;
+using CocosDenshion::SimpleAudioEngine;
 
 #include "Constants.h"
 #include "CCUniquePtr.h"
