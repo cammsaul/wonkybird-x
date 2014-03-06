@@ -22,9 +22,29 @@ inline string readable_name(const char *mangled_name) {
 	else return mangled_name ;
 }
 
-template <class T>
+// dump a debug message when obj is released, useful for debugging too much copying
+class DebugReleaseFn {
+public:
+	template <typename T>
+	static void Release(T* t) {
+		printf("Deleted: %s (%d)\n", readable_name(typeid(T).name()).c_str(), t->getReferenceCount());
+	}
+};
+
+/// no pre-release behavior, default
+class NullReleaseFn {
+public:
+	template <typename T>
+	static void Release(T* t){};
+};
+
+template <class T, class ReleaseFn = DebugReleaseFn>
 class GamePtr {
 public:
+	GamePtr():
+		obj_(nullptr)
+	{}
+	
 	GamePtr(T* obj):
 		obj_(obj)
 	{
@@ -33,21 +53,22 @@ public:
 		}
 	}
 	
-	// copying
-	GamePtr(const GamePtr& rhs) {
+	// copying must be done explicitly, to prevent creating wayyy to many objects
+	explicit GamePtr(const GamePtr& rhs) {
 		if (this != &rhs) {
 			obj_ = rhs.obj_;
 			if (obj_) obj_->retain();
 		}
 	}
 	
-	GamePtr& operator=(const GamePtr& rhs) {
-		if (this != &rhs) {
-			obj_ = rhs.obj_;
-			if (obj_) obj_->retain();
-		}
-		return *this;
-	}
+	GamePtr& operator=(const GamePtr&) = delete;
+//	GamePtr& operator=(const GamePtr& rhs) {
+//		if (this != &rhs) {
+//			obj_ = rhs.obj_;
+//			if (obj_) obj_->retain();
+//		}
+//		return *this;
+//	}
 	
 	// moving ok
 	GamePtr(GamePtr&& rhs) {
@@ -63,8 +84,9 @@ public:
 		return *this;
 	}
 	
-	GamePtr() {
+	~GamePtr() {
 		if (obj_) {
+			ReleaseFn::Release(obj_);
 			obj_->release();
 		}
 	}

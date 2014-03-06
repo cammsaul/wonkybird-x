@@ -37,8 +37,8 @@ private:
 	template <class BirdT>
 	BirdPtr AddBird();
 	
-	BirdPtr CurrentBird() { return mainBird_; }
-	void SetMainBird(BirdPtr bird) { mainBird_ = bird; }
+	BirdPtr& CurrentBird() { return mainBird_; }
+	void SetMainBird(BirdPtr& bird) { mainBird_ = BirdPtr(bird); }
 	
 	Flock birds_;
 	BirdPtr toucan_;

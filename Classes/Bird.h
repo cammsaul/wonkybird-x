@@ -13,7 +13,7 @@
 #include "ReflectiveClass.h"
 
 class Bird;
-typedef GamePtr<Bird> BirdPtr;
+typedef GamePtr<Bird, DebugReleaseFn> BirdPtr;
 typedef vector<BirdPtr> Flock;
 
 class Bird : public ReflectiveClass, public GameSprite {
@@ -37,7 +37,7 @@ public:
 	virtual void SetState(Bird::State birdState);
 	
 	virtual void ApplyTouch(unsigned numFrames) = 0; ///< apply a touch to the bird when GameState is active
-	virtual void FlapAroundOnMainScreen(Flock otherBirds) = 0; ///< Instruct the bird to start flapping around main screen
+	virtual void FlapAroundOnMainScreen(Flock& otherBirds) = 0; ///< Instruct the bird to start flapping around main screen
 protected:
 	enum State state_;
 private:

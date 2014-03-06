@@ -93,12 +93,15 @@ HUDLayer::HUDLayer():
 		impl_->sprites_[key] = nullptr;
 	}
 	
+//	auto listener = EventListenerTouchAllAtOnce::create();
+//	Director::getInstance()->getEventDispatcher()->addEventListenerWithSceneGraphPriority(listener, this);
+//	
 	scheduleUpdate();
-	setTouchEnabled(true);
+//	setTouchEnabled(true);
 }
 
 void HUDLayer::Impl::AddSpriteWithKeyIfNeeded(const string* key) {
-	auto sprite = sprites_[*key];
+	auto& sprite = sprites_[*key];
 	if (sprite) return;
 	
 	sprite = GamePtr<Sprite>(Sprite::createWithSpriteFrameName(*key));
@@ -111,7 +114,7 @@ void HUDLayer::Impl::RemoveSpriteCallback(Node *node, const string* key) {
 }
 
 void HUDLayer::Impl::RemoveSpriteWithKeyIfNeeded(const string* key) {
-	auto sprite = sprites_[*key];
+	auto& sprite = sprites_[*key];
 	if (!sprite) return;
 	
 	auto* seq = CCSequence::createWithTwoActions(CCSequence::createWithTwoActions(CCScaleBy::create(HUDSpriteRemovalDuration, 4.0f), CCFadeOut::create(HUDSpriteRemovalDuration)),

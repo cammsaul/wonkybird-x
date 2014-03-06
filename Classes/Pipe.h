@@ -16,7 +16,7 @@ public:
 	Pipe(unsigned size, bool upsideDown);
 	~Pipe();
 	
-	GamePtr<TMXLayer> Layer() { return layer_; } ///< add the layer to the GameplayLayer, not the TiledMap itself
+	GamePtr<TMXLayer> Layer() { return GamePtr<TMXLayer>(layer_); } ///< add the layer to the GameplayLayer, not the TiledMap itself
 	
 	virtual void Update(float dt) override;
 	

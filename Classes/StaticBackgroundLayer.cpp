@@ -23,11 +23,11 @@ struct StaticBackgroundLayer::Impl {
 	bool IsDay() const { return isDay_; }
 	void SetIsDay(bool isDay);
 	
-	GamePtr<Sprite> DayBackground();
-	GamePtr<Sprite> NightBackground();
-	GamePtr<Sprite> ToucanBackground();
+	GamePtr<Sprite>& DayBackground();
+	GamePtr<Sprite>& NightBackground();
+	GamePtr<Sprite>& ToucanBackground();
 	
-	void SetCurrentBackground(GamePtr<Sprite> background);
+	void SetCurrentBackground(GamePtr<Sprite>& background);
 	GamePtr<Sprite> AddBackground(const string& filename, int zIndex = 0);
 };
 
@@ -65,7 +65,7 @@ void StaticBackgroundLayer::Impl::SetIsDay(bool isDay) {
 	SetCurrentBackground(isDay ? DayBackground() : NightBackground());
 }
 
-void StaticBackgroundLayer::Impl::SetCurrentBackground(GamePtr<Sprite> background) {
+void StaticBackgroundLayer::Impl::SetCurrentBackground(GamePtr<Sprite>& background) {
 	if (currentBackground_ == background) return;
 	
 	background->setOpacity(0);
@@ -78,7 +78,7 @@ void StaticBackgroundLayer::Impl::SetCurrentBackground(GamePtr<Sprite> backgroun
 	// fade in new one
 	background->runAction(CCFadeIn::create(10.0f));
 	
-	currentBackground_ = background;
+	currentBackground_ = GamePtr<Sprite>(background);
 }
 
 GamePtr<Sprite> StaticBackgroundLayer::Impl::AddBackground(const string& filename, int zIndex) {
@@ -94,23 +94,23 @@ GamePtr<Sprite> StaticBackgroundLayer::Impl::AddBackground(const string& filenam
 	return bgSprite;
 }
 
-GamePtr<Sprite> StaticBackgroundLayer::Impl::DayBackground() {
+GamePtr<Sprite>& StaticBackgroundLayer::Impl::DayBackground() {
 	if (!dayBackground_) {
 		dayBackground_ = AddBackground("Background@2x.png", 0);
 	}
 	return dayBackground_;
 }
 
-GamePtr<Sprite> StaticBackgroundLayer::Impl::NightBackground() {
-	if (!dayBackground_) {
-		dayBackground_ = AddBackground("Background_Night@2x.png", 2);
+GamePtr<Sprite>& StaticBackgroundLayer::Impl::NightBackground() {
+	if (!nightBackground_) {
+		nightBackground_ = AddBackground("Background_Night@2x.png", 2);
 	}
-	return dayBackground_;
+	return nightBackground_;
 }
 
-GamePtr<Sprite> StaticBackgroundLayer::Impl::ToucanBackground() {
-	if (!dayBackground_) {
-		dayBackground_ = AddBackground("Background_Toucan@2x.png", 1);
+GamePtr<Sprite>& StaticBackgroundLayer::Impl::ToucanBackground() {
+	if (!toucanBackground_) {
+		toucanBackground_ = AddBackground("Background_Toucan@2x.png", 1);
 	}
-	return dayBackground_;
+	return toucanBackground_;
 }

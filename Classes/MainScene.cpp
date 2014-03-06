@@ -16,10 +16,10 @@
 static MainScene *s_mainScene = nullptr;
 
 struct MainScene::Impl {
-	GamePtr<StaticBackgroundLayer> staticBackgroundLayer_;
-	GamePtr<GameplayLayer> gameplayLayer_;
-	GamePtr<ScrollingBackgroundLayer> scrollingBackgroundLayer_;
-	GamePtr<HUDLayer> hudLayer_;
+	GamePtr<StaticBackgroundLayer>		staticBackgroundLayer_;
+	GamePtr<GameplayLayer>				gameplayLayer_;
+	GamePtr<ScrollingBackgroundLayer>	scrollingBackgroundLayer_;
+	GamePtr<HUDLayer>					hudLayer_;
 };
 
 MainScene::MainScene():

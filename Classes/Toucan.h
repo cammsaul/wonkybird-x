@@ -18,7 +18,7 @@ public:
 	virtual const Metaclass* const MetaClass() const override;
 	
 	virtual void ApplyTouch(unsigned numFrames) override;
-	virtual void FlapAroundOnMainScreen(Flock allBirds) override;
+	virtual void FlapAroundOnMainScreen(Flock& allBirds) override;
 private:
 };
 

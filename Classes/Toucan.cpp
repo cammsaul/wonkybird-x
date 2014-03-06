@@ -20,7 +20,7 @@ void Toucan::ApplyTouch(unsigned numFrames) {
 	SetYVelocity(-GravityVelocity() * (.05f + (.075f * numFrames)));
 }
 
-void Toucan::FlapAroundOnMainScreen(Flock allBirds) {
+void Toucan::FlapAroundOnMainScreen(Flock& allBirds) {
 	auto RandTimes10 = []{ return Rand() * kBirdMenuRandVelocity; };
 	
 	if (abs(YVelocity()) < 2) {
@@ -46,7 +46,7 @@ void Toucan::FlapAroundOnMainScreen(Flock allBirds) {
 		Body()->ApplyForceToCenter({xVel, newYVel}, true);
 		
 		// move towards pigeons
-		for (BirdPtr bird : allBirds) {
+		for (BirdPtr& bird : allBirds) {
 			if (bird.Get() == this) continue;
 			if (bird->MetaClass()->Name() == "Pigeon") {
 				Body()->ApplyForceToCenter({(bird->Box2DX() - Box2DX()) * 0.5f, (bird->Box2DY() - Box2DY()) * 0.5f}, true);

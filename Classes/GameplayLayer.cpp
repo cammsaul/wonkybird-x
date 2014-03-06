@@ -12,7 +12,7 @@
 #include "GameManager.h"
 
 template <typename T>
-string DumpSmartPtr(T Ptr) {
+string DumpSmartPtr(T& Ptr) {
 	char buff[50];
 	sprintf(buff, "%s 0x%016lx", readable_name(typeid(*Ptr).name()).c_str(), (size_t)Ptr.Get());
 	return string{buff};
@@ -93,7 +93,7 @@ void GameplayLayer::UpdateGetReady(float dt) {
 		}
 	}
 	
-	remove_if(birds_.begin(), birds_.end(), [&](BirdPtr b){
+	remove_if(birds_.begin(), birds_.end(), [&](BirdPtr& b){
 		return b != CurrentBird() && b->X() < -(b->getContentSize().width / 2.0f);
 	});
 	CurrentBird()->SetXVelocity(PipeXVelocity * GameManager::sharedInstance().GameSpeed());
@@ -103,7 +103,7 @@ void GameplayLayer::UpdateGetReady(float dt) {
 	const float BirdXDiff = ((CurrentBird()->X() - ScreenHalfWidth()) / kPTMRatio) * 4;
 	CurrentBird()->SetVelocity({-BirdXDiff, -BirdYDiff});
 	
-	for (auto pipe : pipes_) {
+	for (auto& pipe : pipes_) {
 		removeChild(pipe->Layer().Get(), true);
 	}
 	pipes_.clear();
@@ -134,14 +134,14 @@ void GameplayLayer::UpdateActive(float dt) {
 	}
 	
 	for (auto itr = pipes_.begin(); itr != pipes_.end(); itr++) {
-		auto pipe = *itr;
+		auto& pipe = *itr;
 		pipe->SetVelocity({PipeXVelocity * GameManager::sharedInstance().GameSpeed(), 0});
 		pipe->Update(dt);
 	}
 }
 
 void GameplayLayer::UpdateGameOver(float dt) {
-	for (auto pipe : pipes_) {
+	for (auto& pipe : pipes_) {
 		pipe->Body()->SetLinearVelocity({0, 0});
 		pipe->Update(dt);
 	}
@@ -174,7 +174,7 @@ void GameplayLayer::AddPipe(int pipeSize, bool upsideDown) {
 void GameplayLayer::RemoveOldPipes() {
 	if (pipes_.empty()) return;
 	
-	auto pipe = pipes_.front();
+	auto& pipe = pipes_.front();
 	if (pipe->X() < -(pipe->getContentSize().width / 2) || (pipe->X() > ScreenWidth() + pipe->getContentSize().width)) {
 		pipes_.pop_front();
 		removeChild(pipe->Layer().Get(), true);
@@ -189,7 +189,7 @@ void GameplayLayer::AddRandomPipeIfNeeded() {
 	
 	if (pipes_.size()) {
 		// how far was the most recent pipe?
-		auto lastPipe = pipes_.back();
+		auto& lastPipe = pipes_.back();
 		
 		if ((GameManager::sharedInstance().IsReversed() && lastPipe->Layer() && lastPipe->Layer()->getPositionX() < (ScreenWidth() * (1 - NextPipeDistance)))
 			|| (!GameManager::sharedInstance().IsReversed() && lastPipe->Layer()->getPositionX() > ScreenWidth() * NextPipeDistance)) return; // too soon
@@ -201,7 +201,7 @@ void GameplayLayer::AddRandomPipeIfNeeded() {
 template <class BirdT>
 BirdPtr GameplayLayer::AddBird() {
 	BirdPtr newBird { new BirdT() };
-	for (auto bird : birds_) {
+	for (auto& bird : birds_) {
 		if (bird->MetaClass() == newBird->MetaClass()) {
 			printf("Bird of type already exists.\n");
 			return nullptr;
@@ -221,7 +221,7 @@ void GameplayLayer::RemoveExtraBirds() {
 	printf("Removing extra birds. CurrentBird = %s\n", DumpSmartPtr(CurrentBird()).c_str());
 	
 	while (birds_.size() > 1) {
-		for (auto bird : birds_) {
+		for (auto& bird : birds_) {
 			if (bird != CurrentBird()) {
 				bird->removeFromParentAndCleanup(true);
 				birds_.erase(find(birds_.begin(), birds_.end(), bird));
