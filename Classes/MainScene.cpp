@@ -40,7 +40,7 @@ MainScene::MainScene():
 	SimpleAudioEngine::getInstance()->preloadBackgroundMusic("Return_to_Earth.mp3");
 	SimpleAudioEngine::getInstance()->preloadEffect("Shaker_2.wav");
 	SimpleAudioEngine::getInstance()->preloadEffect("Perc_2.wav");
-	SimpleAudioEngine::getInstance()->playBackgroundMusic("Return_to_Earth.mp3");
+	SimpleAudioEngine::getInstance()->playBackgroundMusic("Return_to_Earth.mp3", true);
 	
 	scheduleUpdate();
 }
