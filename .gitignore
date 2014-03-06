@@ -3,4 +3,9 @@ Pods
 Podfile.lock
 *xcshareddata*
 proj.android/libs
+proj.android/bin
+proj.android/gen
+proj.android/local.properties
+proj.android/obj
+proj.android/assets
 cocos2d

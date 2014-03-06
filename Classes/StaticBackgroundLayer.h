@@ -9,7 +9,7 @@
 #ifndef WONKYBIRD_STATICBACKGROUNDLAYER_H
 #define WONKYBIRD_STATICBACKGROUNDLAYER_H
 
-#import "GameLayer.h"
+#include "GameLayer.h"
 
 class StaticBackgroundLayer : public BasicLayer {
 public:

@@ -11,6 +11,9 @@
 
 static const float kPTMRatio = 100.0f; // retina scaling problem: 100.0f;
 
+/// implemented in GameManager
+string to_string(int i);
+
 inline Size ScreenSize()		{ return Director::getInstance()->getWinSize(); }
 inline float ScreenWidth()		{ return ScreenSize().width; }
 inline float ScreenHalfWidth()	{ return ScreenWidth() / 2.0f; }
