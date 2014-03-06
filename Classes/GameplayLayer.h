@@ -13,6 +13,7 @@
 #include "GameNode.h"
 #include "Bird.h"
 #include "Pipe.h"
+#include "GameListener.h"
 
 class GameplayLayer : public Box2DLayer {
 public:
@@ -45,6 +46,8 @@ private:
 	BirdPtr pigeon_;
 	BirdPtr mainBird_;
 	GameSprite ground_;
+	
+	GameListener::Ptr listener_;
 	
 	deque<GamePtr<Pipe>> pipes_;
 	

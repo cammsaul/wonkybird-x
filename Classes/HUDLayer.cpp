@@ -8,6 +8,7 @@
 
 #include "HUDLayer.h"
 #include "GameManager.h"
+#include "GameListener.h"
 
 static const string TitleLabelKey			= "Title.png";
 static const string GetReadyLabelKey		= "Get_Ready.png";
@@ -44,6 +45,8 @@ struct HUDLayer::Impl {
 	void AddOrReomveSpriteWithKey(const string* key, GameState states);
 	
 	void RemoveSpriteCallback(Node *node, const string* key);
+	
+	GameListener::Ptr listener_;
 };
 
 HUDLayer::HUDLayer():
@@ -93,11 +96,9 @@ HUDLayer::HUDLayer():
 		impl_->sprites_[key] = nullptr;
 	}
 	
-//	auto listener = EventListenerTouchAllAtOnce::create();
-//	Director::getInstance()->getEventDispatcher()->addEventListenerWithSceneGraphPriority(listener, this);
-//	
+	impl_->listener_ = GameListener::Builder<HUDLayer>().TouchBegan(&HUDLayer::onTouchBegan).Build(this);
+
 	scheduleUpdate();
-//	setTouchEnabled(true);
 }
 
 void HUDLayer::Impl::AddSpriteWithKeyIfNeeded(const string* key) {
@@ -168,7 +169,7 @@ bool HUDLayer::onTouchBegan(Touch *pTouch, Event *pEvent) {
 	
 	auto TouchedSprite = [&](const string& spriteKey) -> Sprite* {
 		auto& sprite = impl_->sprites_[spriteKey];
-		return (sprite && sprite->boundingBox().containsPoint(pTouch->getLocationInView())) ? sprite.Get() : nullptr;
+		return (sprite && sprite->getBoundingBox().containsPoint(pTouch->getLocationInView())) ? sprite.Get() : nullptr;
 	};
 	for (auto spriteKey : vector<string>{PlayButtonKey, RateButtonKey, LeaderBoardButtonKey}) {
 		if (auto sprite = TouchedSprite(spriteKey)) {

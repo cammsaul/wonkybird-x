@@ -38,7 +38,19 @@ inline string readable_name(const T& t) {
 	else return mangled_name;
 }
 
-class DebugReleaser {
+template <typename T>
+string DumpPtr(T* Ptr) {
+	char buff[50];
+	sprintf(buff, "%s 0x%016lx", readable_name(Ptr).c_str(), (size_t)Ptr);
+	return string{buff};
+}
+
+template <typename T>
+string DumpSmartPtr(T& Ptr) {
+	return DumpPtr(Ptr.Get());
+}
+
+struct DebugReleaser {
 public:
 	template <typename T>
 	static void Release(T* t) {
@@ -46,7 +58,7 @@ public:
 	}
 };
 
-class NullReleaser {
+struct NullReleaser {
 public:
 	template <typename T>
 	static void Release(T*) {};

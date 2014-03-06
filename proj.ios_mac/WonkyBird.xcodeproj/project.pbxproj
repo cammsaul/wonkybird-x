@@ -126,6 +126,8 @@
 		32BBB45418C86521000E794B /* Textures@2x.plist in Resources */ = {isa = PBXBuildFile; fileRef = 32BBB40F18C86521000E794B /* Textures@2x.plist */; };
 		32BBB45518C86521000E794B /* Textures@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 32BBB41018C86521000E794B /* Textures@2x.png */; };
 		32BBB45618C86521000E794B /* Textures@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 32BBB41018C86521000E794B /* Textures@2x.png */; };
+		32EC1C3118C89E7B00714835 /* GameListener.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 32EC1C2F18C89E7B00714835 /* GameListener.cpp */; };
+		32EC1C3218C89E7B00714835 /* GameListener.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 32EC1C2F18C89E7B00714835 /* GameListener.cpp */; };
 		503AE0F817EB97AB00D1A890 /* Icon.icns in Resources */ = {isa = PBXBuildFile; fileRef = 503AE0F617EB97AB00D1A890 /* Icon.icns */; };
 		503AE10017EB989F00D1A890 /* AppController.mm in Sources */ = {isa = PBXBuildFile; fileRef = 503AE0FB17EB989F00D1A890 /* AppController.mm */; };
 		503AE10117EB989F00D1A890 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 503AE0FC17EB989F00D1A890 /* main.m */; };
@@ -419,6 +421,8 @@
 		32BBB40E18C86521000E794B /* Textures.tps */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = Textures.tps; sourceTree = "<group>"; };
 		32BBB40F18C86521000E794B /* Textures@2x.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "Textures@2x.plist"; sourceTree = "<group>"; };
 		32BBB41018C86521000E794B /* Textures@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Textures@2x.png"; sourceTree = "<group>"; };
+		32EC1C2F18C89E7B00714835 /* GameListener.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = GameListener.cpp; sourceTree = "<group>"; };
+		32EC1C3018C89E7B00714835 /* GameListener.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GameListener.h; sourceTree = "<group>"; };
 		503AE0F617EB97AB00D1A890 /* Icon.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = Icon.icns; sourceTree = "<group>"; };
 		503AE0F717EB97AB00D1A890 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		503AE0FA17EB989F00D1A890 /* AppController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AppController.h; path = ios/AppController.h; sourceTree = SOURCE_ROOT; };
@@ -657,6 +661,8 @@
 				32BBB39F18C8370A000E794B /* GameLayer.cpp */,
 				32BBB39C18C8370A000E794B /* Box2DLayer.h */,
 				32BBB39B18C8370A000E794B /* Box2DLayer.cpp */,
+				32EC1C3018C89E7B00714835 /* GameListener.h */,
+				32EC1C2F18C89E7B00714835 /* GameListener.cpp */,
 			);
 			name = Abstract;
 			sourceTree = "<group>";
@@ -1073,6 +1079,7 @@
 				32BBB3C318C8370A000E794B /* Box2DItem.cpp in Sources */,
 				32BBB3BF18C8370A000E794B /* AppDelegate.cpp in Sources */,
 				32BBB3D118C8370A000E794B /* HUDLayer.cpp in Sources */,
+				32EC1C3118C89E7B00714835 /* GameListener.cpp in Sources */,
 				503AE10017EB989F00D1A890 /* AppController.mm in Sources */,
 				32BBB3CD18C8370A000E794B /* GameNode.cpp in Sources */,
 				32BBB3D918C8370A000E794B /* ReflectiveClass.cpp in Sources */,
@@ -1103,6 +1110,7 @@
 				32BBB3C618C8370A000E794B /* Box2DLayer.cpp in Sources */,
 				32BBB3C418C8370A000E794B /* Box2DItem.cpp in Sources */,
 				32BBB3C218C8370A000E794B /* Bird.cpp in Sources */,
+				32EC1C3218C89E7B00714835 /* GameListener.cpp in Sources */,
 				32BBB3D418C8370A000E794B /* MainScene.cpp in Sources */,
 				32BBB3DC18C8370A000E794B /* ScrollingBackgroundLayer.cpp in Sources */,
 				32BBB3E018C8370A000E794B /* StaticBackgroundLayer.cpp in Sources */,

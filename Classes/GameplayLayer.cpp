@@ -10,13 +10,7 @@
 #include "Toucan.h"
 #include "Pigeon.h"
 #include "GameManager.h"
-
-template <typename T>
-string DumpSmartPtr(T& Ptr) {
-	char buff[50];
-	sprintf(buff, "%s 0x%016lx", readable_name(Ptr).c_str(), (size_t)Ptr.Get());
-	return string{buff};
-}
+#include "GameListener.h"
 
 float MaxTotalSize() {
 	return MIN((InitialMaxSize + (CurrentRoundScore() / 2)), MaxMaxSize);
@@ -27,6 +21,7 @@ float RandomPipeSize() {
 	return (random() % SizeRange) + MinPipeSize;
 }
 
+using namespace std::placeholders;
 
 GameplayLayer::GameplayLayer():
 	Box2DLayer("Textures")
@@ -42,7 +37,10 @@ GameplayLayer::GameplayLayer():
 	// TODO : add the roof
 	
 	scheduleUpdate();
-	setTouchEnabled(true);
+	
+//	std::mem_fn(&GameplayLayer::onTouchBegan)
+//	GameListener::Builder<GameplayLayer>::TouchBeganFn fn = std::mem_fn(&GameplayLayer::onTouchBegan);
+	listener_ = GameListener::Builder<GameplayLayer>().TouchBegan(&GameplayLayer::onTouchBegan).Build(this);
 }
 
 void GameplayLayer::update(float dt) {
