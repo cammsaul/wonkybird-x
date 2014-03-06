@@ -28,9 +28,9 @@ static const string FacebookGrayButtonKey	= "Button_Facebook_Gray.png";
 typedef pair<GameState, Point> SpriteInfo;
 
 struct HUDLayer::Impl {
-	HUDLayer& parent_;
+	HUDLayer& this_;
 	Impl(HUDLayer& parent):
-		parent_(parent)
+		this_(parent)
 	{}
 	
 	unordered_map<string, SpriteInfo> spriteInfo_ = {};
@@ -48,7 +48,7 @@ struct HUDLayer::Impl {
 
 HUDLayer::HUDLayer():
 	GameLayer("HUD"),
-	impl_(make_shared<Impl>(*this))
+	impl_(new Impl(*this))
 {
 	const float labelYPosition = ScreenHeight() * 0.75f;
 	const float rateButtonY = ScreenHeight() * 0.45f;
@@ -103,7 +103,7 @@ void HUDLayer::Impl::AddSpriteWithKeyIfNeeded(const string* key) {
 	
 	sprite = GamePtr<Sprite>(Sprite::createWithSpriteFrameName(*key));
 	sprite->setPosition(spriteInfo_[*key].second);
-	parent_.spriteBatchNode_->addChild(sprite.Get());
+	this_.spriteBatchNode_->addChild(sprite.Get());
 }
 
 void HUDLayer::Impl::RemoveSpriteCallback(Node *node, const string* key) {

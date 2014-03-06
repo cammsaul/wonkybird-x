@@ -17,21 +17,8 @@ public:
 		
 	virtual void update(float dt) override;
 private:
-	GamePtr<Sprite> dayBackground_;
-	GamePtr<Sprite> nightBackground_;
-	GamePtr<Sprite> toucanBackground_;
-	GamePtr<Sprite> currentBackground_;
-	
-	bool isDay_;
-	bool IsDay() const { return isDay_; }
-	void SetIsDay(bool isDay);
-	
-	GamePtr<Sprite> DayBackground();
-	GamePtr<Sprite> NightBackground();
-	GamePtr<Sprite> ToucanBackground();
-	
-	void SetCurrentBackground(GamePtr<Sprite> background);
-	GamePtr<Sprite> AddBackground(const string& filename, int zIndex = 0);
+	struct Impl;
+	unique_ptr<Impl> impl_;
 };
 
 #endif

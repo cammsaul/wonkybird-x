@@ -45,8 +45,6 @@ MainScene::MainScene():
 	scheduleUpdate();
 }
 
-//MainScene::~MainScene() {}
-
 Box2DLayer& MainScene::GetBox2DLayer() {
 	return *s_mainScene->impl_->gameplayLayer_.Get();
 }
