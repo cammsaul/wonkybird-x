@@ -96,7 +96,7 @@ HUDLayer::HUDLayer():
 		impl_->sprites_[key] = nullptr;
 	}
 	
-	impl_->listener_ = GameListener::Builder<HUDLayer>().TouchBegan(&HUDLayer::onTouchBegan).Build(this);
+	impl_->listener_ = Binder<HUDLayer>().TouchBegan(&HUDLayer::HUDLayer::onTouchBegan).Bind(this);
 
 	scheduleUpdate();
 }

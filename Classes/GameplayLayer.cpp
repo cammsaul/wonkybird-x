@@ -38,9 +38,7 @@ GameplayLayer::GameplayLayer():
 	
 	scheduleUpdate();
 	
-//	std::mem_fn(&GameplayLayer::onTouchBegan)
-//	GameListener::Builder<GameplayLayer>::TouchBeganFn fn = std::mem_fn(&GameplayLayer::onTouchBegan);
-	listener_ = GameListener::Builder<GameplayLayer>().TouchBegan(&GameplayLayer::onTouchBegan).Build(this);
+	listener_ = Binder<GameplayLayer>().TouchBegan(&GameplayLayer::onTouchBegan).Bind(this);
 }
 
 void GameplayLayer::update(float dt) {
